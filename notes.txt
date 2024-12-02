@@ -3,3 +3,6 @@ create all pages ✅
 create components for all pages
 set up backend for ADM signin 
 set up scheduling system
+
+
+working on mirroring the hero image

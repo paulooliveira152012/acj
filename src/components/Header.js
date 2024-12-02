@@ -42,6 +42,7 @@ const Header = () => {
                 </div>
                 <div className="menuIcon" onClick={toggleMenu}></div>
             </div>
+            {/* side menu */}
             <div className={`openMenu ${menuOpen ? "active" : ""}`}>
                 <div  className="menuIcon openedCloseButton" onClick={toggleMenu}></div>
                 <NavBar className="navBarInMenu" handleTabClick={closeMenu}/>
