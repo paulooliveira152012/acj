@@ -1,0 +1,71 @@
+.header {
+    display: flex;
+    background-color: grey;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.menu {
+    background-color: green;
+    margin-left: auto;
+}
+
+.openMenu {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white; 
+    transform: translateX(100%);  /* Initially hide the menu off the screen */
+    transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.openedCloseButton {
+    margin-right: 20px;
+}
+
+.openMenu.active {
+    transform: translateX(0); /* Slide the menu in when active */
+}
+
+.rightSection {
+    margin-left: auto;
+}
+
+.menuIcon {
+    aspect-ratio: 1;
+    height: 50px;
+    background-color: blue;
+    cursor: pointer;
+    margin-left: auto;
+    display: none;
+}
+
+/* Default NavBar styling */
+.navBarDefault {
+    display: flex;
+    gap: 10px;
+    color: white;
+}
+
+/* NavBar styling inside openMenu */
+.navBarInMenu {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    color: black;
+    text-align: center;
+}
+
+@media screen and (max-width: 850px){
+    .header {
+        background-color: green;
+    }
+    .menuIcon {
+        display: block;
+    }
+    .menu {
+        display: none;
+    }
+}

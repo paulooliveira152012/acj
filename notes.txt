@@ -1,0 +1,5 @@
+implement navigation ✅
+create all pages ✅
+create components for all pages
+set up backend for ADM signin 
+set up scheduling system
