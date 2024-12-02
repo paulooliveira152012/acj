@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import NavBar from "./nav.js";
 import Home from "../pages/HomePage";
 import About from "../pages/About.js";
 import OurServices from "../pages/OurServices.js";
@@ -8,7 +7,6 @@ import TipsAndAdvice from "../pages/TipsAndAdvice";
 import ContactUs from "../pages/ContactUs.js";
 import AccessibilityStatement from "../pages/AccessibilityStatement.js";
 import PrivacyPolicy from "../pages/PrivacyPolicy.js";
-import Header from "../components/Header.js";
 
 const Navigator = () => {
     return (
