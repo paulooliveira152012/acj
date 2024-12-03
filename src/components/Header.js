@@ -14,7 +14,7 @@ const Header = () => {
         setMenuOpen(false)
     }
 
-       // Close the menu on screen resize above 850px
+       // Close the menu on screen resize above 850px 
        useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 850 && isOpen) {
