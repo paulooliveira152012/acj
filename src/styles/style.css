@@ -34,7 +34,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    background-color: grey; 
+    background-color: white; 
     transform: translateX(100%);  /* Initially hide the menu off the screen */
     transition: transform 0.3s ease-in-out; /* Smooth transition */
     z-index: 100;
@@ -75,7 +75,18 @@
     padding: 20px;
     color: black;
     text-align: center;
+    /* background-color: red; */
+    justify-content: space-around;
+    height: 40vh;
 }
+
+
+.navBarInMenu a {
+    text-decoration: none;
+    color: black;
+}
+
+
 
 @media screen and (max-width: 850px){
     .menuIcon {
@@ -88,7 +99,8 @@
 
 /* hero */
 .hero {
-    height: 500px;
+    height: auto;
+    min-height: 50vh;
     width: 100%;
     background-image: url('../assets/images/hero.jpeg');
     background-size: cover;
@@ -103,11 +115,191 @@
 
 .heroContent {
     aspect-ratio: 1;
-    width: 40%;
+    width: 50%;
     max-height: 300px;
-    background-color: blue;
+    margin-top: 100px;
     position: absolute;
     justify-self: center;
     right: 0;
-    margin-right: 20px;
+    /* margin-right: 20px; */
+    color: white;
+    text-shadow: 1px 2px 17px black;
+}
+
+.heroContent button {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.621);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+    .heroContent {
+        /* background-color: rgba(0, 0, 0, 0.825); */
+        width: 90%;
+        height: 200px;
+        right: auto;
+        bottom: 10px;
+        border-radius: 20px;
+        text-shadow: 1px 2px 17px black;
+    }
+}
+
+.businessInfoContainer {
+    height: 50vh;
+    width: 100%;
+    background-color: grey;
+    display: flex;
+}
+
+.businessInfoContainer h2 {
+    font-size: 15px;
+}
+
+.businessInfoContainer div {
+    width: calc(100% / 3);
+    height: 50vh;
+    background-color: #F3F3F3;
+    margin: 1px;
+}
+
+@media screen and (max-width: 850px){
+    .businessInfoContainer {
+        height: auto;
+        width: 100%;
+        background-color: white;
+        display: block;
+    }
+
+    .businessInfoContainer div {
+        width: 100%;
+        height: 50vh;
+        background-color: #F3F3F3;
+        margin: 1px;
+    }
+
+    .businessInfoContainer h2 {
+        font-size:large;
+    }
+}
+
+.WhyChooseUsContainer {
+    height: 50vh;
+    width: 100%;
+    background-color: #18274B;
+    color: white;
+    padding: 20px 0;
+}
+
+.WhyChooseUsContainer h2 {
+    text-align: start;
+    margin-left: 20px;
+}
+
+/* testemonials */
+/* Testimonials Container */
+.testemonialsContainer {
+    min-height: 30vh;
+    width: 100%;
+    background-image: url('../assets//images/engine.png');
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    color: white;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal overflow from parent container */
+    padding: 20px 0; /* Add spacing around the section */
+}
+
+/* Testimonials Wrapper */
+.testemonials {
+    display: flex; /* Use Flexbox for side-by-side layout */
+    gap: 20px; /* Space between items */
+    padding: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scrollbar-width: thin; /* For modern browsers (e.g., Firefox) */
+    scrollbar-color: rgba(0, 0, 0, 0.6) transparent;
+}
+
+/* Hide Scrollbar for Webkit Browsers */
+.testemonials::-webkit-scrollbar {
+    height: 8px; /* Horizontal scrollbar height */
+}
+
+.testemonials::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.6); /* Scrollbar thumb color */
+    border-radius: 10px; /* Rounded scrollbar */
+}
+
+.testemonials::-webkit-scrollbar-track {
+    background-color: transparent; /* Track background */
+}
+
+/* Individual Testimonial Cards */
+.container {
+    flex: 0 0 250px; /* Fixed width for horizontal scroll */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    border-radius: 10px; /* Rounded corners */
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+}
+
+/* Heading */
+.testemonialsContainer h2 {
+    text-align: start;
+    padding: 30px;
+}
+
+/* Text Styles */
+.container p:first-child {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.container p:last-child {
+    font-size: 1rem;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .testemonialsContainer {
+        padding: 10px 0;
+    }
+
+    .testemonials {
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .container {
+        flex: 0 0 200px; /* Reduce card width on smaller screens */
+        padding: 15px;
+    }
+
+    .testemonialsContainer h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .testemonials {
+        gap: 10px;
+    }
+
+    .container {
+        flex: 0 0 150px; /* Further reduce card width on very small screens */
+        padding: 10px;
+    }
+
+    .testemonialsContainer h2 {
+        font-size: 1.5rem;
+    }
 }
