@@ -53,12 +53,26 @@
 }
 
 .menuIcon {
-    aspect-ratio: 1;
+    /* aspect-ratio: 1; */
     height: 50px;
-    background-color: blue;
+    /* background-color: blue; */
     cursor: pointer;
     margin-left: auto;
     display: none;
+}
+
+.burgerMenuContainer {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.bar {
+    width: 100%;
+    height: calc(15%);
+    background-color: black;
 }
 
 /* Default NavBar styling */
@@ -86,11 +100,49 @@
     color: black;
 }
 
+/* menuBurger */
+.burgerMenuContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .bar {
+    width: 100%;
+    height: 5px;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .burgerMenuContainer.open .bar1 {
+    transform: rotate(405deg) translateY(10px) translateX(10px);
+    margin-bottom: 12px;
+    background-color: black;
+  }
+  
+  .burgerMenuContainer.open .bar2 {
+    opacity: 0;
+  }
+  
+  .burgerMenuContainer.open .bar3 {
+    transform: rotate(-45deg) translateY(-10px) translateX(5px);
+    background-color: black;
+
+  }
+  
+
 
 
 @media screen and (max-width: 850px){
     .menuIcon {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        z-index: 1000;
     }
     .menu {
         display: none;
@@ -135,6 +187,10 @@
 }
 
 @media screen and (max-width: 500px) {
+    .hero {
+        min-height: 80vh;
+    }
+
     .heroContent {
         /* background-color: rgba(0, 0, 0, 0.825); */
         width: 90%;

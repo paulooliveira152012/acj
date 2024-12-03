@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../navigation/nav";
+import BurgerMenu from "./BurgerMenu";
 import "../styles/style.css";
 
 const Header = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [isOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
         setMenuOpen((prev) => !prev);
@@ -16,7 +17,7 @@ const Header = () => {
        // Close the menu on screen resize above 850px
        useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth > 850 && menuOpen) {
+            if (window.innerWidth > 850 && isOpen) {
                 setMenuOpen(false);
             }
         };
@@ -25,7 +26,7 @@ const Header = () => {
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, [menuOpen]);
+    }, [isOpen]);
 
     return (
         <>
@@ -40,11 +41,12 @@ const Header = () => {
                         <NavBar className="navBarDefault" />
                     </div>
                 </div>
-                <div className="menuIcon" onClick={toggleMenu}></div>
+                <div className="menuIcon" onClick={toggleMenu}>
+                    <BurgerMenu toggle={isOpen}/>
+                </div>
             </div>
             {/* side menu */}
-            <div className={`openMenu ${menuOpen ? "active" : ""}`}>
-                <div  className="menuIcon openedCloseButton" onClick={toggleMenu}></div>
+            <div className={`openMenu ${isOpen ? "active" : ""}`}>
                 <NavBar className="navBarInMenu" handleTabClick={closeMenu}/>
             </div>
         </>
