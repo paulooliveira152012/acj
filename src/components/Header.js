@@ -3,7 +3,7 @@ import NavBar from "../navigation/nav";
 import BurgerMenu from "./BurgerMenu";
 import "../styles/style.css";
 
-const Header = () => {
+const Header = ({ className }) => {
     const [isOpen, setMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -30,7 +30,7 @@ const Header = () => {
 
     return (
         <>
-            <div className="header">
+            <div className={`header ${className || ""}`}>
                 <div className="branding">
                     <div className="logo"></div>
                     <div className="title">ACJ</div>

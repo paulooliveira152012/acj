@@ -7,6 +7,8 @@ import TipsAndAdvice from "../pages/TipsAndAdvice";
 import ContactUs from "../pages/ContactUs.js";
 import AccessibilityStatement from "../pages/AccessibilityStatement.js";
 import PrivacyPolicy from "../pages/PrivacyPolicy.js";
+import AdmLogin from "../pages/AdmLogin.js";
+import Footer from "../components/Footer.js";
 
 const Navigator = () => {
     return (
@@ -21,7 +23,9 @@ const Navigator = () => {
                 <Route path="/contact-us" element={<ContactUs />} />
                 <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/admLogin" element={<AdmLogin />} />
             </Routes>
+            <Footer />
         </Router>
     );
 };
