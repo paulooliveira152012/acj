@@ -847,5 +847,54 @@ margin-top: 50px;
 
 /* About page */
 .aboutContainer {
-
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    
 }
+
+.aboutContainer .teamPicture {
+    background-image: url('../assets//images/teamPlaceholder.jpg');
+    height: 50vh;
+    width: 90%;
+    margin: auto;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: calc(50% + 20px) 50%;
+}
+
+.aboutContainer article {
+    padding: 30px;
+    text-align: justify;
+}
+
+.aboutContainer button {
+    background-color: transparent;
+    border: solid #B31021 1px;
+    border-radius: 5px;
+    padding: 12px;
+    width: 30%;
+    margin: auto;
+    
+}
+
+.working-hours {
+    margin-bottom: 20px;
+    margin: auto;
+}
+
+.working-hours ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .working-hours li {
+    padding: 5px 0;
+  }
+  
+  .working-hours .closed-now {
+    color: red;
+    font-weight: bold;
+  }
+  
