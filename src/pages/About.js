@@ -1,11 +1,13 @@
 import React from "react";
 import Header from "../components/Header";
+import '../styles/style.css'
 
 const About = () => {
   return (
-    <div>
+    <div className="aboutContainer">
       <Header />
-      <h1>About</h1>
+      
+      <h1>Serving Our Community for Over [X] Years</h1>
     </div>
   );
 };

@@ -57,12 +57,14 @@ const BusinessInfo = () => {
         <div className="servicesContainer">
           {businessInfoList.map((item, index) => (
             <div key={index} className="container">
-              <h2>{item.title}</h2>
+              <h3>{item.title}</h3>
               <p>{item.description}</p>
             </div>
           ))}
         </div>
         {/* services list */}
+        <h3 style={{marginBottom: "20px"}}>Our Auto Service Offerings</h3>
+
         <div className="allServicesList">
           {allServices.map((item, index) => (
             <li key={index}>{item}</li>

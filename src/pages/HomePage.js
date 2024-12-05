@@ -3,6 +3,7 @@ import BusinessInfo from "../components/BusinessInfo";
 import WhyChooseUs from "../components/WhyChooseUs";
 import Testemonials from "../components/Testemonials";
 import CarTypesServices from "../components/CarTypeServices";
+import '../styles/style.css'
 
 const Home = () => {
   return (
@@ -21,11 +22,11 @@ const Home = () => {
       {/* BusinessInfo component */}
       <BusinessInfo />
       <WhyChooseUs />
-      <div className="phrase">
-        <h2>Catchy phrase</h2>
-      </div>
-      <Testemonials />
       <CarTypesServices />
+      <Testemonials />
+      <div className="phrase">
+        <h2>Driven to Keep You Moving!</h2>
+      </div>
 
     </div>
     

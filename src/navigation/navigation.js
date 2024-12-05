@@ -9,12 +9,13 @@ import AccessibilityStatement from "../pages/AccessibilityStatement.js";
 import PrivacyPolicy from "../pages/PrivacyPolicy.js";
 import AdmLogin from "../pages/AdmLogin.js";
 import Footer from "../components/Footer.js";
+import '../styles/style.css'
 
 const Navigator = () => {
     return (
+        <div className="appContainer">
         <Router>
-        
-        {/* <Header /> */}
+            <div className="content">
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
@@ -25,8 +26,10 @@ const Navigator = () => {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/admLogin" element={<AdmLogin />} />
             </Routes>
+            </div>
             <Footer />
         </Router>
+        </div>
     );
 };
 

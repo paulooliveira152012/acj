@@ -38,6 +38,7 @@ const WhyChooseUs = () => {
                 </p>
             </div>
           </div>
+            <button>Contact Us</button>
         </div>
       </div>
     </div>
