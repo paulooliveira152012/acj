@@ -299,6 +299,7 @@ ul {
     /* background-color: green; */
     height: 20%;
     align-items: center;
+    margin: 20px;
 }
 
 .businessInfoContainer .servicesContainer {
@@ -306,7 +307,8 @@ ul {
     overflow-x: auto;   
     justify-content: space-around;
     gap: 50px;
-    margin: 30px 0;
+    margin: 30px 20px;
+    
 }
 
 .businessInfoContainer .servicesContainer .container {
@@ -348,7 +350,7 @@ ul {
     box-sizing: border-box; /* Include padding in width calculations */
   }
 
-  @media screen and (max-width:550px) {
+  @media screen and (max-width:680px) {
     .businessInfoContainer .allServicesList {
         /* background-color: blue; */
         grid-template-columns: repeat(2, minmax(200px, 1fr)); /* Two columns with responsive widths */
@@ -356,7 +358,25 @@ ul {
         padding: 0;
         list-style: none;
         width: 100%;
+        padding: 60px;
+        text-align: left;
     }
+  }
+
+  @media screen and (min-width: 1000px ) {
+    .businessInfoContainer .allServicesList {
+        /* background-color: green; */
+        display: grid;
+        grid-template-columns: repeat(3, minmax(200px, 1fr)); /* Two columns with responsive widths */
+        gap: 20px; /* Add space between rows and columns */
+        justify-content: center; /* Center the grid within the container */
+        align-items: start; /* Align items to the top of each cell */
+        width: 90%; /* Reduce width for better centering */
+        margin: auto; /* Center the grid horizontally on the screen */
+        text-align: justify; /* Justify text within each column */
+        padding-left: 10px;
+        box-sizing: border-box; /* Include padding in width calculations */
+      }
   }
   
 
