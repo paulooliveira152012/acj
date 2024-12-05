@@ -361,11 +361,6 @@ ul {
     justify-content: center;
 }
 
-
-.WhyChooseUsContainer h2 {
-    /* text-align: start; */
-}
-
 .WhyChooseUsContainer .whyListComponent .why {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
