@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap');
 
+@keyframes slideInFromRight {
+    0% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
 /* hededer */
 * {
     color: white;
@@ -236,7 +247,15 @@ ul {
     font-weight: 700; /* Ensure bold weight */
     font-style: normal; /* Optional: Explicitly set normal style */
     font-size: 64px;
+    animation: slideInFromRight 1s ease-out;
+  animation-fill-mode: forwards;
 }
+
+.heroContent p {
+    animation: slideInFromRight 1.2s ease-out; /* Slight delay for a cascading effect */
+    animation-fill-mode: forwards;
+}
+
 
 .heroContent button {
     padding: 10px;
@@ -247,6 +266,8 @@ ul {
     width: 200px;
     margin-top: 20px;
     color: black;
+    animation: slideInFromRight 1.7s ease-out; /* Slight delay for a cascading effect */
+    animation-fill-mode: forwards;
 }
 
 @media screen and (max-width: 500px) {
@@ -352,8 +373,7 @@ ul {
 .WhyChooseUsContainer {
     height: 50vh;
     width: 100%;
-    background: radial-gradient(ellipse, rgba(52, 11, 13, 0.583) 40%, rgba(12, 12, 12, 0) 70%),
-                linear-gradient(to right, #181818, #0c0c0c);
+    background: radial-gradient(ellipse, rgba(52, 11, 13, 0.804) 40%, rgba(12, 12, 12, 0) 70%);
     color: white;
     padding: 20px 0;
     display: flex;
