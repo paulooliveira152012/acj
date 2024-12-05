@@ -25,6 +25,11 @@ const WhyChooseUs = () => {
                 Commitment to Satisfaction
                 </p>
             </div>
+            {/* 4 */}
+            <div>
+            <MesageIcon />
+            <p>Personalized Service</p>
+            </div>   
             {/* 3 */}
             <div>
                 <GearIcon />
@@ -32,11 +37,6 @@ const WhyChooseUs = () => {
                 Expert Team
                 </p>
             </div>
-            <div>
-            {/* 4 */}
-            <MesageIcon />
-            <p>Personalized Service</p>
-            </div>            
           </div>
         </div>
       </div>

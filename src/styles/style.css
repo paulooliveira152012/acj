@@ -289,7 +289,7 @@ ul {
 .businessInfoContainer {
     height: auto;
     width: 100%;
-    padding: 50px;
+    /* padding: 50px; */
     box-sizing: border-box; /* Ensure padding is included in width/height */
 }
 
@@ -333,6 +333,32 @@ ul {
     color: white;
     font-size: 43px;
 }
+
+.businessInfoContainer .allServicesList {
+    /* background-color: green; */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr)); /* Two columns with responsive widths */
+    gap: 20px; /* Add space between rows and columns */
+    justify-content: center; /* Center the grid within the container */
+    align-items: start; /* Align items to the top of each cell */
+    width: 80%; /* Reduce width for better centering */
+    margin: auto; /* Center the grid horizontally on the screen */
+    text-align: justify; /* Justify text within each column */
+    padding-left: 10px;
+    box-sizing: border-box; /* Include padding in width calculations */
+  }
+
+  @media screen and (max-width:550px) {
+    .businessInfoContainer .allServicesList {
+        /* background-color: blue; */
+        grid-template-columns: repeat(2, minmax(200px, 1fr)); /* Two columns with responsive widths */
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+    }
+  }
+  
 
 
 /* .businessInfoContainer div {
@@ -397,6 +423,23 @@ ul {
 .WhyChooseUsContainer .whyListComponent .why div p {
     margin-left: 10px;
 }
+
+@media screen and (max-width: 600px) {
+
+    .WhyChooseUsContainer {
+        margin-top: 50px;
+    }
+
+    .WhyChooseUsContainer .whyListComponent .why {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        align-items: center; /* Center items vertically */
+        height: auto;
+    }
+}
+
 /* testemonials */
 /* Testimonials Container */
 .testemonialsContainer {
@@ -420,7 +463,9 @@ ul {
     overflow-x: auto; /* Enable horizontal scrolling */
     scrollbar-width: thin; /* For modern browsers (e.g., Firefox) */
     scrollbar-color: rgba(0, 0, 0, 0.6) transparent;
+    scroll-behavior: smooth;
 }
+
 
 /* Hide Scrollbar for Webkit Browsers */
 .testemonials::-webkit-scrollbar {
@@ -651,6 +696,11 @@ margin-top: 50px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* Hover effect */
+.carItem:hover img {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
 
 /* Lightbox Styling */
 .lightbox {
