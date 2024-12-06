@@ -47,7 +47,7 @@ const BusinessInfo = () => {
   ];
 
   return (
-    <div className="businessInfoContainer">
+    <div className="businessInfoContainer session">
       <div>
         <div className="titleContainer">
           <div className="ifen"></div>
@@ -62,13 +62,20 @@ const BusinessInfo = () => {
             </div>
           ))}
         </div>
+
+        <div className="servicesContainer2 ">
         {/* services list */}
-        <h3 style={{marginBottom: "20px"}}>Our Auto Service Offerings</h3>
+        <div className="titleContainer">
+        <div className="ifen"></div>
+        <h2>Our Auto Service Offerings</h2>
+        </div>
 
         <div className="allServicesList">
           {allServices.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
+        </div>
+
         </div>
       </div>
     </div>

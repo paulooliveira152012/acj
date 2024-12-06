@@ -35,7 +35,7 @@ const Testemonials = () => {
 
   
   return (
-    <div className="testemonialsContainer">
+    <div className="testemonialsContainer session">
       <h2>What our clients say</h2>
       <div className="testemonials" ref={containerRef}>
         {testimonials.map((testimonial, index) => (

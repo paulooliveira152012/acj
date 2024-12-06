@@ -31,6 +31,12 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.session {
+    margin: 60px 0;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
 .appContainer {
     display: flex;
     flex-direction: column;
@@ -43,12 +49,18 @@ body {
 
 h1, h2 {
     font-family: "Rajdhani", sans-serif;
-    text-align: center;
+}
+
+h2 {
+    font-size: 30px;
+    /* background-color: orange; */
+    margin: 0;
 }
 
 h3 {
-    font-size: 30px;
+    font-size: 20px;
     margin: 0;
+    /* background-color: purple; */
 }
 
 
@@ -184,6 +196,7 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
     width: 40px;
     height: 20px;
     cursor: pointer;
@@ -191,19 +204,31 @@ ul {
     /* background-color: green; */
     z-index: 100;
   }
+
+  .burgerMenuContainer.open {
+    /* background-color: green; */
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    /* align-items: center; */
+  }
+
   
   .bar {
-    width: 80%;
+    width: 100%;
     height: 3px;
     background-color: white;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.5s ease-in-out;
     border-radius: 2px;
   }
   
+  /* transform to X */
   .burgerMenuContainer.open .bar1 {
-    transform: rotate(405deg) translateY(10px) translateX(5px);
-    margin-bottom: 12px;
+    transform: rotate(-225deg) translateY(-4px) translateX(3px);
+    /* margin-bottom: 12px; */
     background-color: black;
+    /* background-color: blue; */
   }
   
   .burgerMenuContainer.open .bar2 {
@@ -211,10 +236,12 @@ ul {
   }
   
   .burgerMenuContainer.open .bar3 {
-    transform: rotate(-45deg) translateY(-10px) translateX(1px);
+    transform: rotate(45deg) translateY(-1px) ;
     background-color: black;
 
   }
+
+  
   
 
 @media screen and (max-width: 850px){
@@ -316,6 +343,8 @@ ul {
     width: 100%;
     /* padding: 50px; */
     box-sizing: border-box; /* Ensure padding is included in width/height */
+    /* background-color: blue; */
+    overflow: hidden;
 }
 
 
@@ -324,7 +353,8 @@ ul {
     /* background-color: green; */
     height: 20%;
     align-items: center;
-    margin: 20px;
+    /* margin: 20px; */
+    margin-bottom: 20px;
 }
 
 .businessInfoContainer .servicesContainer {
@@ -332,24 +362,31 @@ ul {
     overflow-x: auto;   
     justify-content: space-around;
     gap: 50px;
-    margin: 30px 20px;
+    margin: 20px 20px;
+    /* background-color: green; */
 }
 
 .businessInfoContainer .servicesContainer .container {
     height: 200px;
-    aspect-ratio: 2;
+    width: 100%;
     /* background-color: rgba(58, 54, 54, 0.479); */
     border: 1px solid #909090;
 }
 
 .businessInfoContainer .servicesContainer h2 {
     margin: 0;
+
 }
 
 .businessInfoContainer .servicesContainer p {
     text-align: justify;
 
 }
+
+.businessInfoContainer .servicesContainer2 {
+    padding-top: 20px;
+}
+
 
 .ifen {
     background-color: white;
@@ -360,7 +397,6 @@ ul {
 
 .businessInfoContainer h2 {
     color: white;
-    font-size: 43px;
 }
 
 .businessInfoContainer .allServicesList {
@@ -452,10 +488,11 @@ ul {
     width: 100%;
     background: radial-gradient(ellipse, rgba(52, 11, 13, 0.804) 40%, rgba(12, 12, 12, 0) 70%);
     color: white;
-    padding: 20px 0;
+    /* padding: 20px 0; */
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background-color: red; */
 }
 
 .WhyChooseUsContainer .whyListComponent .why {
@@ -482,6 +519,7 @@ ul {
     padding: 12px;
     width: 30%;
     margin: auto;
+    cursor: pointer;
 }
 
 
@@ -520,14 +558,14 @@ ul {
 .testemonialsContainer {
     min-height: 30vh;
     width: 100%;
-    background-image: url('../assets//images/engine.png');
+    /* background-image: url('../assets//images/engine.png'); */
     background-size: cover;
     background-position: left;
     background-repeat: no-repeat;
     color: white;
     box-sizing: border-box;
     overflow-x: hidden; /* Prevent horizontal overflow from parent container */
-    padding: 20px 0; /* Add spacing around the section */
+    /* background-color: pink; */
 }
 
 /* Testimonials Wrapper */
@@ -574,7 +612,7 @@ ul {
 /* Heading */
 .testemonialsContainer h2 {
     text-align: start;
-    padding: 30px;
+    /* padding: 30px; */
 }
 
 /* Text Styles */
@@ -591,7 +629,7 @@ ul {
 /* Media Queries */
 @media screen and (max-width: 768px) {
     .testemonialsContainer {
-        padding: 10px 0;
+        /* padding: 10px 0; */
     }
 
     .testemonials {
@@ -604,9 +642,7 @@ ul {
         padding: 15px;
     }
 
-    .testemonialsContainer h2 {
-        font-size: 1.8rem;
-    }
+    
 }
 
 @media screen and (max-width: 480px) {
@@ -619,9 +655,6 @@ ul {
         padding: 10px;
     }
 
-    .testemonialsContainer h2 {
-        font-size: 1.5rem;
-    }
 }
 
 
@@ -642,6 +675,7 @@ a {
     padding: 20px;
     box-sizing: border-box;
     bottom: 0;
+    /* background-color: green; */
 }
 
 .footer .section {
@@ -747,9 +781,10 @@ margin-top: 50px;
 /* Container Styling */
 /* General Styling */
 .carTypeServices {
-    text-align: center;
-    padding: 20px;
+    /* text-align: center; */
+    padding: 0px;
     overflow-x: hidden;
+    /* background-color: green; */
 }
 
 .carsSlider {
@@ -776,6 +811,7 @@ margin-top: 50px;
 /* Hover effect */
 .carItem:hover img {
     transform: scale(1.1); /* Slightly enlarge on hover */
+    transition: transform 0.5s ease; /* Smooth transition */
   }
 
 /* Lightbox Styling */
@@ -850,7 +886,8 @@ margin-top: 50px;
 }
 
 .phrase {
-    margin: 50px;
+    /* margin: 50px; */
+    /* background-color: purple; */
 }
 
 /* About page */

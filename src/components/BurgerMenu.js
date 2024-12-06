@@ -11,3 +11,4 @@ const BurgerMenu = ({ toggle }) => {
 };
 
 export default BurgerMenu;
+

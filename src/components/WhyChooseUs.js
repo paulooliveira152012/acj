@@ -6,7 +6,7 @@ import MesageIcon from "../assets/icons/MessageIcon";
 
 const WhyChooseUs = () => {
   return (
-    <div className="WhyChooseUsContainer">
+    <div className="WhyChooseUsContainer session">
       <div>
         <h2>Why Choose Us?</h2>
         <div className="whyListComponent">
