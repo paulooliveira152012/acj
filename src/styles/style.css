@@ -478,6 +478,8 @@ ul {
     margin: auto;
 }
 
+
+
 .WhyChooseUsContainer button:hover {
     background-color: #B31021;
     color: black;
@@ -846,15 +848,18 @@ margin-top: 50px;
 }
 
 /* About page */
-.aboutContainer {
+.contentContainer {
     width: 80%;
     margin: auto;
     display: flex;
     flex-direction: column;
-    
 }
 
-.aboutContainer .teamPicture {
+.contentContainer li {
+    padding-left: 20px;
+}
+
+.contentContainer .teamPicture {
     background-image: url('../assets//images/teamPlaceholder.jpg');
     height: 50vh;
     width: 90%;
@@ -864,9 +869,21 @@ margin-top: 50px;
     background-position: calc(50% + 20px) 50%;
 }
 
-.aboutContainer article {
+ article {
     padding: 30px;
     text-align: justify;
+}
+
+@media screen and (max-width: 900px) {
+    .contentContainer {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    article {
+        padding: 0;
+    }
 }
 
 .aboutContainer button {
@@ -876,7 +893,13 @@ margin-top: 50px;
     padding: 12px;
     width: 30%;
     margin: auto;
-    
+    cursor: pointer;
+    margin-bottom: 25px;
+}
+
+.aboutContainer button:hover {
+    background-color: #B31021;
+    color: black;
 }
 
 .working-hours {
@@ -898,3 +921,78 @@ margin-top: 50px;
     font-weight: bold;
   }
   
+  /* ourServices */
+  .machines {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.machine {
+    width: 250px;
+    text-align: center;
+    background-size: contain;
+}
+
+.machine:hover {
+    transform: scale(1.1);
+    
+}
+
+.machine img {
+    width: auto;
+    height: 20vh;
+    border-radius: 10px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+.contentContainer ul {
+    list-style:disc;
+    padding-left: 20px;
+}
+
+.contentContainer button {
+background-color: transparent;
+ border: solid #B31021 1px;
+ border-radius: 5px;
+ padding: 12px;
+ width: 30%;
+ margin: auto;
+ cursor: pointer;
+}
+
+.contentContainer button:hover {
+    background-color: #B31021;
+    color: black;
+    }
+    

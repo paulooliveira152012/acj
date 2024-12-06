@@ -39,7 +39,7 @@ const About = () => {
   };
 
   return (
-    <div className="aboutContainer">
+    <div className="contentContainer">
       <Header />
 
       <h1>Serving Our Community for Over [X] Years</h1>
