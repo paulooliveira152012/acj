@@ -24,8 +24,9 @@ const OurServices = () => {
     );
 
   return (
-    <div className="contentContainer">
+    <>
       <Header />
+    <div className="contentContainer">
       <article>
         <h1>Our Services</h1>
         <p>
@@ -93,6 +94,7 @@ const OurServices = () => {
       )}
       <button>Contact Us</button>
     </div>
+    </>
   );
 };
 

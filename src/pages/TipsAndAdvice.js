@@ -1,13 +1,16 @@
 import React from "react";
 import Header from "../components/Header";
+import "../styles/style.css";
 
 const TipsAndAdvice = () => {
-    return (
-        <div>
-            <Header />
+  return (
+    <>
+      <Header />
+      <div className="contentContainer">
         <h1>Tips & Advice</h1>
-    </div>
-    )
+      </div>
+    </>
+  );
 };
 
 export default TipsAndAdvice;

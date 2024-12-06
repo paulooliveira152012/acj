@@ -39,8 +39,9 @@ const About = () => {
   };
 
   return (
-    <div className="contentContainer">
+    <>
       <Header />
+    <div className="contentContainer">
 
       <h1>Serving Our Community for Over [X] Years</h1>
       <div className="teamPicture"></div>
@@ -101,6 +102,7 @@ const About = () => {
         referrerPolicy="no-referrer-when-downgrade"
       ></iframe>
     </div>
+    </>
   );
 };
 
