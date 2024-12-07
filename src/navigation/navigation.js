@@ -8,6 +8,7 @@ import ContactUs from "../pages/ContactUs.js";
 import AccessibilityStatement from "../pages/AccessibilityStatement.js";
 import PrivacyPolicy from "../pages/PrivacyPolicy.js";
 import AdmLogin from "../pages/AdmLogin.js";
+import Calendar from "../pages/Calendar.js";
 import Footer from "../components/Footer.js";
 import '../styles/style.css'
 
@@ -25,6 +26,7 @@ const Navigator = () => {
                 <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/admLogin" element={<AdmLogin />} />
+                <Route path="/calendar" element={<Calendar />} />
             </Routes>
             </div>
             <Footer />

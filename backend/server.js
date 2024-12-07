@@ -6,9 +6,16 @@ const mongoose = require("mongoose");
 require('dotenv').config()
 // import router
 const appointmentRouter = require('./routes/appointments')
+const adminRouter = require('./routes/adm');
+// import cors
+const cors = require('cors')
+
 
 // implemente express
 const app = express();
+
+// allow CORS
+app.use(cors());
 
 // use express
 app.use(express.json());
@@ -20,6 +27,7 @@ mongoose
     .catch((err) => console.log('Error connecting to MongoDB:', err));
 
 app.use('/api/appointments', appointmentRouter)
+app.use('/api/admin', adminRouter); // Routes for admin login
 app.get('/', (req, res) => res.send('Welcome to the Mechanic Shop API'));
 
 // Start the server
