@@ -1,0 +1,6 @@
+Mongo Credentials
+
+Username: acjautoshop
+Password: n7IdayMdfmADRaSy
+
+mongodb+srv://acjautoshop:n7IdayMdfmADRaSy@acj.i409g.mongodb.net/
