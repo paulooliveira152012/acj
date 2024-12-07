@@ -21,6 +21,7 @@ const costumerSchema = new mongoose.Schema({
     },
     appointment: {
         date: { type: Date, required: true }, // Date and time of the appointment
+        time: { type: String, required: true }, // Ensure the time field is explicitly defined
         service: { type: String, required: true }, // Service type, e.g., "Oil Change"
         notes: { type: String, required: false }, // Optional notes
     },

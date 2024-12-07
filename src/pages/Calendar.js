@@ -8,6 +8,7 @@ import "../styles/style.css";
 const CalendarPage = () => {
     const [selectedDate, setSelectedDate] = useState(new Date()); // Default to today's date
     const [availableTimes, setAvailableTimes] = useState([]);
+    const [appointments, setAppointments] = useState([]); // State to store all appointments
     const [formData, setFormData] = useState({
         name: "",
         phone: "",
@@ -29,12 +30,29 @@ const CalendarPage = () => {
         return times;
     };
 
+    // Fetch all appointments when the component mounts
+    useEffect(() => {
+        const fetchAllAppointments = async () => {
+            try {
+                const response = await axios.get("http://localhost:5001/api/appointments/all");
+                console.log("Fetched appointments from backend:", response.data);
+                setAppointments(response.data); // Store all appointments
+            } catch (err) {
+                console.error("Error fetching all appointments:", err);
+            }
+        };
+
+        fetchAllAppointments();
+    }, []);
+
+    // Fetch available times for the selected date
     useEffect(() => {
         const fetchAvailableTimes = async () => {
             try {
                 const date = selectedDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
                 const response = await axios.get(`http://localhost:5001/api/appointments/${date}`);
                 const takenTimes = response.data.map((appointment) => appointment.appointment.time);
+                console.log("Taken times:", takenTimes);
 
                 // Generate time slots dynamically between 8 AM and 5 PM
                 const allTimes = generateTimeSlots(8, 17);
@@ -101,14 +119,22 @@ const CalendarPage = () => {
                 carDetails: { make: "", model: "", year: "", licensePlate: "" },
                 time: "",
             });
-             // Hide all conditionally rendered elements
-        setIsFormVisible(false);
-        setIsScheduleVisible(false);
-        setAvailableTimes([]); // Reset available times if needed
+            setIsFormVisible(false); // Hide the form after successful submission
+            setIsScheduleVisible(false); // Reset schedule view
         } catch (err) {
             console.error("Error saving appointment:", err);
             alert("Failed to save the appointment.");
         }
+    };
+
+    // Highlight dates with existing appointments
+    const tileClassName = ({ date }) => {
+        const dateString = date.toISOString().split("T")[0];
+        const isHighlighted = appointments.some(
+            (appointment) =>
+                new Date(appointment.appointment.date).toISOString().split("T")[0] === dateString
+        );
+        return isHighlighted ? "highlighted-date" : null; // Custom class for highlighted dates
     };
 
     return (
@@ -119,10 +145,11 @@ const CalendarPage = () => {
                 <Calendar
                     onChange={setSelectedDate}
                     value={selectedDate}
+                    tileClassName={tileClassName} // Apply custom styling to tiles
                 />
             </div>
 
-            {isScheduleVisible && (
+            {isScheduleVisible && availableTimes.length > 0 && (
                 <div className="infoParentContainer">
                     <div className="infoChildContainer">
                         <span className="closeButton" onClick={handleCloseSchedule}>
@@ -130,22 +157,18 @@ const CalendarPage = () => {
                         </span>
                         <h2>Available Times</h2>
                         <div className="scheduleContainer">
-                            {availableTimes.length > 0 ? (
-                                availableTimes.map((time) => (
-                                    <button
-                                        key={time}
-                                        className={`time-slot ${formData.time === time ? "selected" : ""}`}
-                                        onClick={() => {
-                                            setFormData((prev) => ({ ...prev, time }));
-                                            setIsFormVisible(true);
-                                        }}
-                                    >
-                                        {time}
-                                    </button>
-                                ))
-                            ) : (
-                                <p>No available times for this date.</p>
-                            )}
+                            {availableTimes.map((time) => (
+                                <button
+                                    key={time}
+                                    className={`time-slot ${formData.time === time ? "selected" : ""}`}
+                                    onClick={() => {
+                                        setFormData((prev) => ({ ...prev, time }));
+                                        setIsFormVisible(true);
+                                    }}
+                                >
+                                    {time}
+                                </button>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -214,9 +237,7 @@ const CalendarPage = () => {
                                 placeholder="License Plate"
                                 required
                             />
-                            <button type="submit">
-                                Save Appointment
-                            </button>
+                            <button type="submit">Save Appointment</button>
                         </form>
                     </div>
                 </div>
