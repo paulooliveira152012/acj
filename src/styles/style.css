@@ -697,9 +697,6 @@ ul {
 
 /* Media Queries */
 @media screen and (max-width: 768px) {
-    .testemonialsContainer {
-        /* padding: 10px 0; */
-    }
 
     .testemonials {
         gap: 15px;
@@ -954,10 +951,6 @@ margin-top: 50px;
     transform: translateY(-50%);
 }
 
-.phrase {
-    /* margin: 50px; */
-    /* background-color: purple; */
-}
 
 /* About page */
 .contentContainer {
