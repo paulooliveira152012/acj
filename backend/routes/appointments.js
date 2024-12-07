@@ -3,9 +3,11 @@ const router = express.Router();
 const Client = require('../schemas/Costumer'); // Import User model (correct name)
 
 // Add a new appointment
-router.post('/', async (req, res) => {
+router.post('/newAppointment', async (req, res) => {
+    console.group("route to add appointment reached")
     try {
         const { name, phone, email, carDetails, appointment } = req.body;
+        console.log(name, phone, email, carDetails, appointment)
 
         // Validate required fields
         if (!name || !phone || !carDetails || !appointment) {
@@ -29,8 +31,11 @@ router.post('/', async (req, res) => {
 
 // Get appointments for a specific date
 router.get('/:date', async (req, res) => {
+    console.log("route to get dates reached")
     try {
         const date = new Date(req.params.date);
+        console.log("the date is", date)
+
 
         // Find appointments on the given date
         const appointments = await Client.find({

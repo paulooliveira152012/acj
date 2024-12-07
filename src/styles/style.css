@@ -1139,6 +1139,18 @@ background-color: transparent;
     color: black;
 }
 
-.calendar {
-    background-color: red;
+.calendar-page * {
+    color: black;
 }
+
+.calendar-page {
+    background-color: white; 
+    height: 100%;
+    min-height: 100vh;
+}
+
+.calendar-page h2, h1 {
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+

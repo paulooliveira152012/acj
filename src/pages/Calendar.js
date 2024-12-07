@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // Calendar styling
+import "../styles/Calendar.css";
 import axios from "axios";
-import '../styles/style.css'
+import "../styles/style.css";
 
 const CalendarPage = () => {
     const [selectedDate, setSelectedDate] = useState(new Date()); // Default to today's date
@@ -15,16 +16,28 @@ const CalendarPage = () => {
         time: "",
     });
 
-    // Fetch available times for the selected date
+    // Function to generate time slots between 8 AM and 5 PM
+    const generateTimeSlots = (startHour, endHour) => {
+        const times = [];
+        for (let hour = startHour; hour <= endHour; hour++) {
+            const time = `${hour.toString().padStart(2, "0")}:00`;
+            times.push(time);
+        }
+        return times;
+    };
+
     useEffect(() => {
         const fetchAvailableTimes = async () => {
+            console.log("function to check available slots")
             try {
                 const date = selectedDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
-                const response = await axios.get(`/api/appointments/${date}`);
+                const response = await axios.get(`http://localhost:5001/api/appointments/${date}`);
                 const takenTimes = response.data.map((appointment) => appointment.appointment.time);
 
-                // Example of available slots from 9 AM to 5 PM
-                const allTimes = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"];
+                // Generate time slots dynamically between 8 AM and 5 PM
+                const allTimes = generateTimeSlots(8, 17);
+
+                // Filter out taken times
                 const freeTimes = allTimes.filter((time) => !takenTimes.includes(time));
 
                 setAvailableTimes(freeTimes);
@@ -36,7 +49,6 @@ const CalendarPage = () => {
         fetchAvailableTimes();
     }, [selectedDate]);
 
-    // Handle form input
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -51,7 +63,6 @@ const CalendarPage = () => {
         }
     };
 
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -63,7 +74,8 @@ const CalendarPage = () => {
                     service: "Car Drop-Off",
                 },
             };
-            await axios.post("/api/appointments", data);
+            // `http://localhost:5001/api/appointments/${date}`
+            await axios.post("http://localhost:5001/api/appointments/newAppointment", data);
             alert("Appointment saved successfully!");
             setFormData({
                 name: "",
@@ -79,17 +91,14 @@ const CalendarPage = () => {
     };
 
     return (
-        <div className="calendar-page" style={{ color: "black"}} >
+        <div className="calendar-page">
             <h1>Schedule Your Car Drop-Off</h1>
-            <div>
+            <div className="calendarContainer">
                 <h2>Select a Date</h2>
-                <Calendar
-                    onChange={setSelectedDate}
-                    value={selectedDate}
-                />
+                <Calendar onChange={setSelectedDate} value={selectedDate} />
             </div>
 
-            <div >
+            <div>
                 <h2>Select a Time</h2>
                 {availableTimes.length > 0 ? (
                     <select name="time" value={formData.time} onChange={handleChange}>
