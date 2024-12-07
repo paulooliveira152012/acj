@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // Calendar styling
 import axios from "axios";
+import '../styles/style.css'
 
 const CalendarPage = () => {
     const [selectedDate, setSelectedDate] = useState(new Date()); // Default to today's date
@@ -78,7 +79,7 @@ const CalendarPage = () => {
     };
 
     return (
-        <div className="calendar-page">
+        <div className="calendar-page" style={{ color: "black"}} >
             <h1>Schedule Your Car Drop-Off</h1>
             <div>
                 <h2>Select a Date</h2>
@@ -88,7 +89,7 @@ const CalendarPage = () => {
                 />
             </div>
 
-            <div>
+            <div >
                 <h2>Select a Time</h2>
                 {availableTimes.length > 0 ? (
                     <select name="time" value={formData.time} onChange={handleChange}>

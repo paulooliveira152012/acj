@@ -1135,3 +1135,10 @@ background-color: transparent;
     cursor: pointer;
     }
     
+.select {
+    color: black;
+}
+
+.calendar {
+    background-color: red;
+}
