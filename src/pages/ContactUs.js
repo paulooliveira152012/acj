@@ -7,7 +7,9 @@ const ContactUs = () => {
     <>
       <Header />
       <div className="contentContainer">
+        <div className="session">
         <h1>Contact Us</h1>
+        </div>
       </div>
     </>
   );

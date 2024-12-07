@@ -12,6 +12,19 @@
     }
   }
 
+  /* Smooth gradient animation */
+@keyframes colorShift {
+    0% {
+        background-position: 0% 50%; /* Start position */
+    }
+    50% {
+        background-position: 100% 50%; /* Midpoint */
+    }
+    100% {
+        background-position: 0% 50%; /* Loop back */
+    }
+}
+
 /* hededer */
 * {
     color: white;
@@ -90,6 +103,9 @@ ul {
     box-sizing: border-box; /* Ensure padding is included in width */
     /* background-color: green; */
     /* z-index: 100000; */
+    position: absolute;
+    /* background-color: black; */
+    z-index: 50000;
 }
 
 .absoluteHeader {
@@ -310,17 +326,70 @@ ul {
 
 
 .heroContent button {
-    padding: 10px;
-    border-radius: 20px;
+    padding: 10px 20px;
+    border-radius: 15px;
     border: none;
-    box-shadow: 1px 1px rgba(0, 0, 0, 0.621);
     cursor: pointer;
-    width: 200px;
-    margin-top: 20px;
-    color: black;
-    animation: slideInFromRight 1.7s ease-out; /* Slight delay for a cascading effect */
-    animation-fill-mode: forwards;
+    color: white;
+    font-size: 16px;
+    background: linear-gradient(90deg, #ff4d4d, #ff0000, #b30000); /* Red gradient */
+    background-size: 300% 300%; /* Larger size for dynamic movement */
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); /* Red glow */
+    animation: gradientShift 4s infinite ease-in-out; /* Smooth gradient animation */
+    transition: all 0.3s ease; /* Smooth scaling effect */
+    position: relative;
+    overflow: hidden;
+    /* text-transform: uppercase; */
+    /* font-weight: bold; */
 }
+
+.heroContent button:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8), 0 0 60px rgba(255, 117, 143, 0.6); /* Intensified glow */
+}
+
+/* Dynamic gradient animation */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Subtle shine effect */
+.heroContent button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 150%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    transform: skewX(-20deg);
+    transition: transform 0.3s ease;
+    animation: shiny 2s infinite; /* Continuous shine sweep */
+}
+
+.heroContent button:hover::before {
+    animation: shiny 1s infinite; /* Faster shine on hover */
+}
+
+/* Keyframes for shine effect */
+@keyframes shiny {
+    0% {
+        left: -150%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+
 
 @media screen and (max-width: 500px) {
     .hero {
@@ -905,7 +974,7 @@ margin-top: 50px;
 .contentContainer .teamPicture {
     background-image: url('../assets//images/teamPlaceholder.jpg');
     height: 50vh;
-    width: 90%;
+    width: 100%;
     margin: auto;
     border-radius: 20px;
     background-size: cover;
@@ -938,6 +1007,7 @@ margin-top: 50px;
     margin: auto;
     cursor: pointer;
     margin-bottom: 25px;
+    
 }
 
 .aboutContainer button:hover {
@@ -1037,5 +1107,6 @@ background-color: transparent;
 .contentContainer button:hover {
     background-color: #B31021;
     color: black;
+    cursor: pointer;
     }
     

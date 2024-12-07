@@ -7,7 +7,9 @@ const TipsAndAdvice = () => {
     <>
       <Header />
       <div className="contentContainer">
-        <h1>Tips & Advice</h1>
+        <div className="session">
+          <h1>Tips & Advice</h1>
+        </div>
       </div>
     </>
   );

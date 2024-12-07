@@ -27,7 +27,7 @@ const OurServices = () => {
     <>
       <Header />
     <div className="contentContainer">
-      <article>
+      <article className="session" style={{marginBottom: 0}}>
         <h1>Our Services</h1>
         <p>
           We specialize in delivering tailored solutions designed to meet your
@@ -49,6 +49,8 @@ const OurServices = () => {
             stability.
           </li>
         </ul>
+
+        <br></br>
 
         <h2>Our Machinery</h2>
         <p>
