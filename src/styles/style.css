@@ -964,14 +964,45 @@ margin-top: 50px;
     padding-left: 20px;
 }
 
+
+
 .contentContainer .teamPicture {
-    background-image: url('../assets//images/teamPlaceholder.jpg');
+    background-image: url('../assets/images/teamPlaceholder.jpg');
     height: 50vh;
     width: 100%;
     margin: auto;
     border-radius: 20px;
     background-size: cover;
     background-position: calc(50% + 20px) 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.contentContainer .teamPicture::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%; /* Start outside the element */
+    width: 150%; /* Cover more than the element */
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%
+    ); /* Shiny gradient */
+    transform: skewX(-30deg); /* Add a dynamic angle */
+    animation: shinyEffect 2s ease-out 1; /* Run once after loading */
+}
+
+/* Keyframes for the shiny effect */
+@keyframes shinyEffect {
+    0% {
+        left: -150%; /* Start completely off-screen */
+    }
+    100% {
+        left: 100%; /* End completely off-screen */
+    }
 }
 
  article {

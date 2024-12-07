@@ -46,7 +46,9 @@ const About = () => {
       <div className="contentContainer">
         <div className="session" style={{marginBottom: 0}}>
           <h1>Serving Our Community for Over [X] Years</h1>
-          <div className="teamPicture"></div>
+          <div className="teamPicture">
+            
+          </div>
           <article>
             <p>
               Founded on the principles of passion and innovation, our journey
