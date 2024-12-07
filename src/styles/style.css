@@ -627,7 +627,7 @@ ul {
 .testemonialsContainer {
     min-height: 30vh;
     width: 100%;
-    /* background-image: url('../assets//images/engine.png'); */
+    background-image: url('../assets//images/engine.png');
     background-size: cover;
     background-position: left;
     background-repeat: no-repeat;
