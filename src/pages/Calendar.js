@@ -16,10 +16,13 @@ const CalendarPage = () => {
         time: "",
     });
 
+    const [isFormVisible, setIsFormVisible] = useState(false); // To toggle form visibility
+    const [isScheduleVisible, setIsScheduleVisible] = useState(false); // To toggle schedule visibility
+
     // Function to generate time slots between 8 AM and 5 PM
     const generateTimeSlots = (startHour, endHour) => {
         const times = [];
-        for (let hour = startHour; hour <= endHour; hour++) {
+        for (let hour = startHour; hour < endHour; hour++) {
             const time = `${hour.toString().padStart(2, "0")}:00`;
             times.push(time);
         }
@@ -28,7 +31,6 @@ const CalendarPage = () => {
 
     useEffect(() => {
         const fetchAvailableTimes = async () => {
-            console.log("function to check available slots")
             try {
                 const date = selectedDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
                 const response = await axios.get(`http://localhost:5001/api/appointments/${date}`);
@@ -41,6 +43,7 @@ const CalendarPage = () => {
                 const freeTimes = allTimes.filter((time) => !takenTimes.includes(time));
 
                 setAvailableTimes(freeTimes);
+                setIsScheduleVisible(true); // Show schedule when date is selected
             } catch (err) {
                 console.error("Error fetching available times:", err);
             }
@@ -61,6 +64,21 @@ const CalendarPage = () => {
         } else {
             setFormData((prev) => ({ ...prev, [name]: value }));
         }
+
+        // Show the form only when a time is selected
+        if (name === "time" && value) {
+            setIsFormVisible(true);
+        }
+    };
+
+    const handleCloseForm = () => {
+        setIsFormVisible(false);
+        setFormData((prev) => ({ ...prev, time: "" })); // Reset the selected time
+    };
+
+    const handleCloseSchedule = () => {
+        setIsScheduleVisible(false);
+        setAvailableTimes([]); // Clear the schedule times
     };
 
     const handleSubmit = async (e) => {
@@ -74,7 +92,6 @@ const CalendarPage = () => {
                     service: "Car Drop-Off",
                 },
             };
-            // `http://localhost:5001/api/appointments/${date}`
             await axios.post("http://localhost:5001/api/appointments/newAppointment", data);
             alert("Appointment saved successfully!");
             setFormData({
@@ -84,6 +101,10 @@ const CalendarPage = () => {
                 carDetails: { make: "", model: "", year: "", licensePlate: "" },
                 time: "",
             });
+             // Hide all conditionally rendered elements
+        setIsFormVisible(false);
+        setIsScheduleVisible(false);
+        setAvailableTimes([]); // Reset available times if needed
         } catch (err) {
             console.error("Error saving appointment:", err);
             alert("Failed to save the appointment.");
@@ -95,88 +116,111 @@ const CalendarPage = () => {
             <h1>Schedule Your Car Drop-Off</h1>
             <div className="calendarContainer">
                 <h2>Select a Date</h2>
-                <Calendar onChange={setSelectedDate} value={selectedDate} />
+                <Calendar
+                    onChange={setSelectedDate}
+                    value={selectedDate}
+                />
             </div>
 
-            <div>
-                <h2>Select a Time</h2>
-                {availableTimes.length > 0 ? (
-                    <select name="time" value={formData.time} onChange={handleChange}>
-                        <option value="">Select a time</option>
-                        {availableTimes.map((time) => (
-                            <option key={time} value={time}>
-                                {time}
-                            </option>
-                        ))}
-                    </select>
-                ) : (
-                    <p>No available times for this date.</p>
-                )}
-            </div>
+            {isScheduleVisible && (
+                <div className="infoParentContainer">
+                    <div className="infoChildContainer">
+                        <span className="closeButton" onClick={handleCloseSchedule}>
+                            X
+                        </span>
+                        <h2>Available Times</h2>
+                        <div className="scheduleContainer">
+                            {availableTimes.length > 0 ? (
+                                availableTimes.map((time) => (
+                                    <button
+                                        key={time}
+                                        className={`time-slot ${formData.time === time ? "selected" : ""}`}
+                                        onClick={() => {
+                                            setFormData((prev) => ({ ...prev, time }));
+                                            setIsFormVisible(true);
+                                        }}
+                                    >
+                                        {time}
+                                    </button>
+                                ))
+                            ) : (
+                                <p>No available times for this date.</p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
 
-            <div>
-                <h2>Enter Your Information</h2>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Your Name"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="Your Phone"
-                        required
-                    />
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Your Email"
-                    />
-                    <input
-                        type="text"
-                        name="carDetails.make"
-                        value={formData.carDetails.make}
-                        onChange={handleChange}
-                        placeholder="Car Make (e.g., Toyota)"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="carDetails.model"
-                        value={formData.carDetails.model}
-                        onChange={handleChange}
-                        placeholder="Car Model (e.g., Corolla)"
-                        required
-                    />
-                    <input
-                        type="number"
-                        name="carDetails.year"
-                        value={formData.carDetails.year}
-                        onChange={handleChange}
-                        placeholder="Car Year (e.g., 2018)"
-                        required
-                    />
-                    <input
-                        type="text"
-                        name="carDetails.licensePlate"
-                        value={formData.carDetails.licensePlate}
-                        onChange={handleChange}
-                        placeholder="License Plate"
-                        required
-                    />
-                    <button type="submit" disabled={!formData.time}>
-                        Save Appointment
-                    </button>
-                </form>
-            </div>
+            {isFormVisible && (
+                <div className="infoParentContainer">
+                    <div className="infoChildContainer">
+                        <span className="closeButton" onClick={handleCloseForm}>
+                            X
+                        </span>
+                        <h2>Enter Your Information</h2>
+                        <form onSubmit={handleSubmit}>
+                            <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                placeholder="Your Name"
+                                required
+                            />
+                            <input
+                                type="text"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                placeholder="Your Phone"
+                                required
+                            />
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Your Email"
+                            />
+                            <input
+                                type="text"
+                                name="carDetails.make"
+                                value={formData.carDetails.make}
+                                onChange={handleChange}
+                                placeholder="Car Make (e.g., Toyota)"
+                                required
+                            />
+                            <input
+                                type="text"
+                                name="carDetails.model"
+                                value={formData.carDetails.model}
+                                onChange={handleChange}
+                                placeholder="Car Model (e.g., Corolla)"
+                                required
+                            />
+                            <input
+                                type="number"
+                                name="carDetails.year"
+                                value={formData.carDetails.year}
+                                onChange={handleChange}
+                                placeholder="Car Year (e.g., 2018)"
+                                required
+                            />
+                            <input
+                                type="text"
+                                name="carDetails.licensePlate"
+                                value={formData.carDetails.licensePlate}
+                                onChange={handleChange}
+                                placeholder="License Plate"
+                                required
+                            />
+                            <button type="submit">
+                                Save Appointment
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

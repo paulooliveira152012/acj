@@ -9,6 +9,7 @@
   max-width: 1500px;
   margin: auto;
   background: white;
+  /* background-color: red; */
   border: 1px solid #a0a096;
   font-family: 'Arial', 'Helvetica', sans-serif;
   line-height: 1.125em;
@@ -160,4 +161,67 @@
 
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
+}
+
+.infoParentContainer {
+  /* background-color: blue; */
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.793);
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.infoChildContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.infoChildContainer form {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoContainer form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input {
+  /* background-color: red; */
+  margin: 5px;
+}
+
+.infoChildContainer span {
+  position: absolute;
+  right: 5%;
+  top: 1%;
+  /* background-color: red; */
+  float: right;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.scheduleContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.scheduleContainer button {
+  padding: 20px;
+}
+
+form button {
+  width: 50%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
 }
