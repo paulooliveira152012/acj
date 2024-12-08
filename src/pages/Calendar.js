@@ -6,7 +6,7 @@ import axios from "axios";
 import "../styles/style.css";
 
 const CalendarPage = () => {
-    const [selectedDate, setSelectedDate] = useState(new Date()); // Default to today's date
+    const [selectedDate, setSelectedDate] = useState(null); // Initially no date is selected
     const [availableTimes, setAvailableTimes] = useState([]);
     const [appointments, setAppointments] = useState([]); // State to store all appointments
     const [formData, setFormData] = useState({
@@ -16,9 +16,9 @@ const CalendarPage = () => {
         carDetails: { make: "", model: "", year: "", licensePlate: "" },
         time: "",
     });
-
     const [isFormVisible, setIsFormVisible] = useState(false); // To toggle form visibility
     const [isScheduleVisible, setIsScheduleVisible] = useState(false); // To toggle schedule visibility
+    const [dailyAppointments, setDailyAppointments] = useState([]); // Appointments for the selected day
 
     // Function to generate time slots between 8 AM and 5 PM
     const generateTimeSlots = (startHour, endHour) => {
@@ -45,30 +45,45 @@ const CalendarPage = () => {
         fetchAllAppointments();
     }, []);
 
-    // Fetch available times for the selected date
+    // Fetch available times and appointments for the selected date
     useEffect(() => {
-        const fetchAvailableTimes = async () => {
+        if (!selectedDate) return; // Avoid fetching until a date is selected
+
+        const fetchDailyAppointments = async () => {
             try {
                 const date = selectedDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
-                const response = await axios.get(`http://localhost:5001/api/appointments/${date}`);
-                const takenTimes = response.data.map((appointment) => appointment.appointment.time);
-                console.log("Taken times:", takenTimes);
+                const response = await axios.get(`http://localhost:5001/api/appointments/all`); // Fetch all appointments
+                console.log("Fetched appointments from backend:", response.data);
 
-                // Generate time slots dynamically between 8 AM and 5 PM
+                // Filter appointments for the selected date
+                const filteredAppointments = response.data.filter(
+                    (appointment) =>
+                        new Date(appointment.appointment.date).toISOString().split("T")[0] === date
+                );
+
+                console.log("Appointments for the selected date:", filteredAppointments);
+
+                const takenTimes = filteredAppointments.map(
+                    (appointment) => appointment.appointment.time
+                );
                 const allTimes = generateTimeSlots(8, 17);
-
-                // Filter out taken times
                 const freeTimes = allTimes.filter((time) => !takenTimes.includes(time));
 
+                setDailyAppointments(filteredAppointments); // Store filtered appointments
                 setAvailableTimes(freeTimes);
-                setIsScheduleVisible(true); // Show schedule when date is selected
+                setIsScheduleVisible(true);
             } catch (err) {
-                console.error("Error fetching available times:", err);
+                console.error("Error fetching daily appointments:", err);
             }
         };
 
-        fetchAvailableTimes();
+        fetchDailyAppointments();
     }, [selectedDate]);
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        setIsScheduleVisible(false); // Ensure schedule is hidden until appointments are fetched
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -83,7 +98,6 @@ const CalendarPage = () => {
             setFormData((prev) => ({ ...prev, [name]: value }));
         }
 
-        // Show the form only when a time is selected
         if (name === "time" && value) {
             setIsFormVisible(true);
         }
@@ -143,13 +157,13 @@ const CalendarPage = () => {
             <div className="calendarContainer">
                 <h2>Select a Date</h2>
                 <Calendar
-                    onChange={setSelectedDate}
+                    onChange={handleDateChange}
                     value={selectedDate}
                     tileClassName={tileClassName} // Apply custom styling to tiles
                 />
             </div>
 
-            {isScheduleVisible && availableTimes.length > 0 && (
+            {isScheduleVisible && (
                 <div className="infoParentContainer">
                     <div className="infoChildContainer">
                         <span className="closeButton" onClick={handleCloseSchedule}>
@@ -157,18 +171,47 @@ const CalendarPage = () => {
                         </span>
                         <h2>Available Times</h2>
                         <div className="scheduleContainer">
-                            {availableTimes.map((time) => (
-                                <button
-                                    key={time}
-                                    className={`time-slot ${formData.time === time ? "selected" : ""}`}
-                                    onClick={() => {
-                                        setFormData((prev) => ({ ...prev, time }));
-                                        setIsFormVisible(true);
-                                    }}
-                                >
-                                    {time}
-                                </button>
-                            ))}
+                            {generateTimeSlots(8, 17).map((time) => {
+                                const appointment = dailyAppointments.find(
+                                    (appt) => appt.appointment.time === time
+                                );
+                                return (
+                                    <div key={time} className="time-slot-wrapper">
+                                        <button
+                                            className={`time-slot ${
+                                                appointment ? "taken-slot" : ""
+                                            }`}
+                                            onClick={() => {
+                                                if (!appointment) {
+                                                    setFormData((prev) => ({
+                                                        ...prev,
+                                                        time,
+                                                    }));
+                                                    setIsFormVisible(true);
+                                                }
+                                            }}
+                                            disabled={!!appointment} // Disable if slot is taken
+                                        >
+                                            {time}
+                                        </button>
+                                        {appointment && (
+                                            <div className="appointment-details">
+                                                <p>
+                                                    <strong>Name:</strong> {appointment.name}
+                                                </p>
+                                                <p>
+                                                    <strong>Car:</strong>{" "}
+                                                    {appointment.carDetails.make}{" "}
+                                                    {appointment.carDetails.model}
+                                                </p>
+                                                <p>
+                                                    <strong>Phone:</strong> {appointment.phone}
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>

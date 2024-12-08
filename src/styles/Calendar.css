@@ -16,11 +16,30 @@
 }
 
 .highlighted-date {
-  background-color: #fdd835; /* Yellow highlight */
+  background-color: #fdd835 !important; /* Yellow highlight */
   color: black;
   font-weight: bold;
 }
 
+.time-slot-wrapper {
+  display: flex;
+}
+
+.time-slot {
+  background-color: green;
+}
+
+.time-slot.taken-slot {
+  background-color: red;
+  color: white;
+  cursor: not-allowed;
+}
+
+.appointment-details {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+}
 
 .react-calendar--doubleView {
   width: 700px;
