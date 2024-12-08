@@ -1151,6 +1151,7 @@ background-color: transparent;
     background-color: white; 
     height: 100%;
     min-height: 100vh;
+    /* max-height: 100vh; */
 }
 
 .calendar-page h2, h1 {

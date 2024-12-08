@@ -52,7 +52,7 @@ const CalendarPage = () => {
         const fetchDailyAppointments = async () => {
             try {
                 const date = selectedDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
-                const response = await axios.get(`http://localhost:5001/api/appointments/all`); // Fetch all appointments
+                const response = await axios.get(`http://localhost:5001/api/appointments/all`);
                 console.log("Fetched appointments from backend:", response.data);
 
                 // Filter appointments for the selected date
@@ -141,7 +141,7 @@ const CalendarPage = () => {
         }
     };
 
-    // Highlight dates with existing appointments
+    // Highlight dates with existing appointments and add available slots count
     const tileClassName = ({ date }) => {
         const dateString = date.toISOString().split("T")[0];
         const isHighlighted = appointments.some(
@@ -149,6 +149,23 @@ const CalendarPage = () => {
                 new Date(appointment.appointment.date).toISOString().split("T")[0] === dateString
         );
         return isHighlighted ? "highlighted-date" : null; // Custom class for highlighted dates
+    };
+
+    const tileContent = ({ date }) => {
+        const dateString = date.toISOString().split("T")[0];
+        const appointmentsForDate = appointments.filter(
+            (appointment) =>
+                new Date(appointment.appointment.date).toISOString().split("T")[0] === dateString
+        );
+        const takenTimes = appointmentsForDate.map((appointment) => appointment.appointment.time);
+        const allTimes = generateTimeSlots(8, 17);
+        const freeTimesCount = allTimes.length - takenTimes.length;
+
+        return freeTimesCount > 0 ? (
+            <div className="available-slots">
+                <span style={{ color: "green", fontSize: "0.8em", position:"absolute", top: 0, right:0 }}>{freeTimesCount}</span>
+            </div>
+        ) : null;
     };
 
     return (
@@ -160,6 +177,7 @@ const CalendarPage = () => {
                     onChange={handleDateChange}
                     value={selectedDate}
                     tileClassName={tileClassName} // Apply custom styling to tiles
+                    tileContent={tileContent} // Add available slots
                 />
             </div>
 

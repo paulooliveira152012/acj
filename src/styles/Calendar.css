@@ -6,7 +6,7 @@
 
 .react-calendar {
   width: 95%;
-  max-width: 1500px;
+  max-width: 1000px;
   margin: auto;
   background: white;
   /* background-color: red; */
@@ -41,10 +41,12 @@
   color: #555;
 }
 
+
+
 .react-calendar--doubleView {
   width: 700px;
 }
-
+f.react-calendar__tile--now
 .react-calendar--doubleView .react-calendar__viewContainer {
   display: flex;
   margin: -0.5em;
@@ -62,6 +64,8 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  /* background-color: green; */
+  /* max-height: 80vh; */
 }
 
 .react-calendar button {
@@ -138,6 +142,9 @@
   text-align: center;
   font: inherit;
   font-size: 0.833em;
+  position: relative;
+  border: 1px solid black !important;
+  aspect-ratio: 1.5;
 }
 
 .react-calendar__tile:disabled {
