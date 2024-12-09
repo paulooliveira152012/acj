@@ -142,14 +142,22 @@ const CalendarPage = () => {
     };
 
     // Highlight dates with existing appointments and add available slots count
-    const tileClassName = ({ date }) => {
-        const dateString = date.toISOString().split("T")[0];
-        const isHighlighted = appointments.some(
-            (appointment) =>
-                new Date(appointment.appointment.date).toISOString().split("T")[0] === dateString
-        );
-        return isHighlighted ? "highlighted-date" : null; // Custom class for highlighted dates
-    };
+const tileClassName = ({ date }) => {
+    const dateString = date.toISOString().split("T")[0];
+    const appointmentsForDate = appointments.filter(
+        (appointment) =>
+            new Date(appointment.appointment.date).toISOString().split("T")[0] === dateString
+    );
+    const takenTimes = appointmentsForDate.map((appointment) => appointment.appointment.time);
+    const allTimes = generateTimeSlots(8, 17);
+    const freeTimesCount = allTimes.length - takenTimes.length;
+
+    if (freeTimesCount === 0) {
+        return "fully-booked-date"; // Apply red background for fully booked dates
+    }
+    return appointmentsForDate.length > 0 ? "highlighted-date" : null; // Highlight if there are appointments
+};
+
 
     const tileContent = ({ date }) => {
         const dateString = date.toISOString().split("T")[0];

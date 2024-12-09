@@ -16,7 +16,7 @@
 }
 
 .highlighted-date {
-  background-color: #fdd835 !important; /* Yellow highlight */
+  background-color: #96ec80 !important; /* Yellow highlight */
   color: black;
   font-weight: bold;
 }
@@ -37,12 +37,13 @@
   top: 0px;
   right: 0px;
   border: 1px solid black;
-  border-radius: 50%;
+  border-radius: 10%;
   width: 30%;
   aspect-ratio: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 1px;
   /* background-color: green; */
 }
 
@@ -53,9 +54,30 @@
 }
 
 .appointment-details {
-  margin-top: 8px;
+  /* margin-top: 8px; */
   font-size: 14px;
   color: #555;
+  /* background-color: blue; */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.appointment-details p {
+  margin: 0;
+}
+
+
+.fully-booked-date {
+  background-color: rgba(255, 0, 0, 0.741) !important;
+  color: white;
+}
+
+.highlighted-date {
+  background-color: #96ec80 !important; /* Yellow highlight */
 }
 
 
@@ -63,7 +85,7 @@
 .react-calendar--doubleView {
   width: 700px;
 }
-f.react-calendar__tile--now
+.react-calendar__tile--now
 .react-calendar--doubleView .react-calendar__viewContainer {
   display: flex;
   margin: -0.5em;
