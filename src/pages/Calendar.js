@@ -23,7 +23,7 @@ const CalendarPage = () => {
     // Function to generate time slots between 8 AM and 5 PM
     const generateTimeSlots = (startHour, endHour) => {
         const times = [];
-        for (let hour = startHour; hour < endHour; hour++) {
+        for (let hour = startHour; hour <= endHour; hour++) {
             const time = `${hour.toString().padStart(2, "0")}:00`;
             times.push(time);
         }
@@ -163,7 +163,7 @@ const CalendarPage = () => {
 
         return freeTimesCount > 0 ? (
             <div className="available-slots">
-                <span style={{ color: "green", fontSize: "0.8em", position:"absolute", top: 0, right:0 }}>{freeTimesCount}</span>
+                <span className="availableSlots">{freeTimesCount}</span>
             </div>
         ) : null;
     };

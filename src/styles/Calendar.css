@@ -29,6 +29,23 @@
   background-color: green;
 }
 
+
+.available-slots span {
+  color: green;
+  font-size: 1em;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 30%;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: green; */
+}
+
 .time-slot.taken-slot {
   background-color: red;
   color: white;
