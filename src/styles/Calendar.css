@@ -1,12 +1,20 @@
+.calendar-page {
+  /* background-color: grey; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .calendarContainer {
   /* background-color: green; */
   box-sizing: border-box;
   overflow: hidden;
+  /* height: 100vh; */
 }
 
 .react-calendar {
   width: 95%;
-  max-width: 1000px;
+  max-width: 1700px;
   margin: auto;
   background: white;
   /* background-color: red; */
