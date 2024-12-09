@@ -44,6 +44,7 @@ const CarTypesServices = () => {
   return (
     <div className="carTypeServices session">
       <h2 style={{textAlign: "left", paddingLeft:"20px"}}>We service all types of cars</h2>
+      <div className="h2Underline"></div>
       <div className="carsSlider">
         {cars.map((car, index) => (
           <div key={index} className="carItem" onClick={() => openImage(index)}>

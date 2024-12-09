@@ -27,7 +27,7 @@
 
 /* hededer */
 * {
-    color: white;
+    /* color: white; */
 }
 
 button {
@@ -42,7 +42,7 @@ button {
 
 body {
     /* background-image: linear-gradient(to right, #181818, #0C0C0C) ; */
-    background-color: black;
+    /* background-color: black; */
     max-width: 1500px;
     margin: auto;
     font-family: 'Roboto', sans-serif;
@@ -420,6 +420,10 @@ ul {
     overflow: hidden;
 }
 
+.businessInfoContainer .titleParentContainer {
+    /* background-color: blue; */
+}
+
 
 .businessInfoContainer .titleContainer {
     display: flex;
@@ -427,7 +431,7 @@ ul {
     height: 20%;
     align-items: center;
     /* margin: 20px; */
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .businessInfoContainer .servicesContainer {
@@ -462,14 +466,22 @@ ul {
 
 
 .ifen {
-    background-color: white;
+    background-color: black;
     width: 50px;
-    height: 5px;
+    height: 3px;
     margin-right: 10px;
 }
 
 .businessInfoContainer h2 {
-    color: white;
+    /* color: white; */
+}
+
+.h2Underline {
+    width: 100%;
+    height: 1px;
+    background-color: red;
+    margin: 0;
+    padding: 0;
 }
 
 .businessInfoContainer .allServicesList {
@@ -482,8 +494,9 @@ ul {
     width: 80%; /* Reduce width for better centering */
     margin: auto; /* Center the grid horizontally on the screen */
     text-align: justify; /* Justify text within each column */
-    padding-left: 10px;
+    /* padding-left: 10px; */
     box-sizing: border-box; /* Include padding in width calculations */
+    margin: 20px;
   }
 
   @media screen and (max-width:680px) {
@@ -503,16 +516,16 @@ ul {
 
   @media screen and (min-width: 1000px ) {
     .businessInfoContainer .allServicesList {
-        /* background-color: green; */
-        display: grid;
+        /* display: grid; */
         grid-template-columns: repeat(3, minmax(200px, 1fr)); /* Two columns with responsive widths */
         gap: 5px; /* Add space between rows and columns */
         justify-content: center; /* Center the grid within the container */
         align-items: start; /* Align items to the top of each cell */
         width: 90%; /* Reduce width for better centering */
         margin: auto; /* Center the grid horizontally on the screen */
+        margin-top: 20px;
         text-align: justify; /* Justify text within each column */
-        padding-left: 10px;
+        /* padding-left: 10px; */
         box-sizing: border-box; /* Include padding in width calculations */
       }
 
@@ -559,8 +572,8 @@ ul {
 .WhyChooseUsContainer {
     height: 50vh;
     width: 100%;
-    background: radial-gradient(ellipse, rgba(52, 11, 13, 0.804) 40%, rgba(12, 12, 12, 0) 70%);
-    color: white;
+    /* background: radial-gradient(ellipse, rgba(52, 11, 13, 0.804) 40%, rgba(12, 12, 12, 0) 70%); */
+    /* color: white; */
     /* padding: 20px 0; */
     display: flex;
     align-items: center;
@@ -587,7 +600,7 @@ ul {
 
 .WhyChooseUsContainer button {
     background-color: transparent;
-    border: solid #B31021 1px;
+    border: solid #B31021 2px;
     border-radius: 5px;
     padding: 12px;
     width: 30%;
@@ -735,21 +748,66 @@ a {
 
 .footer {
     width: 100%;
-    height: auto;
-    /* display: flex; */
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
     color: white;
     position: relative;
     bottom: 0;
-    background-color: #121212;
-    /* background-color: yellow; */
+    background-color: #313131;
     padding: 20px;
     box-sizing: border-box;
-    bottom: 0;
-    /* background-color: green; */
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
 }
 
-.footer .section {
-    margin-bottom: 20px;
+.footerContent {
+    /* background-color: green; */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.footerContent div {
+    width: auto;
+    height: 50%; 
+    /* background-color: blue; */
+    margin: 20px;
+}
+
+.footerContent div ul {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+}
+
+.footerContent div ul li {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    height: auto;
+    width: 20px;
+    /* background-color: red; */
+    margin-right: 10px;
+
+}
+
+.footer .divLine {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    margin: 20px;
+}
+
+.footer h3 {
+    font-size: 13px;
 }
 
 
@@ -763,11 +821,6 @@ a {
     /* padding: 0; */
 }
 
-.footer .links {
-    display: flex;
-    justify-content: space-around;
-    font-size: 12px;
-}
 
 
 .footer span {
@@ -793,17 +846,14 @@ a {
 }
 
 .footer .logoContainer {
-    flex: 1;
-    /* background-color: red; */
+    /* flex: 1; */
+    background-color: red;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.footer .addressContainer {
-    flex: 2;
-    /* background-color: red; */
-}
+
 
 
 /* login page */

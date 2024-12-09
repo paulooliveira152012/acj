@@ -1,5 +1,8 @@
 import "../styles/style.css";
 import { Link } from "react-router-dom";
+import PhoneIcon from "../assets/icons/footer/phone";
+import EnvelopIcon from "../assets/icons/footer/envelop";
+import LocationIcon from "../assets/icons/footer/location";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,34 +11,69 @@ const Footer = () => {
     <div className="footer">
       {/* flex side by side */}
       {/* section1 */}
-      <div className="section flex">
-        <div className="logoContainer">Logo</div>
-        <div className="addressContainer">
-          <span>Address:</span> 570 Maple Ave, Elizabeth, NJ 07202 <br />
-          <span>Telephone:</span> +1 908-527-9734
+      <div className="logoContainer">Logo</div>
+
+      <div className="footerContent">
+        <div>
+          <h3>Reach us</h3>
+          <ul>
+            <li>
+              <PhoneIcon className="icon" /> +1 908-527-9734
+            </li>
+            <li><EnvelopIcon className="icon"/>demo@gmail.com</li>
+            <li>
+              {" "}
+              <LocationIcon className="icon"/> 570 Maple Ave, Elizabeth, NJ 07202{" "}
+            </li>
+          </ul>
+        </div>
+
+        {/* section 2 */}
+        <div>
+          <h3>Company</h3>
+          <ul>
+            <li>
+              <Link to="/about-us">About Us</Link>
+            </li>
+            
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link to="/blogs">Blogs</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* section 3 */}
+        <div>
+          <h3>Legal</h3>
+          <ul>
+            <li>
+              <Link to="/privacy-policy">Privacy Policy</Link>
+            </li>
+            <li>
+              <Link to="/termsandservices">Terms & Services</Link>
+            </li>
+            <li>
+              <Link to="/accessibility-statement">Accessibility Statement</Link>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Adm</h3>
+          <ul>
+            <li>
+              <Link to="/admLogin">login (Adm)</Link>
+            </li>
+          </ul>
         </div>
       </div>
-
-      {/* section 2 */}
-      <div className="section links">
-        <Link to="/about-us">About Us</Link>
-        <Link to="/services">Services</Link>
-        <Link to="/contact">Contact</Link>
+      <div>
       </div>
-
-      {/* section 3 */}
-      <div className="section links">
-        <Link to="/privacy-policy">Privacy Policy</Link>
-        <Link to="/accessibility-statement">Accessibility Statement</Link>
-        <Link to="/admLogin">login (Adm)</Link>
-      </div>
-
-      {/* section 4 */}
-      <div className="section links">
-        <p>
-          &copy; {currentYear} ACJ Auto Repair. All rights reserved.
-        </p>
-      </div>
+        <div className="divLine"></div>
+        <p>&copy; {currentYear} ACJ Auto Repair. All rights reserved.</p>
     </div>
   );
 };
