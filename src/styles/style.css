@@ -48,6 +48,12 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.pageTitle {
+    color: #A4A4A4;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
 .session {
     margin: 60px 0;
     box-sizing: border-box;
@@ -111,6 +117,18 @@ ul {
     /* background-color: black; */
     z-index: 50000;
 }
+
+/* Title Style for Other Pages (Light Background) */
+.header.blackHeader .title {
+    color: black; /* Black title for light backgrounds */
+}
+
+/* BurgerMenu Styles for Light Background */
+.header.blackHeader .burgerMenuContainer .bar {
+    background-color: black; /* Black bars for light backgrounds */
+}
+
+
 
 .absoluteHeader {
     position: absolute;
@@ -1050,6 +1068,16 @@ margin-top: 50px;
     animation: shinyEffect 2s ease-out 1; /* Run once after loading */
 }
 
+.teamPicture h1 {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    margin-left: 20px;
+    /* text-shadow: offsetX offsetY blurRadius color; */
+    text-shadow: 1px 1px 1px black;
+
+}
+
 /* Keyframes for the shiny effect */
 @keyframes shinyEffect {
     0% {
@@ -1063,6 +1091,7 @@ margin-top: 50px;
  article {
     padding: 30px;
     text-align: justify;
+    color: #2B2B2B;
 }
 
 @media screen and (max-width: 900px) {

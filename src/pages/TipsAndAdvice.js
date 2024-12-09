@@ -5,7 +5,7 @@ import "../styles/style.css";
 const TipsAndAdvice = () => {
   return (
     <>
-      <Header />
+      <Header className="blackHeader"/>
       <div className="contentContainer">
         <div className="session">
           <h1>Tips & Advice</h1>

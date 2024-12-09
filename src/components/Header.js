@@ -11,11 +11,11 @@ const Header = ({ className }) => {
     };
 
     const closeMenu = () => {
-        setMenuOpen(false)
-    }
+        setMenuOpen(false);
+    };
 
-       // Close the menu on screen resize above 850px 
-       useEffect(() => {
+    // Close the menu on screen resize above 850px
+    useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth > 850 && isOpen) {
                 setMenuOpen(false);
@@ -42,12 +42,12 @@ const Header = ({ className }) => {
                     </div>
                 </div>
                 <div className="menuIcon" onClick={toggleMenu}>
-                    <BurgerMenu toggle={isOpen}/>
+                    <BurgerMenu toggle={isOpen} />
                 </div>
             </div>
             {/* side menu */}
             <div className={`openMenu ${isOpen ? "active" : ""}`}>
-                <NavBar className="navBarInMenu" handleTabClick={closeMenu}/>
+                <NavBar className="navBarInMenu" handleTabClick={closeMenu} />
             </div>
         </>
     );

@@ -25,7 +25,7 @@ const OurServices = () => {
 
   return (
     <>
-      <Header />
+      <Header className="blackHeader"/>
     <div className="contentContainer">
       <article className="session" style={{marginBottom: 0}}>
         <h1>Our Services</h1>

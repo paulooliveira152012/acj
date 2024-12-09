@@ -5,7 +5,7 @@ import "../styles/style.css";
 const ContactUs = () => {
   return (
     <>
-      <Header />
+      <Header className="blackHeader"/>
       <div className="contentContainer">
         <div className="session">
         <h1>Contact Us</h1>

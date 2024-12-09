@@ -42,12 +42,12 @@ const About = () => {
 
   return (
     <>
-      <Header />
+      <Header className="blackHeader"/>
       <div className="contentContainer">
         <div className="session" style={{marginBottom: 0}}>
-          <h1>Serving Our Community for Over [X] Years</h1>
+        <h2 className="pageTitle"> /About Us</h2>
           <div className="teamPicture">
-            
+          <h1>Serving Our Community for Over [X] Years</h1>
           </div>
           <article>
             <p>
