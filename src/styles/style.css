@@ -129,6 +129,16 @@ ul {
     background-color: black; /* Black bars for light backgrounds */
 }
 
+.header.blackHeader a {
+    color: black;
+}
+
+.header.blackHeader .branding .title {
+    color: black;
+}
+
+
+
 
 
 .absoluteHeader {
