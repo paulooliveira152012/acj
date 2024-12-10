@@ -75,7 +75,7 @@ const About = () => {
 
         <button>Contact Us</button>
 
-        <div className="session">
+        <div className="session" style={{marginTop: "0"}}>
           
           <div className="working-hours">
             <h2>Hours of Operation</h2>

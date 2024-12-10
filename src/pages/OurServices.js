@@ -27,7 +27,9 @@ const OurServices = () => {
     <>
       <Header className="blackHeader"/>
     <div className="contentContainer">
+    
       <article className="session" style={{marginBottom: 0}}>
+      <h2 className="pageTitle"> /Our Services</h2>
         <h1>Our Services</h1>
         <p>
           We specialize in delivering tailored solutions designed to meet your
@@ -52,7 +54,7 @@ const OurServices = () => {
 
         <br></br>
 
-        <h2>Our Machinery</h2>
+        <h1>Our Machinery</h1>
         <p>
           We are equipped with advanced, state-of-the-art machinery that ensures
           precision, efficiency, and exceptional quality in every project. From
@@ -94,7 +96,7 @@ const OurServices = () => {
           </div>
         </div>
       )}
-      <button>Contact Us</button>
+      <button style={{marginBottom: "80px"}}>Contact Us</button>
     </div>
     </>
   );

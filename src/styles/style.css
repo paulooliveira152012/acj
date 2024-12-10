@@ -68,6 +68,7 @@ body {
 
 .content {
     flex: 1;
+    min-height: 60vh;
 }
 
 h1, h2 {
@@ -120,7 +121,7 @@ ul {
 
 /* Title Style for Other Pages (Light Background) */
 .header.blackHeader .title {
-    color: black; /* Black title for light backgrounds */
+    
 }
 
 /* BurgerMenu Styles for Light Background */
@@ -464,8 +465,8 @@ ul {
 .businessInfoContainer .servicesContainer .container {
     height: 200px;
     width: 100%;
-    /* background-color: rgba(58, 54, 54, 0.479); */
-    border: 1px solid #909090;
+    background-color: #B31021;
+    border: 1px solid #B31021;
 }
 
 .businessInfoContainer .servicesContainer h2 {
@@ -766,7 +767,7 @@ a {
 
 .footer {
     width: 100%;
-    height: 40vh;
+    min-height: 40vh;
     display: flex;
     flex-direction: column;
     color: white;
@@ -865,10 +866,28 @@ a {
 
 .footer .logoContainer {
     /* flex: 1; */
-    background-color: red;
+    /* background-color: red; */
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (max-width: 500px) {
+    .footer {
+        height: 100%;
+    }
+
+    .footerContent {
+        /* background-color: red; */
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+        text-align: center;
+    }
+
+    .footerContent ul {
+        align-items: center;
+    }
 }
 
 
@@ -1094,6 +1113,10 @@ margin-top: 50px;
     color: #2B2B2B;
 }
 
+article h1 {
+    color: #3F0B0B;
+}
+
 @media screen and (max-width: 900px) {
     .contentContainer {
         width: 100%;
@@ -1115,7 +1138,6 @@ margin-top: 50px;
     margin: auto;
     cursor: pointer;
     margin-bottom: 25px;
-    
 }
 
 .aboutContainer button:hover {
