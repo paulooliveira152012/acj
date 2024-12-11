@@ -31,7 +31,7 @@ const ContentWithFooter = () => {
                 </Routes>
             </div>
             {/* Conditionally render the Footer */}
-            {location.pathname !== "/calendar" && <Footer />}
+            {location.pathname !== "/calendar" && location.pathname !=="/admLogin" && <Footer />}
         </>
     );
 };

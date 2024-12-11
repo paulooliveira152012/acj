@@ -9,7 +9,7 @@ const AdmLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -17,58 +17,72 @@ const AdmLogin = () => {
 
     try {
       // Send login credentials to the backend
-      const response = await axios.post("http://localhost:5001/api/admin/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:5001/api/admin/login",
+        {
+          username,
+          password,
+        }
+      );
 
       // Handle success (e.g., store the token)
       const { token } = response.data;
       console.log("Login successful, token:", token);
       setSuccess(true);
-      navigate('/calendar')
+      navigate("/calendar");
 
       // Optionally, save the token to localStorage
       localStorage.setItem("admToken", token);
 
-         // Redirect to the calendar page
-      navigate('/calendar');
+      // Redirect to the calendar page
+      navigate("/calendar");
     } catch (err) {
-      console.error("Login failed:", err.response?.data?.message || err.message);
-      setError(err.response?.data?.message || "An error occurred during login.");
+      console.error(
+        "Login failed:",
+        err.response?.data?.message || err.message
+      );
+      setError(
+        err.response?.data?.message || "An error occurred during login."
+      );
     }
   };
 
   return (
     <>
-      <Header />
-      <div className="contentContainer">
+      <div className="admLoginPage">
         <div className="session">
-          <h2>Page designated to staff members</h2>
-          <form className="loginForm" onSubmit={handleLogin}>
-            <input
-              id="username"
-              placeholder="username"
-              type="text"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              required
-            />
+          <div className="shaddow">
+            <div>
+              <p>Page designated to staff members</p>
+              <form className="loginForm" onSubmit={handleLogin}>
+                <p>siteLogo</p>
+                <input
+                  id="username"
+                  placeholder="username"
+                  type="text"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  required
+                />
 
-            <input
-              id="password"
-              placeholder="password"
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              required
-            />
+                <input
+                  id="password"
+                  placeholder="password"
+                  type="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  required
+                />
 
-            <button className="loginSubmitBtn" type="submit">
-              Login
-            </button>
-            <a className="forgotPassword">Forgot Password?</a>
-          </form>
+                <button className="loginSubmitBtn" type="submit">
+                  Login
+                </button>
+                <a className="forgotPassword">Forgot Password?</a>
+              </form>
+            </div>
+          </div>
+          <div className="imageBehind"></div>
+
           {error && <p className="errorMessage">{error}</p>}
           {success && <p className="successMessage">Login successful!</p>}
         </div>
