@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // Calendar styling
 import "../styles/Calendar.css";
@@ -21,6 +21,8 @@ const CalendarPage = () => {
   const [isEditFormVisible, setIsEditFormVisible] = useState(false); //To toggle appointment edit visibility
   const [dailyAppointments, setDailyAppointments] = useState([]); // Appointments for the selected day
   const [isChangingDateTime, setIsChangingDateTime] = useState(false);
+  const [clickedAppointmentId, setClickedAppointmentId] = useState(null);
+  const appointmentDetailsRef = useRef(null);
 
   // Function to generate time slots between 8 AM and 5 PM
   const generateTimeSlots = (startHour, endHour) => {
@@ -145,7 +147,7 @@ const CalendarPage = () => {
           return;
         }
         console.log("Editing appointment with ID:", id);
-        
+
         const response = await axios.put(
           `http://localhost:5001/api/appointments/edit/${id}`,
           data
@@ -291,6 +293,32 @@ const CalendarPage = () => {
     }
   };
 
+  const displayButtons = () => {
+    console.log("displaying button");
+  };
+
+  const toggleAppointmentDetails = (id, ref) => {
+    setClickedAppointmentId((prevId) => (prevId === id ? null : id));
+    appointmentDetailsRef.current = ref;
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if the click is outside the selected appointment-details
+      if (
+        appointmentDetailsRef.current &&
+        !appointmentDetailsRef.current.contains(event.target)
+      ) {
+        setClickedAppointmentId(null); // Hide the buttons
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="calendar-page">
       <h1>Schedule Your Car Drop-Off</h1>
@@ -333,23 +361,43 @@ const CalendarPage = () => {
                       {time}
                     </button>
                     {appointment && (
-                      <div className="appointment-details">
+                      <div
+                        className="appointment-details"
+                        ref={
+                          clickedAppointmentId === appointment._id
+                            ? appointmentDetailsRef
+                            : null
+                        }
+                        onClick={(e) =>
+                          toggleAppointmentDetails(
+                            appointment._id,
+                            e.currentTarget
+                          )
+                        }
+                      >
                         {/* Client info */}
                         <div>
                           <p>{appointment.name}</p>
-
                           <p>{appointment.phone}</p>
                         </div>
-                        {/* car details */}
+
+                        {/* Car details */}
                         <div>
                           <p>
                             {appointment.carDetails.make}{" "}
-                            {appointment.carDetails.model} {""}
+                            {appointment.carDetails.model}{" "}
                             {appointment.carDetails.year}
                           </p>
                         </div>
-                        {/* edit button */}
-                        <div>
+
+                        {/* Buttons */}
+                        <div
+                          className={`changeButtonContainer ${
+                            clickedAppointmentId === appointment._id
+                              ? "visible"
+                              : ""
+                          }`}
+                        >
                           <button
                             onClick={() =>
                               handleEditAppointment(appointment._id)
@@ -358,10 +406,6 @@ const CalendarPage = () => {
                           >
                             Edit
                           </button>
-                        </div>
-
-                        {/* cancel button */}
-                        <div>
                           <button
                             onClick={() => cancelAppointment(appointment._id)}
                             className="cancelButton"
