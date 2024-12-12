@@ -161,6 +161,15 @@
     padding: 0;
     margin: 0;
   }
+
+  .appointment-details p {
+    display: flex;
+  }
+
+  .appointment-details .infoWide {
+    float: left;
+    background-color: green;
+  }
 }
 
 /* For screens larger than 600px, buttons are always displayed */

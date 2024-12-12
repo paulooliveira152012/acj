@@ -379,6 +379,7 @@ const CalendarPage = () => {
                         <div>
                           <p>{appointment.name}</p>
                           <p>{appointment.phone}</p>
+                          
                         </div>
 
                         {/* Car details */}
