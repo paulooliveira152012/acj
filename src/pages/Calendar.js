@@ -16,6 +16,7 @@ const CalendarPage = () => {
     carDetails: { make: "", model: "", year: "", licensePlate: "" },
     time: "",
   });
+  const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false)
   const [isFormVisible, setIsFormVisible] = useState(false); // To toggle form visibility
   const [isScheduleVisible, setIsScheduleVisible] = useState(false); // To toggle schedule visibility
   const [isEditFormVisible, setIsEditFormVisible] = useState(false); //To toggle appointment edit visibility
@@ -23,6 +24,51 @@ const CalendarPage = () => {
   const [isChangingDateTime, setIsChangingDateTime] = useState(false);
   const [clickedAppointmentId, setClickedAppointmentId] = useState(null);
   const appointmentDetailsRef = useRef(null);
+  // displaying passwordModal
+  const [enteredPassword, setEnteredPassword] = useState("");
+  const [editAppointmentId, setEditAppointmentId] = useState(null);
+
+  const adminPassword = "12345"; // Replace with your actual password logic
+
+  const handleOpenPasswordModal = (id) => {
+    setEditAppointmentId(id); // Save the ID of the appointment being edited
+    setIsPasswordModalVisible(true); // Show the password modal
+  };
+
+  const handlePasswordSubmit = () => {
+    if (enteredPassword === adminPassword) {
+      setIsPasswordModalVisible(false); // Close the modal
+      setEnteredPassword(""); // Clear the password field
+      proceedToEditAppointment(editAppointmentId); // Proceed with editing
+    } else {
+      alert("Incorrect password. Access denied.");
+      setEnteredPassword(""); // Clear the input
+    }
+  };
+
+  const proceedToEditAppointment = (id) => {
+    const appointmentToEdit = appointments.find(
+      (appointment) => appointment._id === id
+    );
+
+    if (appointmentToEdit) {
+      setFormData({
+        _id: appointmentToEdit._id,
+        name: appointmentToEdit.name,
+        phone: appointmentToEdit.phone,
+        email: appointmentToEdit.email,
+        carDetails: appointmentToEdit.carDetails,
+        time: appointmentToEdit.appointment.time,
+        appointment: {
+          date: new Date(appointmentToEdit.appointment.date),
+        },
+      });
+
+      setIsEditFormVisible(true);
+    } else {
+      console.error("Appointment not found");
+    }
+  };
 
   // Function to generate time slots between 8 AM and 5 PM
   const generateTimeSlots = (startHour, endHour) => {
@@ -416,7 +462,7 @@ const CalendarPage = () => {
                         >
                           <button
                             onClick={() =>
-                              handleEditAppointment(appointment._id)
+                              handleOpenPasswordModal(appointment._id)
                             }
                             className="editButton"
                           >
@@ -437,6 +483,31 @@ const CalendarPage = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {isPasswordModalVisible && (
+        <div className="modal-overlay">
+        <div className="modal-content">
+          <h2>Enter Admin Password</h2>
+          <input
+            type="password"
+            value={enteredPassword}
+            onChange={(e) => setEnteredPassword(e.target.value)}
+            placeholder="Password"
+          />
+          <div className="modal-actions">
+            <button onClick={handlePasswordSubmit}>Submit</button>
+            <button
+              onClick={() => {
+                setIsPasswordModalVisible(false);
+                setEnteredPassword("");
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
       )}
 
       {isFormVisible && (
