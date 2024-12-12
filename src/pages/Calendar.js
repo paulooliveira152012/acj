@@ -171,7 +171,7 @@ const tileClassName = ({ date }) => {
 
         return freeTimesCount > 0 ? (
             <div className="available-slots">
-                <span className="availableSlots">{freeTimesCount}</span>
+                <span className="availableSlots">{freeTimesCount} slots</span> 
             </div>
         ) : null;
     };
@@ -180,7 +180,6 @@ const tileClassName = ({ date }) => {
         <div className="calendar-page">
             <h1>Schedule Your Car Drop-Off</h1>
             <div className="calendarContainer">
-                <h2>Select a Date</h2>
                 <Calendar
                     onChange={handleDateChange}
                     value={selectedDate}
