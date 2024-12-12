@@ -13,6 +13,7 @@
   flex-direction: column;
   justify-content: center;
   font-family: "Montserrat", sans-serif;
+  height: 100vh;
 }
 
 .calendarContainer {
@@ -51,10 +52,14 @@
 
 .time-slot-wrapper {
   display: flex;
+  border-bottom: 0.5px solid grey;
+  
 }
 
 .time-slot {
-  background-color: green;
+  background-color: white;
+  border: none;
+  
 }
 
 .available-slots {
@@ -87,10 +92,10 @@
 }
 
 .time-slot.taken-slot {
-  background-color: red;
-  color: white;
+  color: red;
   cursor: not-allowed;
 }
+
 
 .appointment-details {
   /* margin-top: 8px; */
@@ -100,14 +105,28 @@
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content:space-evenly;
   margin-left: 20px;
+  width: 100%;
+  align-items: center;
 }
 
-.appointment-details p {
-  margin: 0;
+.appointment-details div {
+  width: 20%;
+  /* background-color: red; */
 }
+
+.appointment-details * {
+  margin: 0;
+  color: red;
+}
+
+.appointment-details button {
+  background-color: white;
+  border: none;
+}
+
 
 
 .fully-booked-date {
@@ -354,6 +373,7 @@ form input {
 .scheduleContainer {
   display: flex;
   flex-direction: column;
+  
 }
 
 .scheduleContainer button {

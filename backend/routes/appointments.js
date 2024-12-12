@@ -69,6 +69,24 @@ router.get('/:date', async (req, res) => {
     }
 });
 
+// cancel appointment
+router.delete('/cancel/:id', async (req, res) => {
+    console.log("route delete reached")
+    const { id } = req.params;
+    console.log("id is:", id)
+
+    try {
+      // Logic to delete or cancel the appointment
+      await Client.findByIdAndDelete(id); // Or mark it as canceled
+      console.log("appointment found")
+      res.status(200).json({ message: "Appointment canceled successfully" });
+    } catch (error) {
+        console.log("appointment not found")
+      res.status(500).json({ message: "Error canceling appointment", error });
+    }
+  });
+  
+
 // Test Route (Optional)
 router.post('/test', (req, res) => {
     const data = req.body;
