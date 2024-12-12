@@ -13,7 +13,7 @@
   flex-direction: column;
   justify-content: center;
   font-family: "Montserrat", sans-serif;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .calendarContainer {
@@ -127,6 +127,40 @@
   border: none;
 }
 
+.editParentContainer {
+  background-color: red;
+  flex-direction: column;
+}
+
+.fullScreenOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlayContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.closeButton {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff0000;
+  cursor: pointer;
+  align-self: flex-end;
+}
 
 
 .fully-booked-date {
@@ -310,13 +344,13 @@
 }
 
 .react-calendar__tile--active {
-  background: #006edc;
+  /* background: #006edc; */
   color: white;
 }
 
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background: #1087ff;
+  /* background: #1087ff; */
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover {

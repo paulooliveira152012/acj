@@ -18,7 +18,9 @@ const CalendarPage = () => {
   });
   const [isFormVisible, setIsFormVisible] = useState(false); // To toggle form visibility
   const [isScheduleVisible, setIsScheduleVisible] = useState(false); // To toggle schedule visibility
+  const [isEditFormVisible, setIsEditFormVisible] = useState(false); //To toggle appointment edit visibility
   const [dailyAppointments, setDailyAppointments] = useState([]); // Appointments for the selected day
+  const [isChangingDateTime, setIsChangingDateTime] = useState(false);
 
   // Function to generate time slots between 8 AM and 5 PM
   const generateTimeSlots = (startHour, endHour) => {
@@ -115,6 +117,7 @@ const CalendarPage = () => {
   const handleCloseForm = () => {
     setIsFormVisible(false);
     setFormData((prev) => ({ ...prev, time: "" })); // Reset the selected time
+    setIsEditFormVisible(false);
   };
 
   const handleCloseSchedule = () => {
@@ -122,22 +125,41 @@ const CalendarPage = () => {
     setAvailableTimes([]); // Clear the schedule times
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (id) => {
+    console.log("Submitting form with ID:", id);
+
     try {
       const data = {
         ...formData,
         appointment: {
-          date: selectedDate,
+          date: formData.appointment?.date || selectedDate, // Ensure date is set
           time: formData.time,
           service: "Car Drop-Off",
         },
       };
-      await axios.post(
-        "http://localhost:5001/api/appointments/newAppointment",
-        data
-      );
-      alert("Appointment saved successfully!");
+
+      if (isEditFormVisible) {
+        console.log("Editing appointment with ID:", id);
+        if (!id) {
+          alert("Appointment ID is missing. Cannot update.");
+          return;
+        }
+        console.log("Editing appointment with ID:", id);
+        
+        const response = await axios.put(
+          `http://localhost:5001/api/appointments/edit/${id}`,
+          data
+        );
+        alert("Appointment updated successfully!");
+      } else {
+        const response = await axios.post(
+          "http://localhost:5001/api/appointments/newAppointment",
+          data
+        );
+        alert("Appointment saved successfully!");
+      }
+
+      // Reset form and close form
       setFormData({
         name: "",
         phone: "",
@@ -145,8 +167,14 @@ const CalendarPage = () => {
         carDetails: { make: "", model: "", year: "", licensePlate: "" },
         time: "",
       });
-      setIsFormVisible(false); // Hide the form after successful submission
-      setIsScheduleVisible(false); // Reset schedule view
+      setIsFormVisible(false);
+      setIsEditFormVisible(false);
+
+      // Refresh appointments
+      const refreshedAppointments = await axios.get(
+        "http://localhost:5001/api/appointments/all"
+      );
+      setAppointments(refreshedAppointments.data);
     } catch (err) {
       console.error("Error saving appointment:", err);
       alert("Failed to save the appointment.");
@@ -193,32 +221,65 @@ const CalendarPage = () => {
     ) : null;
   };
 
-  const handleEdidListing = (id) => {
-    console.log("edit appointent for Id refference:", id)
-  }
+  const handleEditAppointment = (id) => {
+    console.log("Editing appointment for ID:", id);
+    console.log("formData:", formData);
+
+    // Find the appointment by ID
+    const appointmentToEdit = appointments.find(
+      (appointment) => appointment._id === id
+    );
+
+    if (appointmentToEdit) {
+      // Set formData with the selected appointment's details
+      setFormData({
+        _id: appointmentToEdit._id, // Include the _id field
+        name: appointmentToEdit.name,
+        phone: appointmentToEdit.phone,
+        email: appointmentToEdit.email,
+        carDetails: {
+          make: appointmentToEdit.carDetails.make,
+          model: appointmentToEdit.carDetails.model,
+          year: appointmentToEdit.carDetails.year,
+          licensePlate: appointmentToEdit.carDetails.licensePlate,
+        },
+        time: appointmentToEdit.appointment.time,
+        appointment: {
+          date: new Date(appointmentToEdit.appointment.date), // Populate the date
+        },
+      });
+
+      setIsEditFormVisible(true); // Show the edit form
+    } else {
+      console.error("Appointment not found");
+    }
+  };
 
   const cancelAppointment = async (id) => {
     try {
       // Log the appointment ID for debugging
       console.log("Canceling appointment:", id);
-  
+
       // Define the API endpoint for canceling the appointment
-      const response = await fetch(`http://localhost:5001/api/appointments/cancel/${id}`, {
-        method: "DELETE", // or "PUT" if you want to mark it as canceled instead of deleting
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
+      const response = await fetch(
+        `http://localhost:5001/api/appointments/cancel/${id}`,
+        {
+          method: "DELETE", // or "PUT" if you want to mark it as canceled instead of deleting
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       if (!response.ok) {
         throw new Error(`Error: ${response.status} ${response.statusText}`);
       }
-  
+
       const data = await response.json();
-  
+
       // Log success message
       console.log("Appointment canceled successfully:", data);
-  
+
       // Optionally update the UI or state
       // For example, remove the appointment from a list
       setAppointments((prevAppointments) =>
@@ -229,7 +290,6 @@ const CalendarPage = () => {
       console.error("Failed to cancel appointment:", error);
     }
   };
-  
 
   return (
     <div className="calendar-page">
@@ -276,13 +336,9 @@ const CalendarPage = () => {
                       <div className="appointment-details">
                         {/* Client info */}
                         <div>
-                          <p>
-                             {appointment.name}
-                          </p>
+                          <p>{appointment.name}</p>
 
-                          <p>
-                             {appointment.phone}
-                          </p>
+                          <p>{appointment.phone}</p>
                         </div>
                         {/* car details */}
                         <div>
@@ -294,12 +350,24 @@ const CalendarPage = () => {
                         </div>
                         {/* edit button */}
                         <div>
-                          <button onClick={ () => handleEdidListing(appointment._id)} className="editButton">Edit</button>
+                          <button
+                            onClick={() =>
+                              handleEditAppointment(appointment._id)
+                            }
+                            className="editButton"
+                          >
+                            Edit
+                          </button>
                         </div>
 
                         {/* cancel button */}
                         <div>
-                        <button onClick={() => cancelAppointment(appointment._id)} className="cancelButton">Cancel</button>
+                          <button
+                            onClick={() => cancelAppointment(appointment._id)}
+                            className="cancelButton"
+                          >
+                            Cancel
+                          </button>
                         </div>
                       </div>
                     )}
@@ -376,6 +444,161 @@ const CalendarPage = () => {
               />
               <button type="submit">Save Appointment</button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {isEditFormVisible && (
+        <div className="infoParentContainer">
+          <div className="infoChildContainer">
+            {console.log("formData at render:", formData)}{" "}
+            {/* Debug formData */}
+            <span className="closeButton" onClick={handleCloseForm}>
+              X
+            </span>
+            <h2>Edit Information</h2>
+            {/* <form onSubmit={handleSubmit}> */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!formData._id) {
+                  console.error("Error: Missing appointment ID.");
+                  alert("Unable to save changes. Missing appointment ID.");
+                  return;
+                }
+                handleSubmit(formData._id);
+              }}
+            >
+              <h3>
+                Scheduled Date:{" "}
+                {formData.appointment.date?.toLocaleDateString()} at{" "}
+                {formData.time || "Not Set"}
+              </h3>
+
+              {/* Change Date/Time Button */}
+              <button type="button" onClick={() => setIsChangingDateTime(true)}>
+                Change Date and Time
+              </button>
+
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your Name"
+                required
+              />
+              <input
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Your Phone"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Your Email"
+              />
+              <input
+                type="text"
+                name="carDetails.make"
+                value={formData.carDetails.make}
+                onChange={handleChange}
+                placeholder="Car Make (e.g., Toyota)"
+                required
+              />
+              <input
+                type="text"
+                name="carDetails.model"
+                value={formData.carDetails.model}
+                onChange={handleChange}
+                placeholder="Car Model (e.g., Corolla)"
+                required
+              />
+              <input
+                type="number"
+                name="carDetails.year"
+                value={formData.carDetails.year}
+                onChange={handleChange}
+                placeholder="Car Year (e.g., 2018)"
+                required
+              />
+              <input
+                type="text"
+                name="carDetails.licensePlate"
+                value={formData.carDetails.licensePlate}
+                onChange={handleChange}
+                placeholder="License Plate"
+                required
+              />
+
+              <button type="submit">Save Appointment</button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Full-Screen Calendar Overlay */}
+      {isChangingDateTime && (
+        <div className="fullScreenOverlay">
+          <div className="overlayContent">
+            <span
+              className="closeButton"
+              onClick={() => setIsChangingDateTime(false)}
+            >
+              X
+            </span>
+            <h3>Select a New Date</h3>
+            <Calendar
+              onChange={(date) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  appointment: { ...prev.appointment, date },
+                }));
+              }}
+              value={formData.appointment?.date || new Date()}
+            />
+
+            <h3>Select a New Time</h3>
+            <div className="time-slot-container">
+              {generateTimeSlots(8, 17).map((time) => (
+                <button
+                  key={time}
+                  className={`time-slot ${
+                    dailyAppointments.find(
+                      (appt) =>
+                        appt.appointment.time === time &&
+                        new Date(appt.appointment.date).toISOString() ===
+                          formData.appointment.date.toISOString()
+                    )
+                      ? "taken-slot"
+                      : ""
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setFormData((prev) => ({
+                      ...prev,
+                      time,
+                    }));
+                    setIsChangingDateTime(false); // Close overlay after selecting time
+                  }}
+                  disabled={
+                    !!dailyAppointments.find(
+                      (appt) =>
+                        appt.appointment.time === time &&
+                        new Date(appt.appointment.date).toISOString() ===
+                          formData.appointment.date.toISOString()
+                    )
+                  }
+                >
+                  {time}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}

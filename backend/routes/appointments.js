@@ -33,6 +33,33 @@ router.post('/newAppointment', async (req, res) => {
     }
 });
 
+// Edit an existing appointment
+router.put("/edit/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      console.log("o Id e:", id)
+      const updatedData = req.body;
+      console.log("o req.body e: ", req.body)
+      
+  
+      // Find the appointment by ID and update it
+      const updatedAppointment = await Client.findByIdAndUpdate(
+        id,
+        updatedData,
+        { new: true } // Return the updated document
+      );
+  
+      if (!updatedAppointment) {
+        return res.status(404).json({ message: "Appointment not found" });
+      }
+  
+      res.status(200).json(updatedAppointment);
+    } catch (error) {
+      console.error("Error updating appointment:", error);
+      res.status(500).json({ message: "Failed to update appointment", error });
+    }
+  });
+
 
 // Route to retrieve all appointments
 router.get('/all', async (req, res) => {
@@ -85,6 +112,18 @@ router.delete('/cancel/:id', async (req, res) => {
       res.status(500).json({ message: "Error canceling appointment", error });
     }
   });
+  
+//   router.put('/edit/:id', async (req, res) => {
+//     const { id } = req.params;
+//     const updatedData = req.body;
+  
+//     try {
+//       const updatedAppointment = await Appointment.findByIdAndUpdate(id, updatedData, { new: true });
+//       res.status(200).json(updatedAppointment);
+//     } catch (error) {
+//       res.status(500).json({ message: "Error updating appointment", error });
+//     }
+//   });
   
 
 // Test Route (Optional)
