@@ -338,25 +338,38 @@ const CalendarPage = () => {
               X
             </span>
             <h2>Available Times</h2>
+            {selectedDate && (
+              <p className="selected-date">
+                {selectedDate.toLocaleDateString("en-US", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+            )}
             <div className="scheduleContainer">
               {generateTimeSlots(8, 17).map((time) => {
                 const appointment = dailyAppointments.find(
                   (appt) => appt.appointment.time === time
                 );
                 return (
-                  <div key={time} className="time-slot-wrapper">
+                  <div
+                    onClick={() => {
+                      if (!appointment) {
+                        setFormData((prev) => ({
+                          ...prev,
+                          time,
+                        }));
+                        setIsFormVisible(true);
+                      }
+                    }}
+                    
+                    key={time}
+                    className={`time-slot-wrapper ${appointment ? "taken-slot" : ""}`}
+                  >
                     <button
                       className={`time-slot ${appointment ? "taken-slot" : ""}`}
-                      onClick={() => {
-                        if (!appointment) {
-                          setFormData((prev) => ({
-                            ...prev,
-                            time,
-                          }));
-                          setIsFormVisible(true);
-                        }
-                      }}
-                      disabled={!!appointment} // Disable if slot is taken
                     >
                       {time}
                     </button>
@@ -379,7 +392,6 @@ const CalendarPage = () => {
                         <div>
                           <p>{appointment.name}</p>
                           <p>{appointment.phone}</p>
-                          
                         </div>
 
                         {/* Car details */}

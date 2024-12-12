@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700&display=swap');
 
 .monstsserat-bold {
   font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
   font-weight: 100;
   font-style: normal;
 }
@@ -20,12 +27,13 @@
   /* background-color: green; */
   box-sizing: border-box;
   overflow: hidden;
-  /* height: 100vh; */
+  height: 100vh;
+  width: auto;
 }
 
 .react-calendar {
   width: 95%;
-  max-width: 1700px;
+  max-width: 1000px;
   aspect-ratio: 1;
   margin: auto;
   background: white;
@@ -53,6 +61,7 @@
 .time-slot-wrapper {
   display: flex;
   border-bottom: 0.5px solid grey;
+  cursor: pointer;
   
 }
 
@@ -120,6 +129,8 @@
 .appointment-details * {
   margin: 0;
   color: red;
+  font-style: italic;
+  font-family: 'poppins';
 }
 
 .appointment-details button {
