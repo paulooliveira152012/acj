@@ -23,6 +23,10 @@
   height: 100vh;
 }
 
+.titleSessionCalendar {
+  text-align: center;
+}
+
 .calendarContainer {
   /* background-color: green; */
   box-sizing: border-box;
@@ -149,7 +153,7 @@
 
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   .appointment-details {
     /* background-color: green; */
     flex-direction: column;
@@ -184,7 +188,7 @@
 }
 
 /* For screens larger than 600px, buttons are always displayed */
-@media screen and (min-width: 601px) {
+@media screen and (min-width: 651px) {
   .changeButtonContainer {
     display: flex;
     flex-direction: row;
@@ -441,11 +445,22 @@
   padding: 20px;
   border-radius: 10px;
   width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  
 }
 
 .infoChildContainer form {
   display: flex;
   flex-direction: column;
+  /* background-color: red; */
+  width: 80%;
+  margin: auto;
+}
+
+.inputSession {
+  width: 80%;
+  max-width: 800px;
 }
 
 .infoContainer form {

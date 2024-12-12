@@ -337,7 +337,8 @@ const CalendarPage = () => {
             <span className="closeButton" onClick={handleCloseSchedule}>
               X
             </span>
-            <h2>Available Times</h2>
+            <div className="titleSessionCalendar">
+            <h2>Schedule Availability</h2>
             {selectedDate && (
               <p className="selected-date">
                 {selectedDate.toLocaleDateString("en-US", {
@@ -348,6 +349,8 @@ const CalendarPage = () => {
                 })}
               </p>
             )}
+            </div>
+
             <div className="scheduleContainer">
               {generateTimeSlots(8, 17).map((time) => {
                 const appointment = dailyAppointments.find(
@@ -438,7 +441,7 @@ const CalendarPage = () => {
 
       {isFormVisible && (
         <div className="infoParentContainer">
-          <div className="infoChildContainer">
+          <div className="infoChildContainer inputSession">
             <span className="closeButton" onClick={handleCloseForm}>
               X
             </span>
