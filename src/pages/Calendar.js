@@ -811,13 +811,26 @@ const CalendarPage = () => {
                   (appt) => appt.appointment.time === time
                 );
 
+                          // Parse time slot into a full Date object for comparison
+          const now = new Date();
+          const selectedDate = formData.appointment?.date || new Date();
+          const slotDateTime = new Date(selectedDate);
+          const [hours, minutes] = time.split(":").map(Number);
+          slotDateTime.setHours(hours, minutes, 0, 0);
+
+          // Determine if the slot is in the past
+          const isPastSlot = slotDateTime < now;
+
+
                 return (
                   <button
                     key={time}
-                    className={`time-slot ${isTaken ? "taken-slot" : ""}`}
+                    className={`time-slot ${
+                       isTaken ? "taken-slot" : isPastSlot ? "disabled-slot" : ""
+                    }`}
                     onClick={(e) => {
                       e.preventDefault();
-                      if (!isTaken) {
+                      if (!isTaken && !isPastSlot) {
                         setFormData((prev) => ({
                           ...prev,
                           time,
@@ -825,7 +838,7 @@ const CalendarPage = () => {
                         setIsChangingDateTime(false); // Close overlay after selecting time
                       }
                     }}
-                    disabled={isTaken}
+                    disabled={isTaken || isPastSlot} // Disable past or taken slots
                   >
                     {time}
                   </button>
