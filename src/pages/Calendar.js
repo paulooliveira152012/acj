@@ -499,14 +499,14 @@ const CalendarPage = () => {
             />
             <div className="modal-actions">
               <button onClick={handlePasswordSubmit}>Confirm</button>
-              {/* <button
+              <button
               onClick={() => {
                 setIsPasswordModalVisible(false);
                 setEnteredPassword("");
               }}
             >
               Cancel
-            </button> */}
+            </button>
             </div>
           </div>
         </div>
