@@ -514,6 +514,7 @@ const CalendarPage = () => {
                   setIsPasswordModalVisible(false);
                   setEnteredPassword("");
                 }}
+                className="cancelBtn"
               >
                 Cancel
               </button>
