@@ -27,7 +27,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Cron job to run every day at 3 PM
-cron.schedule("0 15 * * *", async () => {
+cron.schedule("0 19 * * *", async () => {
   console.log("Running email reminder job at 3 PM...");
   try {
     const tomorrow = new Date();
