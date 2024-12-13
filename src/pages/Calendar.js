@@ -163,12 +163,22 @@ const CalendarPage = () => {
   };
 
   const handleCloseForm = () => {
+    console.log("closing form")
     setIsFormVisible(false);
     setFormData((prev) => ({ ...prev, time: "" })); // Reset the selected time
     setIsEditFormVisible(false);
+    // clean form
+    setFormData({
+      name: "",
+    phone: "",
+    email: "",
+    carDetails: { make: "", model: "", year: "", licensePlate: "" },
+    time: "",
+  })
   };
 
   const handleCloseSchedule = () => {
+    console.log("closing schedule")
     setIsScheduleVisible(false);
     setAvailableTimes([]); // Clear the schedule times
     setIsPasswordModalVisible(false);
@@ -500,13 +510,13 @@ const CalendarPage = () => {
             <div className="modal-actions">
               <button onClick={handlePasswordSubmit}>Confirm</button>
               <button
-              onClick={() => {
-                setIsPasswordModalVisible(false);
-                setEnteredPassword("");
-              }}
-            >
-              Cancel
-            </button>
+                onClick={() => {
+                  setIsPasswordModalVisible(false);
+                  setEnteredPassword("");
+                }}
+              >
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -556,40 +566,48 @@ const CalendarPage = () => {
               </div>
 
               <div className="formFlexLine">
-                <input
-                  type="text"
-                  name="carDetails.make"
-                  value={formData.carDetails.make}
-                  onChange={handleChange}
-                  placeholder="Car Make (e.g., Toyota)"
-                  required
-                />
-                <input
-                  type="text"
-                  name="carDetails.model"
-                  value={formData.carDetails.model}
-                  onChange={handleChange}
-                  placeholder="Car Model (e.g., Corolla)"
-                  required
-                />
+                <div>
+                  <input
+                    type="text"
+                    name="carDetails.make"
+                    value={formData.carDetails.make}
+                    onChange={handleChange}
+                    placeholder="Car Make (e.g., Toyota)"
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="carDetails.model"
+                    value={formData.carDetails.model}
+                    onChange={handleChange}
+                    placeholder="Car Model (e.g., Corolla)"
+                    required
+                  />
+                </div>
               </div>
               <div className="formFlexLine">
-                <input
-                  type="number"
-                  name="carDetails.year"
-                  value={formData.carDetails.year}
-                  onChange={handleChange}
-                  placeholder="Car Year (e.g., 2018)"
-                  required
-                />
-                <input
-                  type="text"
-                  name="carDetails.licensePlate"
-                  value={formData.carDetails.licensePlate}
-                  onChange={handleChange}
-                  placeholder="License Plate"
-                  required
-                />
+                <div>
+                  <input
+                    type="number"
+                    name="carDetails.year"
+                    value={formData.carDetails.year}
+                    onChange={handleChange}
+                    placeholder="Car Year (e.g., 2018)"
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="carDetails.licensePlate"
+                    value={formData.carDetails.licensePlate}
+                    onChange={handleChange}
+                    placeholder="License Plate"
+                    required
+                  />
+                </div>
               </div>
               <button type="submit">save appointment</button>
             </form>
@@ -625,7 +643,11 @@ const CalendarPage = () => {
               </div>
 
               {/* Change Date/Time Button */}
-              <button className="changeDateBtn" type="button" onClick={() => setIsChangingDateTime(true)}>
+              <button
+                className="changeDateBtn"
+                type="button"
+                onClick={() => setIsChangingDateTime(true)}
+              >
                 Change Date and Time
               </button>
 
@@ -642,28 +664,27 @@ const CalendarPage = () => {
                 />
                 <div className="formFlexLine">
                   <div>
-                  <label>Phone</label>
-                  <input
-                    type="text"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Your Phone"
-                    required
-                    className="flex1"
-                  />
+                    <label>Phone</label>
+                    <input
+                      type="text"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Your Phone"
+                      required
+                      className="flex1"
+                    />
                   </div>
 
                   <div className="flex2">
                     <label>Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Your Email"
-                    
-                  />
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Your Email"
+                    />
                   </div>
                 </div>
               </div>
@@ -673,56 +694,54 @@ const CalendarPage = () => {
               </div> */}
 
               <div className="formFlexLine">
-              
-              <div>
-                <label>Car Make (e.g., Toyota)</label>
-              <input
-                type="text"
-                name="carDetails.make"
-                value={formData.carDetails.make}
-                onChange={handleChange}
-                placeholder="Car Make (e.g., Toyota)"
-                required
-              />
-              </div>
-              <div>
-                <label>Car Model (e.g., Corolla)</label>
-              <input
-                type="text"
-                name="carDetails.model"
-                value={formData.carDetails.model}
-                onChange={handleChange}
-                placeholder="Car Model (e.g., Corolla)"
-                required
-              />
-              </div>
+                <div>
+                  <label>Car Make (e.g., Toyota)</label>
+                  <input
+                    type="text"
+                    name="carDetails.make"
+                    value={formData.carDetails.make}
+                    onChange={handleChange}
+                    placeholder="Car Make (e.g., Toyota)"
+                    required
+                  />
+                </div>
+                <div>
+                  <label>Car Model (e.g., Corolla)</label>
+                  <input
+                    type="text"
+                    name="carDetails.model"
+                    value={formData.carDetails.model}
+                    onChange={handleChange}
+                    placeholder="Car Model (e.g., Corolla)"
+                    required
+                  />
+                </div>
               </div>
 
               <div className="formFlexLine">
                 <div>
                   <label>Car Year (e.g., 2018)</label>
-              <input
-                type="number"
-                name="carDetails.year"
-                value={formData.carDetails.year}
-                onChange={handleChange}
-                placeholder="Car Year (e.g., 2018)"
-                required
-              />
+                  <input
+                    type="number"
+                    name="carDetails.year"
+                    value={formData.carDetails.year}
+                    onChange={handleChange}
+                    placeholder="Car Year (e.g., 2018)"
+                    required
+                  />
+                </div>
+                <div>
+                  <label>License Plate</label>
+                  <input
+                    type="text"
+                    name="carDetails.licensePlate"
+                    value={formData.carDetails.licensePlate}
+                    onChange={handleChange}
+                    placeholder="License Plate"
+                    required
+                  />
+                </div>
               </div>
-              <div>
-                <label>License Plate</label>
-              <input
-                type="text"
-                name="carDetails.licensePlate"
-                value={formData.carDetails.licensePlate}
-                onChange={handleChange}
-                placeholder="License Plate"
-                required
-              />
-              </div>
-              </div>
-
 
               <button type="submit">Save Appointment</button>
             </form>
