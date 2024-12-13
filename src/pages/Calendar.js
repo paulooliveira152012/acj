@@ -413,10 +413,28 @@ const CalendarPage = () => {
                 const appointment = dailyAppointments.find(
                   (appt) => appt.appointment.time === time
                 );
+
+                // Create a Date object for the current slot
+                const now = new Date(); // Current date and time
+                const slotDateTime = new Date(selectedDate); // Base the slot date on the selected date
+                const [hours, minutes] = time.split(":").map(Number);
+                slotDateTime.setHours(hours, minutes, 0, 0); // Set the time of the slot
+
+                // Check if the slot is in the past
+                const isPastSlot = slotDateTime < now;
+
                 return (
                   <div
+                    key={time}
+                    className={`time-slot-wrapper ${
+                      appointment
+                        ? "taken-slot"
+                        : isPastSlot
+                        ? "disabled-slot"
+                        : ""
+                    }`}
                     onClick={() => {
-                      if (!appointment) {
+                      if (!appointment && !isPastSlot) {
                         setFormData((prev) => ({
                           ...prev,
                           time,
@@ -424,13 +442,16 @@ const CalendarPage = () => {
                         setIsFormVisible(true);
                       }
                     }}
-                    key={time}
-                    className={`time-slot-wrapper ${
-                      appointment ? "taken-slot" : ""
-                    }`}
                   >
                     <button
-                      className={`time-slot ${appointment ? "taken-slot" : ""}`}
+                      className={`time-slot ${
+                        appointment
+                          ? "taken-slot"
+                          : isPastSlot
+                          ? "disabled-slot"
+                          : ""
+                      }`}
+                      disabled={isPastSlot || !!appointment} // Disable if in the past or already taken
                     >
                       {time}
                     </button>
@@ -752,70 +773,76 @@ const CalendarPage = () => {
 
       {/* Full-Screen Calendar Overlay */}
       {isChangingDateTime && (
-  <div className="fullScreenOverlay">
-    <div className="overlayContent">
-      <span
-        className="closeButton"
-        onClick={() => setIsChangingDateTime(false)}
-      >
-        X
-      </span>
-      <h3>Select a New Date</h3>
-
-      <Calendar
-        onChange={(date) => {
-          setFormData((prev) => ({
-            ...prev,
-            appointment: { ...prev.appointment, date },
-          }));
-
-          // Update dailyAppointments for the selected date
-          const selectedDateAppointments = appointments.filter(
-            (appt) =>
-              new Date(appt.appointment.date).toISOString().split("T")[0] ===
-              date.toISOString().split("T")[0]
-          );
-          setDailyAppointments(selectedDateAppointments); // Update state
-        }}
-        value={formData.appointment?.date || new Date()}
-        tileClassName={tileClassName} // Apply custom styling to tiles
-        tileContent={tileContent} // Add available slots
-      />
-
-      <h3>Select a New Time</h3>
-      <div className="time-slot-container">
-        {generateTimeSlots(8, 17).map((time) => {
-          const isTaken = dailyAppointments.some(
-            (appt) => appt.appointment.time === time
-          );
-
-          return (
-            <button
-              key={time}
-              className={`time-slot ${isTaken ? "taken-slot" : ""}`}
-              onClick={(e) => {
-                e.preventDefault();
-                if (!isTaken) {
-                  setFormData((prev) => ({
-                    ...prev,
-                    time,
-                  }));
-                  setIsChangingDateTime(false); // Close overlay after selecting time
-                }
-              }}
-              disabled={isTaken}
+        <div className="fullScreenOverlay">
+          <div className="overlayContent">
+            <span
+              className="closeButton"
+              onClick={() => setIsChangingDateTime(false)}
             >
-              {time}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  </div>
-)}
+              X
+            </span>
+            <h3>Select a New Date</h3>
 
+            <Calendar
+              onChange={(date) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  appointment: { ...prev.appointment, date },
+                }));
+
+                // Update dailyAppointments for the selected date
+                const selectedDateAppointments = appointments.filter(
+                  (appt) =>
+                    new Date(appt.appointment.date)
+                      .toISOString()
+                      .split("T")[0] === date.toISOString().split("T")[0]
+                );
+                setDailyAppointments(selectedDateAppointments); // Update state
+              }}
+              value={formData.appointment?.date || new Date()}
+              tileClassName={tileClassName} // Apply custom styling to tiles
+              tileContent={tileContent} // Add available slots
+            />
+
+            <h3>Select a New Time</h3>
+            <div className="time-slot-container">
+              {generateTimeSlots(8, 17).map((time) => {
+                const isTaken = dailyAppointments.some(
+                  (appt) => appt.appointment.time === time
+                );
+
+                return (
+                  <button
+                    key={time}
+                    className={`time-slot ${isTaken ? "taken-slot" : ""}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (!isTaken) {
+                        setFormData((prev) => ({
+                          ...prev,
+                          time,
+                        }));
+                        setIsChangingDateTime(false); // Close overlay after selecting time
+                      }
+                    }}
+                    disabled={isTaken}
+                  >
+                    {time}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default CalendarPage;
+
+/* 
+TODO:
+  prevent empty time slots from being clicled at past days 
+
+*/

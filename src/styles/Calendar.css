@@ -77,6 +77,11 @@
   
 }
 
+.disabled-slot {
+  /* background-color: lightgray; */
+  cursor: not-allowed;
+}
+
 .available-slots {
   /* background-color: red; */
   display: flex;
