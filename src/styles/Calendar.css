@@ -447,15 +447,96 @@
   width: 100%;
   max-width: 1000px;
   margin: auto;
+}
+
+.enterPassword {
+  width: 50%;
+  text-align: center;
   
+}
+
+.enterPassword * {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.enterPassword input {
+  padding: 10px;
+  border-radius: 0;
+  border: none;
+  border-bottom: solid;
+  margin: 20px 0;
+}
+
+.enterPassword button {
+  background-color: #21933C;
+  border: none;
+  padding: 12px;
+  margin-top: 20px;
+  width: 50%;
+  border-radius: 10px;
+  color: white;
+}
+
+.enterPassword h2 {
+  font-size: 18px;
+  font-family: 'Montserrat';
+  font-weight: 500;
 }
 
 .infoChildContainer form {
   display: flex;
   flex-direction: column;
   /* background-color: red; */
-  width: 80%;
+  /* width: 80%; */
   margin: auto;
+}
+
+.infoChildContainer form div {
+  /* background-color: red; */
+}
+
+.infoChildContainer form div .formFlexLine {
+  display: flex;
+  flex-direction: row;
+  /* background-color: red; */
+}
+
+.infoChildContainer form .formFlexLine {
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: row;
+}
+
+.infoChildContainer form button {
+  background-color: green;
+  /* position: absolute; */
+  bottom: 0;
+  margin-right: 0;
+  margin-top: 40px;
+  width: auto;
+  padding: 5px 10px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.infoChildContainer form div {
+  margin: 5px 0px 0px;
+}
+
+.infoChildContainer form .formFlexLine div {
+  flex: 1;
+}
+
+.infoChildContainer form div .formFlexLine  .flex1 {
+  flex: 1
+}
+
+.infoChildContainer form div .formFlexLine  .flex2 {
+  flex: 2
 }
 
 .inputSession {
@@ -463,14 +544,52 @@
   max-width: 800px;
 }
 
+.inputSession .changeDateBtn {
+  background-color: rgb(152, 152, 152);
+  /* float: left; */
+  margin-left: 0px;
+  margin-top: 8px;
+  margin-right: auto;
+}
+
+.inputSession h2 {
+  text-align: center;
+  font-family: 'poppins';
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.inputSession label {
+  font-size: 12px;
+}
+
 .infoContainer form {
   display: flex;
   flex-direction: column;
+  font-family: 'poppins';
 }
+
+.infoChildContainer form div {
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+}
+
+.infoChildContainer form div h3 {
+  color: #676767;
+  font-size: 13px;
+  font-weight:500;
+  margin-top: 20px;
+
+}
+
 
 form input {
   /* background-color: red; */
-  margin: 5px;
+  margin: 5px 0px;
+  margin-right: 5px;
+  border:  0.5px solid #666666;
+  border-radius: 8px;
 }
 
 .infoChildContainer span {
@@ -498,5 +617,5 @@ form button {
   width: 50%;
   margin: auto;
   padding: 20px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }

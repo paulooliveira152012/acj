@@ -16,7 +16,7 @@ const CalendarPage = () => {
     carDetails: { make: "", model: "", year: "", licensePlate: "" },
     time: "",
   });
-  const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false)
+  const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false); // To toggle form visibility
   const [isScheduleVisible, setIsScheduleVisible] = useState(false); // To toggle schedule visibility
   const [isEditFormVisible, setIsEditFormVisible] = useState(false); //To toggle appointment edit visibility
@@ -171,6 +171,7 @@ const CalendarPage = () => {
   const handleCloseSchedule = () => {
     setIsScheduleVisible(false);
     setAvailableTimes([]); // Clear the schedule times
+    setIsPasswordModalVisible(false);
   };
 
   const handleSubmit = async (id) => {
@@ -384,17 +385,17 @@ const CalendarPage = () => {
               X
             </span>
             <div className="titleSessionCalendar">
-            <h2>Schedule Availability</h2>
-            {selectedDate && (
-              <p className="selected-date">
-                {selectedDate.toLocaleDateString("en-US", {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </p>
-            )}
+              <h2>Schedule Availability</h2>
+              {selectedDate && (
+                <p className="selected-date">
+                  {selectedDate.toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+              )}
             </div>
 
             <div className="scheduleContainer">
@@ -413,9 +414,10 @@ const CalendarPage = () => {
                         setIsFormVisible(true);
                       }
                     }}
-                    
                     key={time}
-                    className={`time-slot-wrapper ${appointment ? "taken-slot" : ""}`}
+                    className={`time-slot-wrapper ${
+                      appointment ? "taken-slot" : ""
+                    }`}
                   >
                     <button
                       className={`time-slot ${appointment ? "taken-slot" : ""}`}
@@ -486,28 +488,28 @@ const CalendarPage = () => {
       )}
 
       {isPasswordModalVisible && (
-        <div className="modal-overlay">
-        <div className="modal-content">
-          <h2>Enter Admin Password</h2>
-          <input
-            type="password"
-            value={enteredPassword}
-            onChange={(e) => setEnteredPassword(e.target.value)}
-            placeholder="Password"
-          />
-          <div className="modal-actions">
-            <button onClick={handlePasswordSubmit}>Submit</button>
-            <button
+        <div className="infoParentContainer">
+          <div className="infoChildContainer enterPassword">
+            <h2>Enter Admin Password</h2>
+            <input
+              type="password"
+              value={enteredPassword}
+              onChange={(e) => setEnteredPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <div className="modal-actions">
+              <button onClick={handlePasswordSubmit}>Confirm</button>
+              {/* <button
               onClick={() => {
                 setIsPasswordModalVisible(false);
                 setEnteredPassword("");
               }}
             >
               Cancel
-            </button>
+            </button> */}
+            </div>
           </div>
         </div>
-      </div>
       )}
 
       {isFormVisible && (
@@ -518,62 +520,78 @@ const CalendarPage = () => {
             </span>
             <h2>Enter Your Information</h2>
             <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your Name"
-                required
-              />
-              <input
-                type="text"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Your Phone"
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Your Email"
-              />
-              <input
-                type="text"
-                name="carDetails.make"
-                value={formData.carDetails.make}
-                onChange={handleChange}
-                placeholder="Car Make (e.g., Toyota)"
-                required
-              />
-              <input
-                type="text"
-                name="carDetails.model"
-                value={formData.carDetails.model}
-                onChange={handleChange}
-                placeholder="Car Model (e.g., Corolla)"
-                required
-              />
-              <input
-                type="number"
-                name="carDetails.year"
-                value={formData.carDetails.year}
-                onChange={handleChange}
-                placeholder="Car Year (e.g., 2018)"
-                required
-              />
-              <input
-                type="text"
-                name="carDetails.licensePlate"
-                value={formData.carDetails.licensePlate}
-                onChange={handleChange}
-                placeholder="License Plate"
-                required
-              />
-              <button type="submit">Save Appointment</button>
+              <div>
+                <h3>Personal info</h3>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Name"
+                  required
+                />
+                <div className="formFlexLine">
+                  <input
+                    type="text"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Phone"
+                    required
+                    className="flex1"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                    className="flex2"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <h3>Vehicle info</h3>
+              </div>
+
+              <div className="formFlexLine">
+                <input
+                  type="text"
+                  name="carDetails.make"
+                  value={formData.carDetails.make}
+                  onChange={handleChange}
+                  placeholder="Car Make (e.g., Toyota)"
+                  required
+                />
+                <input
+                  type="text"
+                  name="carDetails.model"
+                  value={formData.carDetails.model}
+                  onChange={handleChange}
+                  placeholder="Car Model (e.g., Corolla)"
+                  required
+                />
+              </div>
+              <div className="formFlexLine">
+                <input
+                  type="number"
+                  name="carDetails.year"
+                  value={formData.carDetails.year}
+                  onChange={handleChange}
+                  placeholder="Car Year (e.g., 2018)"
+                  required
+                />
+                <input
+                  type="text"
+                  name="carDetails.licensePlate"
+                  value={formData.carDetails.licensePlate}
+                  onChange={handleChange}
+                  placeholder="License Plate"
+                  required
+                />
+              </div>
+              <button type="submit">save appointment</button>
             </form>
           </div>
         </div>
@@ -581,14 +599,12 @@ const CalendarPage = () => {
 
       {isEditFormVisible && (
         <div className="infoParentContainer">
-          <div className="infoChildContainer">
-            {console.log("formData at render:", formData)}{" "}
-            {/* Debug formData */}
+          <div className="infoChildContainer inputSession">
             <span className="closeButton" onClick={handleCloseForm}>
               X
             </span>
             <h2>Edit Information</h2>
-            {/* <form onSubmit={handleSubmit}> */}
+
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -600,40 +616,66 @@ const CalendarPage = () => {
                 handleSubmit(formData._id);
               }}
             >
-              <h3>
-                Scheduled Date:{" "}
-                {formData.appointment.date?.toLocaleDateString()} at{" "}
-                {formData.time || "Not Set"}
-              </h3>
+              <div>
+                <h3>
+                  Scheduled Date:{" "}
+                  {formData.appointment.date?.toLocaleDateString()} at{" "}
+                  {formData.time || "Not Set"}
+                </h3>
+              </div>
 
               {/* Change Date/Time Button */}
-              <button type="button" onClick={() => setIsChangingDateTime(true)}>
+              <button className="changeDateBtn" type="button" onClick={() => setIsChangingDateTime(true)}>
                 Change Date and Time
               </button>
 
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your Name"
-                required
-              />
-              <input
-                type="text"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Your Phone"
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Your Email"
-              />
+              <div>
+                {/* <h3>Personal info</h3> */}
+                <label>Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                  required
+                />
+                <div className="formFlexLine">
+                  <div>
+                  <label>Phone</label>
+                  <input
+                    type="text"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Your Phone"
+                    required
+                    className="flex1"
+                  />
+                  </div>
+
+                  <div className="flex2">
+                    <label>Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Your Email"
+                    
+                  />
+                  </div>
+                </div>
+              </div>
+
+              {/* <div>
+                <h3>Vehicle info</h3>
+              </div> */}
+
+              <div className="formFlexLine">
+              
+              <div>
+                <label>Car Make (e.g., Toyota)</label>
               <input
                 type="text"
                 name="carDetails.make"
@@ -642,6 +684,9 @@ const CalendarPage = () => {
                 placeholder="Car Make (e.g., Toyota)"
                 required
               />
+              </div>
+              <div>
+                <label>Car Model (e.g., Corolla)</label>
               <input
                 type="text"
                 name="carDetails.model"
@@ -650,6 +695,12 @@ const CalendarPage = () => {
                 placeholder="Car Model (e.g., Corolla)"
                 required
               />
+              </div>
+              </div>
+
+              <div className="formFlexLine">
+                <div>
+                  <label>Car Year (e.g., 2018)</label>
               <input
                 type="number"
                 name="carDetails.year"
@@ -658,6 +709,9 @@ const CalendarPage = () => {
                 placeholder="Car Year (e.g., 2018)"
                 required
               />
+              </div>
+              <div>
+                <label>License Plate</label>
               <input
                 type="text"
                 name="carDetails.licensePlate"
@@ -666,6 +720,9 @@ const CalendarPage = () => {
                 placeholder="License Plate"
                 required
               />
+              </div>
+              </div>
+
 
               <button type="submit">Save Appointment</button>
             </form>
