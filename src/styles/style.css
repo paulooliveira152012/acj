@@ -72,9 +72,10 @@ body {
 }
 
 .session {
-    margin: 60px auto;
+    margin: 100px auto;
     box-sizing: border-box;
     padding: 20px;
+    width: 100%;
     max-width: 1500px;
     /* background-color: red; */
 }
@@ -139,12 +140,10 @@ ul {
     position: absolute;
     /* background-color: black; */
     z-index: 50000;
+    /* margin-bottom: 50px; */
 }
 
-/* Title Style for Other Pages (Light Background) */
-.header.blackHeader .title {
-    
-}
+
 
 /* BurgerMenu Styles for Light Background */
 .header.blackHeader .burgerMenuContainer .bar {
@@ -161,8 +160,37 @@ ul {
 
 .header .branding img {
     width: 100%;
-
 }
+
+/* Center logo horizontally when the black logo is used */
+.centerLogo {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Keep vertical alignment consistent */
+    height: auto; /* Maintain default height */
+    width: 100%; /* Ensure it spans the full width */
+    position: relative; /* Prevent layout shifts */
+    z-index: 1; /* Ensure it remains above other elements if needed */
+}
+
+/* Default styling for white logo */
+.branding img {
+    max-width: 50px;
+    height: auto;
+    transition: opacity 1s ease; /* Smooth transition for opacity */
+    position: relative; /* Prevent it from being pushed */
+}
+
+/* Hide the logo when the menu is open */
+.hiddenLogo img{
+    opacity: 0; /* Make logo invisible */
+    pointer-events: none; /* Prevent interaction with the hidden logo */
+}
+
+
+
+
+
 
 
 
@@ -243,7 +271,7 @@ nav {
 }
 
 nav a {
-    /* background-color: red; */
+    /* background-color: purple; */
     margin-left: 20px;
 }
 
@@ -261,15 +289,21 @@ nav a {
     padding: 20px;
     color: black;
     text-align: center;
-    /* background-color: red; */
+    /* background-color: purple; */
     justify-content: space-around;
     height: 40vh;
+    top: 0;
 }
 
 
 .navBarInMenu a {
     text-decoration: none;
     color: black;
+    width: auto;
+    /* background-color: red; */
+    max-width: 200px;
+    margin: auto;
+    /* margin-bottom: 1px solid black; */
 }
 
 /* menuBurger */
@@ -1137,8 +1171,14 @@ margin-top: 50px;
     max-height: 80%; */
     width: 80%;
     height: 100%;
-    border-radius: 8px;
-    object-fit: contain; /* Ensure the image behaves like background-size: cover */
+    object-fit: cover; /* Ensure the image behaves like background-size: cover */
+    border-radius: 10px;
+    background-position: center;
+}
+
+.lightboxImage image {
+
+    box-shadow: 2px  2px 2px solid black;
 }
 
 .closeButton,
@@ -1188,6 +1228,7 @@ margin-top: 50px;
     margin: auto;
     display: flex;
     flex-direction: column;
+    /* background-color: yellow; */
 }
 
 .contentContainer li {
@@ -1306,11 +1347,11 @@ article h1 {
   .machines {
     display: flex;
     gap: 20px;
-    overflow-x: auto; /* Enables horizontal scrolling */
+    overflow-x: auto; 
     margin-top: 50px;
     margin-bottom: 50px;
-    background-color: red;
-    max-width: 100%; /* Prevents extending beyond the parent */
+    /* background-color: red; */
+    /* width: 500px; */
     box-sizing: border-box; /* Ensures padding and border are included in the width */
 }
 

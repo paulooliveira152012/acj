@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/style.css";
+import blackLogo from '../assets/images/logo_black.svg'
 
 const ContactUs = () => {
   const [fullName, setFullName] = useState("");
@@ -24,7 +25,8 @@ const ContactUs = () => {
   return (
     <>
       <Header className="blackHeader" />
-      <div className="contactUsContainer">
+      <div className="contentContainer">
+      <div className="session">
         <div className="contactFormSection">
           <h1>Contact Us</h1>
           <form onSubmit={handleSubmit} className="contactForm">
@@ -81,7 +83,7 @@ const ContactUs = () => {
           ></iframe>
         </div>
       </div>
-      
+      </div>
     </>
   );
 };
