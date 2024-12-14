@@ -52,7 +52,7 @@ const BusinessInfo = () => {
         <div className="titleParentContainer">
           <div className="titleContainer">
             {/* <div className="ifen"></div> */}
-            <h2>Our comprehensive services for you</h2>
+            <h2>Our comprehensive services</h2>
           </div>
           <div className="h2Underline"></div>
         </div>

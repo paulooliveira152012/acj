@@ -1,8 +1,6 @@
 implement navigation ✅
 create all pages ✅
-create components for all pages
-set up backend for ADM signin 
-set up scheduling system
-
-
-working on mirroring the hero image
+create components for all pages ✅
+set up backend for ADM signin ✅
+set up scheduling system ✅
+deixar em negrito a pagina atual (demarcar menu lateral)

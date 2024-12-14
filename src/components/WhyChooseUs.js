@@ -9,6 +9,7 @@ const WhyChooseUs = () => {
     <div className="WhyChooseUsContainer session">
       <div>
         <h2>Why Choose Us?</h2>
+        <div className="h2Underline"></div>
         <div className="whyListComponent">
           <div className="why">
             {/* 1 */}

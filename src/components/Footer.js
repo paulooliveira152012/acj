@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PhoneIcon from "../assets/icons/footer/phone";
 import EnvelopIcon from "../assets/icons/footer/envelop";
 import LocationIcon from "../assets/icons/footer/location";
+import whiteLogo from '../assets/images/logo_white.svg'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,9 +12,13 @@ const Footer = () => {
     <div className="footer">
       {/* flex side by side */}
       {/* section1 */}
-      <div className="logoContainer">Logo</div>
+      <div className="logoContainer">
+      <img src={whiteLogo} alt="White Logo" />
+      </div>
 
+      {/* display flex para 4 divs */}
       <div className="footerContent">
+        {/* div 1 */}
         <div>
           <h3>Reach us</h3>
           <ul>
@@ -28,7 +33,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* section 2 */}
+        {/* div 2 */}
         <div>
           <h3>Company</h3>
           <ul>
@@ -45,7 +50,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* section 3 */}
+        {/* div 3 */}
         <div>
           <h3>Legal</h3>
           <ul>
@@ -61,14 +66,17 @@ const Footer = () => {
           </ul>
         </div>
 
+        {/* div 4 */}
         <div>
           <h3>Adm</h3>
-          <ul>
-            <li>
+          
+            <li style={{listStyle: "none", marginTop: "12px"}}>
               <Link to="/admLogin">login (Adm)</Link>
             </li>
-          </ul>
+          
         </div>
+
+        
       </div>
       <div>
       </div>

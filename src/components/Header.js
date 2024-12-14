@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../navigation/nav";
 import BurgerMenu from "./BurgerMenu";
 import "../styles/style.css";
+import whiteLogo from '../assets/images/logo_white.svg'
 
 const Header = ({ className }) => {
     const [isOpen, setMenuOpen] = useState(false);
@@ -33,7 +34,7 @@ const Header = ({ className }) => {
             <div className={`header ${className || ""}`}>
                 <div className="branding">
                     <div className="logo"></div>
-                    <div className="title">ACJ</div>
+                    <img src={whiteLogo} alt="White Logo" />
                 </div>
                 <div className="rightSection">
                     <div className="languageToggle"></div>
