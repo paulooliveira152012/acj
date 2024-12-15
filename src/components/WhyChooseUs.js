@@ -3,8 +3,11 @@ import ChaveIcon from "../assets/icons/chave";
 import CommitmentIcon from "../assets/icons/Commitment";
 import GearIcon from "../assets/icons/GearIcon";
 import MesageIcon from "../assets/icons/MessageIcon";
+import { useNavigate } from "react-router-dom";
 
 const WhyChooseUs = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="WhyChooseUsContainer session">
       <div>
@@ -39,7 +42,7 @@ const WhyChooseUs = () => {
                 </p>
             </div>
           </div>
-            <button>Contact Us</button>
+            <button onClick={() => navigate('contact-us')}>Contact Us</button>
         </div>
       </div>
     </div>

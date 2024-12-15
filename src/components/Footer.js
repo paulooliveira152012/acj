@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PhoneIcon from "../assets/icons/footer/phone";
 import EnvelopIcon from "../assets/icons/footer/envelop";
 import LocationIcon from "../assets/icons/footer/location";
-import whiteLogo from '../assets/images/logo_white.svg'
+import whiteLogo from "../assets/images/logo_white.svg";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -13,7 +13,7 @@ const Footer = () => {
       {/* flex side by side */}
       {/* section1 */}
       <div className="logoContainer">
-      <img src={whiteLogo} alt="White Logo" />
+        <img src={whiteLogo} alt="White Logo" />
       </div>
 
       {/* display flex para 4 divs */}
@@ -23,12 +23,20 @@ const Footer = () => {
           <h3>Reach us</h3>
           <ul>
             <li>
-              <PhoneIcon className="icon" /> +1 908-527-9734
+              <a href="tel: +1 908-527-9734 ">
+                <PhoneIcon className="icon" /> +1 908-527-9734
+              </a>
             </li>
-            <li><EnvelopIcon className="icon"/>demo@gmail.com</li>
+            <li>
+              <a href="mailto: acjautorepair@gmail.com">
+                <EnvelopIcon className="icon" />
+                acjautorepair@gmail.com
+              </a>
+            </li>
             <li>
               {" "}
-              <LocationIcon className="icon"/> 570 Maple Ave, Elizabeth, NJ 07202{" "}
+              <LocationIcon className="icon" /> 570 Maple Ave, Elizabeth, NJ
+              07202{" "}
             </li>
           </ul>
         </div>
@@ -40,7 +48,7 @@ const Footer = () => {
             <li>
               <Link to="/about-us">About Us</Link>
             </li>
-            
+
             <li>
               <Link to="/contact">Contact</Link>
             </li>
@@ -69,19 +77,15 @@ const Footer = () => {
         {/* div 4 */}
         <div>
           <h3>Adm</h3>
-          
-            <li style={{listStyle: "none", marginTop: "12px"}}>
-              <Link to="/admLogin">login (Adm)</Link>
-            </li>
-          
-        </div>
 
-        
+          <li style={{ listStyle: "none", marginTop: "12px" }}>
+            <Link to="/admLogin">login (Adm)</Link>
+          </li>
+        </div>
       </div>
-      <div>
-      </div>
-        <div className="divLine"></div>
-        <p>&copy; {currentYear} ACJ Auto Repair. All rights reserved.</p>
+      <div></div>
+      <div className="divLine"></div>
+      <p>&copy; {currentYear} ACJ Auto Repair. All rights reserved.</p>
     </div>
   );
 };

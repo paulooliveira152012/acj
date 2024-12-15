@@ -36,13 +36,15 @@ body {
 }
 
 .currentScreen {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
+    /* border-top: 1px solid white;
+    border-bottom: 1px solid white; */
+    font-weight: bold;
 }
 
 .currentScreenBlack {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    /* border-top: 1px solid black;
+    border-bottom: 1px solid black; */
+    font-weight: bold;
 }
 
 button {
@@ -126,7 +128,6 @@ h2 {
 h3 {
     font-size: 20px;
     margin: 0;
-    /* background-color: purple; */
 }
 
 
@@ -194,7 +195,7 @@ ul {
 
 /* Default styling for white logo */
 .branding img {
-    max-width: 50px;
+    max-width: 70px;
     height: auto;
     transition: opacity 1s ease; /* Smooth transition for opacity */
     position: relative; /* Prevent it from being pushed */
@@ -331,7 +332,7 @@ nav a {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 40px;
+    width: 30px;
     height: 20px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -933,6 +934,14 @@ a {
     align-items: center;
 }
 
+.footerContent a {
+    margin: 0;
+    padding: 0;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+}
+
 .icon {
     height: auto;
     width: 20px;
@@ -1376,6 +1385,12 @@ article h1 {
     box-sizing: border-box; /* Ensures padding and border are included in the width */
 }
 
+.machines h3 {
+    /* background-color: purple; */
+    font-weight: normal;
+    font-size: 15px;
+}
+
 
 .machine {
     width: 250px;
@@ -1434,13 +1449,16 @@ background-color: transparent;
  border-radius: 5px;
  padding: 12px;
  width: 30%;
- margin: auto;
  cursor: pointer;
+ font-weight: bold;
+ margin: 80px auto;
+ margin-top: 20px;
+ 
 }
 
 .contentContainer button:hover {
     background-color: #B31021;
-    color: black;
+    color: white;
     cursor: pointer;
     }
     

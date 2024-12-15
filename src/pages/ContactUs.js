@@ -78,7 +78,7 @@ const ContactUs = () => {
   </li>
   <li>
     <span><EnvelopIconComponent className="icon" /></span>
-    <span>demo@gmail.com</span>
+    <span>acjautorepair@gmail.com</span>
   </li>
   <li>
     <span><LocationIconComponent className="icon" /></span>
