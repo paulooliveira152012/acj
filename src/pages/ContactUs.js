@@ -1,22 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/style.css";
-import blackLogo from '../assets/images/logo_black.svg'
+import blackLogo from "../assets/images/logo_black.svg";
+import PhoneIcon from "../assets/icons/footer/phone";
+import EnvelopIcon from "../assets/icons/footer/envelop";
+import LocationIcon from "../assets/icons/footer/location";
+import InstagramIcon from "../assets/images/icons/instagram";
+// black logos for smaller screens
+import PhoneIconBlack from "../assets/icons/footer/phoneBlack";
+import EnvelopIconBlack from "../assets/icons/footer/envelopBlack";
+import LocationIconBlack from "../assets/icons/footer/locationBlack";
 
 const ContactUs = () => {
-  const [fullName, setFullName] = useState("");
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 650);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [caseContent, setCaseContent] = useState("");
 
+
+    // Handle screen resize
+    useEffect(() => {
+      const handleResize = () => {
+        setIsSmallScreen(window.innerWidth <= 650);
+      };
+  
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const PhoneIconComponent = isSmallScreen ? PhoneIconBlack : PhoneIcon;
+    const EnvelopIconComponent = isSmallScreen ? EnvelopIconBlack : EnvelopIcon;
+    const LocationIconComponent = isSmallScreen
+      ? LocationIconBlack
+      : LocationIcon;
+      
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ fullName, email, phone, caseContent });
+    console.log({ firstName, lastName, email, phone, caseContent });
     window.alert("Inquiry submitted!");
 
     // Clear all fields
-    setFullName("");
+    setFirstName("");
+    setLastName("");
     setPhone("");
     setEmail("");
     setCaseContent("");
@@ -25,70 +55,139 @@ const ContactUs = () => {
   return (
     <>
       <Header className="blackHeader" />
-      <div className="contentContainer">
-      <div className="session">
-        <div className="contactFormSection">
-          <h1>Contact Us</h1>
-          <form onSubmit={handleSubmit} className="contactForm">
-            <input
-              id="fullName"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              type="text"
-              placeholder="Full Name"
-              required
-            />
+      <div className="contentContainer contactUsContainer">
+        <div className="session ContactUsDiv" >
+          <h2 className="pageTitle"> /Contact </h2>
+          <h1 style={{ textAlign: "center", marginBottom: "0px" }}>Contact Us</h1>
+          <p style={{ textAlign: "center", marginTop: "0px" }}>
+            Any question or remarks? Just write us a message!
+          </p>
 
-            <input
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Email"
-              required
-            />
+          <div className="contactUsPage">
+            {/* first div (left) */}
+            <div className="contactInfo">
+              <div>
+                <h3>Contact Information</h3>
+              </div>
 
-            <input
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              type="tel"
-              placeholder="Phone Number"
-              required
-            />
+              <div>
+              <ul className="contactList">
+  <li>
+    <span><PhoneIconComponent className="icon" /></span>
+    <span>+1 908-527-9734</span>
+  </li>
+  <li>
+    <span><EnvelopIconComponent className="icon" /></span>
+    <span>demo@gmail.com</span>
+  </li>
+  <li>
+    <span><LocationIconComponent className="icon" /></span>
+    <span>570 Maple Ave, Elizabeth, NJ 07202</span>
+  </li>
+</ul>
 
-            <textarea
-              id="caseDescription"
-              value={caseContent}
-              onChange={(e) => setCaseContent(e.target.value)}
-              placeholder="Provide a brief description of your case"
-              className="caseDescriptionInput"
-              rows="4"
-              required
-            ></textarea>
+              </div>
 
-            <button type="submit">Submit</button>
-          </form>
+              {/* social media */}
+              <div>
+                <ul>
+                  <li>
+                    <a>
+                      <InstagramIcon />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* second div (right) */}
+
+            <div className="contactFormSection">
+              <div className="flexContainer"></div>
+              <form onSubmit={handleSubmit} className="contactForm">
+                <div>
+                  <div>
+                  <label>First Name</label>
+                  <input
+                    id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    type="text"
+                    placeholder=""
+                    required
+                  />
+                  </div>
+
+                  <div>
+                    <label>Last Name</label>
+                    <input
+                      id="lastName"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      type="text"
+                      placeholder=""
+                      required
+                    />
+                  </div>
+
+                </div>
+                <div>
+                  <div>
+                    <label>Email</label>
+                    <input
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="email"
+                      placeholder=""
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label>Phone Number</label>
+                    <input
+                      id="phone"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      type="tel"
+                      placeholder=""
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <label>Provide a brief description of your case</label>
+                <textarea
+                  id="caseDescription"
+                  value={caseContent}
+                  onChange={(e) => setCaseContent(e.target.value)}
+                  placeholder=""
+                  className="caseDescriptionInput"
+                  rows="4"
+                  required
+                ></textarea>
+                <div className="contactPageBtnContainer">
+                <button type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+
+            {/* <div className="contactMapSection">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3027.0638410507795!2d-74.2140532!3d40.650523099999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24d4a42597c55%3A0xecff621093733150!2s570%20Maple%20Ave%2C%20Elizabeth%2C%20NJ%2007202!5e0!3m2!1sen!2sus!4v1733440849063!5m2!1sen!2sus"
+              width="100%"
+              height="200"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div> */}
+          </div>
         </div>
-
-        <div className="contactMapSection">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3027.0638410507795!2d-74.2140532!3d40.650523099999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24d4a42597c55%3A0xecff621093733150!2s570%20Maple%20Ave%2C%20Elizabeth%2C%20NJ%2007202!5e0!3m2!1sen!2sus!4v1733440849063!5m2!1sen!2sus"
-            width="100%"
-            height="200"
-            style={{ border: 0 }}
-            allowFullScreen=""
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-      </div>
       </div>
     </>
   );
 };
 
 export default ContactUs;
-
-
-
