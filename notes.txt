@@ -10,11 +10,11 @@ arrumar carrossel de comentarios loop infinito
     //aboutUs
 botao hover tem que deixar em negrito e branco quando hover ✅
 ajustar tamanho entre contactus btn e hours of operations ✅
+    //Contact Us
+display black telephone icon ✅
 trocar a foto
 inserir informacoes reais
     //Our Services
 Atualizar texto
 atualizar fotos das maquinas (lista do giovani)
 Contact Us btn --> negrito e color white quando hover ✅
-    //Contact Us
-display black telephone icon ✅

@@ -1,11 +1,11 @@
-.contentContainer {
+/* .contentContainer {
     width: 90%;
     margin: auto;
   }
-  
-  .session {
+   */
+  /* .session {
     margin-top: 20px;
-  }
+  } */
   
   .blogHeader {
     display: flex;
@@ -125,12 +125,10 @@ margin-bottom: 100px;
         margin-bottom: 20px;
     }
 
-    .contentContainer {
-        /* background-color: purple; */
+    .blogScreen .contentContainer {
         width: 100%;
         padding: 0;
     }
-
 
   .blogDetail {
     padding: 20px;
@@ -138,10 +136,12 @@ margin-bottom: 100px;
     border-radius: 10px;
 margin-top: 100px;
 margin-bottom: 100px;
-
   }
 
-    
+  .blogHeader {
+    /* background-color: red; */
+    flex-direction: column;
+  }
 
 
   }
@@ -152,7 +152,5 @@ margin-bottom: 100px;
         /* background-color: green; */
     }
 
-    .blogBlock {
-        /* min-height: 500px; */
-    }
+    
   }

@@ -80,6 +80,7 @@ const TipsAndAdvice = () => {
     <>
       <Header className="blackHeader" />
       <div className="contentContainer blogScreen">
+        <div>
         {selectedBlog ? (
           <div className="blogDetail">
             <button onClick={goBack} className="backButton">
@@ -130,6 +131,7 @@ const TipsAndAdvice = () => {
             </div>
           </div>
         )}
+        </div>
       </div>
     </>
   );
