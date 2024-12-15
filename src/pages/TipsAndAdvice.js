@@ -1,67 +1,135 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import "../styles/style.css";
+import "../styles/blog.css";
+
+const blogs = [
+  {
+    title: "How to Change Your Oil",
+    tip: "Regular oil changes ensure smooth engine performance.",
+    content: [
+      "Changing your oil is one of the most critical tasks to keep your car in good condition. Fresh oil reduces engine wear by minimizing friction between moving parts.",
+      "To change your oil, start by warming up the engine slightly. Then, drain the old oil into a container and replace the oil filter. Finally, add new oil as per your vehicle manufacturer's recommendations.",
+      "Most cars require an oil change every 3,000 to 5,000 miles, but always consult your owner's manual for specific guidelines."
+    ],
+  },
+  {
+    title: "The Importance of Tire Maintenance",
+    tip: "Well-maintained tires improve fuel efficiency and safety.",
+    content: [
+      "Your tires are the only point of contact between your car and the road, making their condition critical for safety.",
+      "Check tire pressure regularly and ensure it meets the recommended levels in your owner's manual. Proper inflation enhances fuel efficiency and prevents uneven wear.",
+      "Rotate your tires every 5,000 to 7,000 miles to ensure even tread wear and prolong their lifespan."
+    ],
+  },
+  {
+    title: "Brake Maintenance Tips",
+    tip: "Inspect brakes frequently to ensure your safety.",
+    content: [
+      "Brakes are one of the most vital components of your car. Worn brake pads or low brake fluid can compromise your ability to stop quickly.",
+      "Listen for squeaking or grinding noises when braking, as these are signs of worn-out pads. Inspect brake pads every six months and replace them if the thickness is less than a quarter inch.",
+      "Check your brake fluid level periodically and replace it according to the manufacturer's guidelines to maintain effective braking performance."
+    ],
+  },
+  {
+    title: "How to Clean Your Car's Interior",
+    tip: "A clean car interior makes your driving experience more enjoyable.",
+    content: [
+      "Keeping your car's interior clean not only improves aesthetics but also prevents wear and tear.",
+      "Start by removing all trash and vacuuming the seats and floor mats. Use a microfiber cloth and an appropriate cleaner to wipe down the dashboard, console, and door panels.",
+      "Finish by cleaning the windows with a streak-free glass cleaner and applying a protective product to prevent UV damage."
+    ],
+  },
+  {
+    title: "Preparing Your Car for Winter",
+    tip: "Winterize your car to avoid breakdowns during cold weather.",
+    content: [
+      "Winter conditions can be tough on your vehicle, but proper preparation can help you avoid breakdowns.",
+      "Check your battery's health, as cold temperatures can reduce its efficiency. Top off your antifreeze and replace wiper blades with winter-specific ones.",
+      "Consider switching to winter tires for better traction on snow and ice. Always keep an emergency kit in your car, including a flashlight, blankets, and jumper cables."
+    ],
+  },
+];
+
 
 const TipsAndAdvice = () => {
-  const tips = [
-    {
-      title: "Regular Oil Changes",
-      content: "Changing your oil regularly keeps your engine running smoothly and extends its lifespan. Aim to replace the oil every 3,000 to 5,000 miles, depending on your vehicle's make and model."
-    },
-    {
-      title: "Check Your Tires",
-      content: "Ensure your tires are properly inflated and have sufficient tread. Low tire pressure can lead to reduced fuel efficiency and uneven wear."
-    },
-    {
-      title: "Inspect Brakes Frequently",
-      content: "Don't ignore squeaking or grinding noises when you brake. These could be signs of worn brake pads or other issues that need immediate attention."
-    },
-    {
-      title: "Replace Air Filters",
-      content: "A clean air filter improves engine performance and fuel efficiency. Check and replace your air filter every 12,000 to 15,000 miles."
-    },
-    {
-      title: "Pay Attention to Warning Lights",
-      content: "Your car's dashboard warning lights indicate potential problems. Address them promptly to avoid costly repairs later."
-    },
-    {
-      title: "Keep Your Battery in Check",
-      content: "Ensure your car battery terminals are clean and free of corrosion. Replace the battery every 3 to 5 years or when you notice issues starting your vehicle."
-    },
-    {
-      title: "Maintain Your Cooling System",
-      content: "Coolant prevents your engine from overheating. Check coolant levels and flush the system every 30,000 miles or as recommended by your vehicle's manual."
-    },
-    {
-      title: "Test Your Lights",
-      content: "Inspect all your vehicle's lights regularly to ensure they’re functioning correctly. Replace any burned-out bulbs promptly."
-    },
-    {
-      title: "Keep Your Car Clean",
-      content: "Regularly washing and waxing your car protects the paint from rust and corrosion. A clean car is also more pleasant to drive."
-    },
-    {
-      title: "Have Regular Checkups",
-      content: "Schedule regular maintenance checkups with a trusted mechanic to catch small issues before they become big problems."
-    },
-  ];
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedBlog, setSelectedBlog] = useState(null); // State to track selected blog
+
+  // Filter blogs based on search query
+  const filteredBlogs = blogs.filter(
+    (blog) =>
+      blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      blog.tip.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      blog.content.some((paragraph) =>
+        paragraph.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+  );
+
+  // Handler to view a blog
+  const viewBlog = (blog) => {
+    setSelectedBlog(blog);
+  };
+
+  // Handler to go back to the blog list
+  const goBack = () => {
+    setSelectedBlog(null);
+  };
 
   return (
     <>
       <Header className="blackHeader" />
-      <div className="contentContainer">
-        <div className="session">
-          <h1>Tips & Advice</h1>
-          <p>Here are some essential tips and advice to keep your vehicle running smoothly and safely:</p>
-          <ul className="tipsList">
-            {tips.map((tip, index) => (
-              <li key={index} className="tipItem">
-                <h3>{tip.title}</h3>
-                <p>{tip.content}</p>
-              </li>
+      <div className="contentContainer blogScreen">
+        {selectedBlog ? (
+          <div className="blogDetail">
+            <button onClick={goBack} className="backButton">
+              &larr; Back to Blogs
+            </button>
+            <h1>{selectedBlog.title}</h1>
+            <p className="blogTip">{selectedBlog.tip}</p>
+            {selectedBlog.content.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
             ))}
-          </ul>
-        </div>
+          </div>
+        ) : (
+          <div className="session" style={{ marginTop: "50px" }}>
+            <div className="blogHeader">
+              <h1>Recent Blogs</h1>
+              <input
+                type="text"
+                placeholder="Search blogs..."
+                className="blogSearchBar"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <div className="blogContainer">
+              {filteredBlogs.length > 0 ? (
+                filteredBlogs.map((blog, index) => (
+                  <div
+                    key={index}
+                    className={`blogBlock ${
+                      index % 4 === 0 || index % 4 === 3
+                        ? "flexLarge"
+                        : "flexSmall"
+                    }`}
+                    onClick={() => viewBlog(blog)} // Navigate to blog detail
+                  >
+                    <div className="blogImage">
+                      <p>Image Placeholder</p>
+                    </div>
+                    <div className="blogContent">
+                      <h3>{blog.title}</h3>
+                      <p>{blog.tip}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No blogs found.</p>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
