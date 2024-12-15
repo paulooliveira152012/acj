@@ -4,3 +4,17 @@ create components for all pages ✅
 set up backend for ADM signin ✅
 set up scheduling system ✅
 deixar em negrito a pagina atual (demarcar menu lateral)
+ajustar tamanho do icone de menu lateral (diminuir)
+almentar a logo no cabeçalho
+arrumar carrossel de comentarios loop infinito
+    //aboutUs
+trocar a foto
+inserir informacoes reais
+botao hover tem que deixar em negrito e branco quando hover
+ajustar tamanho entre contactus btn e hours of operations
+    //Our Services
+Atualizar texto
+atualizar fotos das maquinas (lista do giovani)
+Contact Us btn --> negrito e color white quando hover
+    //Contact Us
+display black telephone icon
