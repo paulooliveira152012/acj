@@ -1560,7 +1560,12 @@ background-color: transparent;
     border-radius: 10px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
+  .serviceCard li  {
+    /* background-color: red; */
+    list-style: disc;
+  }
+
   /* .machines {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));

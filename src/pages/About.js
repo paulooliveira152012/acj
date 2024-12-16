@@ -1,8 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import "../styles/style.css";
 
 const About = () => {
+  const navigate = useNavigate()
+
   const workingHours = [
     { day: "Mon", hours: "8:00 AM - 5:00 PM" },
     { day: "Tue", hours: "8:00 AM - 5:00 PM" },
@@ -73,7 +76,7 @@ const About = () => {
           </article>
         </div>
 
-        <button>Contact Us</button>
+        <button onClick={() => navigate('/contact-us')}>Contact Us</button>
 
         <div className="session" style={{marginTop: "0"}}>
           

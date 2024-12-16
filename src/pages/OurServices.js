@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 import "../styles/style.css";
 import tpmSensorMachine from "../assets/images/equipment/tpm sensor machine.png";
 import batteryTestingMachine from "../assets/images/equipment/battery test.png";
@@ -14,7 +15,10 @@ import acChargeMachineR134 from "../assets/images/equipment/AC Charge machine R-
 import nitrogenleaktest from "../assets/images/equipment/nitrogenleaktest.png";
 import lyft from "../assets/images/machine.png";
 
+
 const OurServices = () => {
+  const navigate = useNavigate()
+
   const services = [
     {
       name: "Engine Repair",
@@ -108,7 +112,8 @@ const OurServices = () => {
           </div>
         </article>
 
-        <button style={{ marginBottom: "80px" }}>Contact Us</button>
+        <button onClick={() => navigate('/contact-us')} style={{ marginBottom: "80px" }}>Contact Us</button>
+        
       </div>
     </>
   );

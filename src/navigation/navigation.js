@@ -12,11 +12,24 @@ import Calendar from "../pages/Calendar.js";
 import Footer from "../components/Footer.js";
 import "../styles/style.css";
 
+const ScrollToTop = () => {
+    const { pathname } = useLocation();
+
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+};
+
 const ContentWithFooter = () => {
-    const location = useLocation(); // Now inside Router context
+    const location = useLocation();
+    const excludedFooterPaths = ["/calendar", "/admLogin"];
+    const showFooter = !excludedFooterPaths.includes(location.pathname);
 
     return (
         <>
+            <ScrollToTop />
             <div className="content">
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -28,10 +41,10 @@ const ContentWithFooter = () => {
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/admLogin" element={<AdmLogin />} />
                     <Route path="/calendar" element={<Calendar />} />
+                    <Route path="*" element={<Home />} /> {/* Fallback Route */}
                 </Routes>
             </div>
-            {/* Conditionally render the Footer */}
-            {location.pathname !== "/calendar" && location.pathname !=="/admLogin" && <Footer />}
+            {showFooter && <Footer />}
         </>
     );
 };
