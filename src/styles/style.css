@@ -1210,6 +1210,31 @@ margin-top: 50px;
     box-shadow: 2px  2px 2px solid black;
 }
 
+@media screen and (min-width: 600px) {
+    .lightboxContent {
+        height: 70vh;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .lightboxContent {
+        height: 90vh;
+    }
+
+    .lightboxImage {
+        /* max-width: 80%;
+        max-height: 80%; */
+        width: 80%;
+        height: 100%;
+        object-fit: contain; /* Ensure the image behaves like background-size: cover */
+        border-radius: 10px;
+        background-position: center;
+    }
+}
+
+
+
+
 .closeButton,
 .prevButton,
 .nextButton {
