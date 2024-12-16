@@ -1521,6 +1521,39 @@ background-color: transparent;
     color: #555;
 }
 
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .serviceCard {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* .machines {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+  } */
+  
+  /* .machine {
+    text-align: center;
+  }
+  
+  .machine img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+   */
+
+
 /* contact up page */
 
 /* Contact Us Page Styles */
