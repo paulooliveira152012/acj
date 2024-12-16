@@ -49,7 +49,7 @@ const CarTypesServices = () => {
         {cars.map((car, index) => (
           <div key={index} className="carItem" onClick={() => openImage(index)}>
             <img src={car.src} alt={car.name} />
-            <p>{car.name}</p>
+            {/* <p>{car.name}</p> */}
           </div>
         ))}
       </div>
