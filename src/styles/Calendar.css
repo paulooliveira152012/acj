@@ -252,6 +252,11 @@
   align-self: flex-end;
 }
 
+/* Style for past dates */
+.past-date {
+  background-color: rgba(211, 211, 211, 0.422) !important; /* Light gray background */
+  color: #000; /* Optional: Set text color for better contrast */
+}
 
 .fully-booked-date {
   background-color: #D88790 !important;

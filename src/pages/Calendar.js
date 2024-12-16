@@ -242,7 +242,16 @@ const CalendarPage = () => {
 
   // Highlight dates with existing appointments and add available slots count
   const tileClassName = ({ date }) => {
+    const now = new Date();
     const dateString = date.toISOString().split("T")[0];
+  
+    // Check if the date is in the past
+    const isPastDate = date < now.setHours(0, 0, 0, 0); // Compare with today's date at midnight
+  
+    if (isPastDate) {
+      return "past-date"; // Add a CSS class for past dates
+    }
+  
     const appointmentsForDate = appointments.filter(
       (appointment) =>
         new Date(appointment.appointment.date).toISOString().split("T")[0] ===
@@ -253,12 +262,13 @@ const CalendarPage = () => {
     );
     const allTimes = generateTimeSlots(8, 17);
     const freeTimesCount = allTimes.length - takenTimes.length;
-
+  
     if (freeTimesCount === 0) {
       return "fully-booked-date"; // Apply red background for fully booked dates
     }
     return appointmentsForDate.length > 0 ? "highlighted-date" : null; // Highlight if there are appointments
   };
+  
 
   const tileContent = ({ date }) => {
     const dateString = date.toISOString().split("T")[0];
@@ -857,5 +867,4 @@ export default CalendarPage;
 /* 
 TODO:
   prevent empty time slots from being clicled at past days 
-
 */
