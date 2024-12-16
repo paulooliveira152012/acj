@@ -7,6 +7,7 @@ require('dotenv').config();
 // Import router
 const appointmentRouter = require('./routes/appointments');
 const adminRouter = require('./routes/adm');
+const newInquiry = require('./routes/inquiry')
 // Import cors
 const cors = require('cors');
 
@@ -15,6 +16,7 @@ const app = express();
 
 // Allow CORS
 app.use(cors());
+console.log('CORS is enabled');
 
 // Use express
 app.use(express.json());
@@ -27,6 +29,7 @@ mongoose
 
 app.use('/api/appointments', appointmentRouter);
 app.use('/api/admin', adminRouter); // Routes for admin login
+app.use('/api/inquiry', newInquiry);
 app.get('/', (req, res) => res.send('Welcome to the Mechanic Shop API'));
 
 // Start the server
@@ -34,4 +37,4 @@ const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // Import the email sender cron job
-require('./emailSender');
+require('./emailSender/emailSender');

@@ -1,7 +1,7 @@
 const cron = require("node-cron");
 const nodemailer = require("nodemailer");
 const mongoose = require("mongoose");
-const Appointment = require("./schemas/Costumer"); // Your Mongoose model
+const Appointment = require("../schemas/Costumer"); // Your Mongoose model
 require("dotenv").config();
 
 // Connect to MongoDB

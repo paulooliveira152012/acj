@@ -12,7 +12,7 @@ botao hover tem que deixar em negrito e branco quando hover ✅
 ajustar tamanho entre contactus btn e hours of operations ✅
     //Contact Us
 display black telephone icon ✅
-trocar a foto
+trocar a foto 
 inserir informacoes reais
     //Our Services
 Atualizar texto

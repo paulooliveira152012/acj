@@ -19,46 +19,80 @@ const ContactUs = () => {
 
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [caseContent, setCaseContent] = useState("");
+  const [description, setDescription] = useState("");
 
+  // Handle screen resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 650);
+    };
 
-    // Handle screen resize
-    useEffect(() => {
-      const handleResize = () => {
-        setIsSmallScreen(window.innerWidth <= 650);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const PhoneIconComponent = isSmallScreen ? PhoneIconBlack : PhoneIcon;
+  const EnvelopIconComponent = isSmallScreen ? EnvelopIconBlack : EnvelopIcon;
+  const LocationIconComponent = isSmallScreen
+    ? LocationIconBlack
+    : LocationIcon;
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log("function: submit new inquiry")
+    
+      const inquiryData = {
+        firstName,
+        lastName,
+        email,
+        phone,
+        description,
       };
-  
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    const PhoneIconComponent = isSmallScreen ? PhoneIconBlack : PhoneIcon;
-    const EnvelopIconComponent = isSmallScreen ? EnvelopIconBlack : EnvelopIcon;
-    const LocationIconComponent = isSmallScreen
-      ? LocationIconBlack
-      : LocationIcon;
+    
+      const api = "http://localhost:5001/api/inquiry/newInquiry";
+      console.log("API URL:", api)
       
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({ firstName, lastName, email, phone, caseContent });
-    window.alert("Inquiry submitted!");
-
-    // Clear all fields
-    setFirstName("");
-    setLastName("");
-    setPhone("");
-    setEmail("");
-    setCaseContent("");
-  };
+      try {
+        const response = await fetch(api, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(inquiryData),
+        });
+    
+        if (response.ok) {
+          console.log("respose was ok")
+          const result = await response.json();
+          console.log("Inquiry submitted successfully:", result);
+          window.alert("Inquiry submitted successfully!");
+        } else {
+          console.error("Error submitting inquiry:", response.statusText);
+          window.alert("There was an error submitting your inquiry. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error submitting inquiry:", error);
+        window.alert("Something went wrong. Please try again later.");
+      }
+    
+      // Clear all fields
+      setFirstName("");
+      setLastName("");
+      setPhone("");
+      setEmail("");
+      setDescription("");
+    };
+    
 
   return (
     <>
       <Header className="blackHeader" />
       <div className="contentContainer contactUsContainer">
-        <div className="session ContactUsDiv" >
+        <div className="session ContactUsDiv">
           <h2 className="pageTitle"> /Contact </h2>
-          <h1 style={{ textAlign: "center", marginBottom: "0px" }}>Contact Us</h1>
+          <h1 style={{ textAlign: "center", marginBottom: "0px" }}>
+            Contact Us
+          </h1>
           <p style={{ textAlign: "center", marginTop: "0px" }}>
             Any question or remarks? Just write us a message!
           </p>
@@ -71,21 +105,26 @@ const ContactUs = () => {
               </div>
 
               <div>
-              <ul className="contactList">
-  <li>
-    <span><PhoneIconComponent className="icon" /></span>
-    <span>+1 908-527-9734</span>
-  </li>
-  <li>
-    <span><EnvelopIconComponent className="icon" /></span>
-    <span>acjautorepair@gmail.com</span>
-  </li>
-  <li>
-    <span><LocationIconComponent className="icon" /></span>
-    <span>570 Maple Ave, Elizabeth, NJ 07202</span>
-  </li>
-</ul>
-
+                <ul className="contactList">
+                  <li>
+                    <span>
+                      <PhoneIconComponent className="icon" />
+                    </span>
+                    <span>+1 908-527-9734</span>
+                  </li>
+                  <li>
+                    <span>
+                      <EnvelopIconComponent className="icon" />
+                    </span>
+                    <span>acjautorepair@gmail.com</span>
+                  </li>
+                  <li>
+                    <span>
+                      <LocationIconComponent className="icon" />
+                    </span>
+                    <span>570 Maple Ave, Elizabeth, NJ 07202</span>
+                  </li>
+                </ul>
               </div>
 
               {/* social media */}
@@ -107,15 +146,15 @@ const ContactUs = () => {
               <form onSubmit={handleSubmit} className="contactForm">
                 <div>
                   <div>
-                  <label>First Name</label>
-                  <input
-                    id="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    type="text"
-                    placeholder=""
-                    required
-                  />
+                    <label>First Name</label>
+                    <input
+                      id="firstName"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      type="text"
+                      placeholder=""
+                      required
+                    />
                   </div>
 
                   <div>
@@ -129,7 +168,6 @@ const ContactUs = () => {
                       required
                     />
                   </div>
-
                 </div>
                 <div>
                   <div>
@@ -155,19 +193,19 @@ const ContactUs = () => {
                     />
                   </div>
                 </div>
-                
+
                 <label>Provide a brief description of your case</label>
                 <textarea
                   id="caseDescription"
-                  value={caseContent}
-                  onChange={(e) => setCaseContent(e.target.value)}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   placeholder=""
                   className="caseDescriptionInput"
                   rows="4"
                   required
                 ></textarea>
                 <div className="contactPageBtnContainer">
-                <button type="submit">Submit</button>
+                  <button type="submit">Submit</button>
                 </div>
               </form>
             </div>
