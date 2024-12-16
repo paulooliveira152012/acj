@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/style.css";
-import Header from "../components/Header";
 import axios from "axios";
 
 const AdmLogin = () => {
@@ -9,6 +8,7 @@ const AdmLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [showSupportMessage, setShowSupportMessage] = useState(false); // State for the support message
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
@@ -16,7 +16,6 @@ const AdmLogin = () => {
     setError(""); // Clear previous errors
 
     try {
-      // Send login credentials to the backend
       const response = await axios.post(
         "http://localhost:5001/api/admin/login",
         {
@@ -25,16 +24,10 @@ const AdmLogin = () => {
         }
       );
 
-      // Handle success (e.g., store the token)
       const { token } = response.data;
       console.log("Login successful, token:", token);
       setSuccess(true);
-      navigate("/calendar");
-
-      // Optionally, save the token to localStorage
       localStorage.setItem("admToken", token);
-
-      // Redirect to the calendar page
       navigate("/calendar");
     } catch (err) {
       console.error(
@@ -45,6 +38,10 @@ const AdmLogin = () => {
         err.response?.data?.message || "An error occurred during login."
       );
     }
+  };
+
+  const handleForgotPassword = () => {
+    setShowSupportMessage(true); // Show the support message when clicked
   };
 
   return (
@@ -58,32 +55,47 @@ const AdmLogin = () => {
                 <p>siteLogo</p>
                 <input
                   id="username"
-                  placeholder="username"
+                  placeholder="Username"
                   type="text"
                   value={username}
                   onChange={(event) => setUsername(event.target.value)}
                   required
                 />
-
                 <input
                   id="password"
-                  placeholder="password"
+                  placeholder="Password"
                   type="password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   required
                 />
-
+                {error && (
+                  <p
+                    className="errorMessage"
+                    style={{ color: "red", marginTop: 0 }}
+                  >
+                    {error}
+                  </p>
+                )}
                 <button className="loginSubmitBtn" type="submit">
                   Login
                 </button>
-                <a className="forgotPassword">Forgot Password?</a>
+                <p
+                  type="button"
+                  className="forgotPassword"
+                  onClick={handleForgotPassword}
+                >
+                  Forgot Password?
+                </p>
               </form>
+                {showSupportMessage && (
+                  <p className="supportMessage">
+                    Contact support at <strong>908-630-8458</strong>.
+                  </p>
+                )}
             </div>
           </div>
           <div className="imageBehind"></div>
-
-          {error && <p className="errorMessage">{error}</p>}
           {success && <p className="successMessage">Login successful!</p>}
         </div>
       </div>

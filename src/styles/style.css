@@ -1120,6 +1120,7 @@ input {
 
 .forgotPassword {
 margin-top: 50px;
+cursor: pointer;
 }
 
 @media screen and (max-width: 680px) {
@@ -1823,7 +1824,7 @@ background-color: transparent;
     
 
     .contactForm {
-        /* background-color: red; */
+        /* backfground-color: red; */
         gap: 0;
     }
 
