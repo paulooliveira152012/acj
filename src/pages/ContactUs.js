@@ -7,6 +7,7 @@ import PhoneIcon from "../assets/icons/footer/phone";
 import EnvelopIcon from "../assets/icons/footer/envelop";
 import LocationIcon from "../assets/icons/footer/location";
 import InstagramIcon from "../assets/images/icons/instagram";
+import FacebookIcon from "../assets/images/icons/facebook";
 // black logos for smaller screens
 import PhoneIconBlack from "../assets/icons/footer/phoneBlack";
 import EnvelopIconBlack from "../assets/icons/footer/envelopBlack";
@@ -138,11 +139,16 @@ const ContactUs = () => {
               </div>
 
               {/* social media */}
-              <div>
+              <div className="socialMediaContainer">
                 <ul>
                   <li>
                     <a>
                       <InstagramIcon />
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <FacebookIcon />
                     </a>
                   </li>
                 </ul>

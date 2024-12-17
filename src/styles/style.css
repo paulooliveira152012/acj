@@ -1776,6 +1776,12 @@ background-color: transparent;
     overflow: hidden;
   }
 
+  .socialMediaContainer ul{
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-evenly;
+  }
+
   @media screen and (min-width: 1200px) {
     .contactUsContainer {
         /* width: 95%; */
