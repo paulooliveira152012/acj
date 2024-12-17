@@ -18,6 +18,15 @@ const iquiryForm = new mongoose.Schema({
         type: Number,
         required: true
     },
+    make: {
+        type: String,
+    },
+    model: {
+        type: String
+    },
+    year: {
+        type: Number
+    },
     description: {
         type: String,
         required: true

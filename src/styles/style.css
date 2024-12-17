@@ -1666,6 +1666,12 @@ background-color: transparent;
     margin-top: 42px;
   }
 
+  .contactForm div {
+    /* background-color: green; */
+    display: flex;
+
+  }
+
 
   .contactFormSection .contactForm div input {
     /* width: 100%; */

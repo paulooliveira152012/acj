@@ -7,12 +7,12 @@ const sendInquiryEmail = require('../emailSender/inquiries.js')
 router.post('/newInquiry', async (req, res) => {
   console.log('Route for new inquiry reached');
   try {
-    const { firstName, lastName, email, phone, description } = req.body;
+    const { firstName, lastName, email, phone, description, make, model, year } = req.body;
 
-    console.log('Received Data:', { firstName, lastName, email, phone, description });
+    console.log('Received Data:', { firstName, lastName, email, phone, description, make, model, year });
 
     // Validate required fields
-    if (!firstName || !lastName || !email || !phone || !description) {
+    if (!firstName || !lastName || !phone || !description) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
@@ -25,6 +25,9 @@ router.post('/newInquiry', async (req, res) => {
       email,
       phone,
       description,
+      make,
+      model,
+      year
     });
 
     console.log("document created")
@@ -35,7 +38,7 @@ router.post('/newInquiry', async (req, res) => {
 
     console.log("sending email with inquiry details")
      // Send the inquiry email
-     await sendInquiryEmail({ firstName, lastName, email, phone, description });
+     await sendInquiryEmail({ firstName, lastName, email, phone, make, model, year, description });
      console.log("email sent")
     // Respond with success
     res.status(201).json({ message: 'Inquiry submitted successfully', inquiry: newInquiry });

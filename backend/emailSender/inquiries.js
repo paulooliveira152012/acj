@@ -1,7 +1,8 @@
 const nodemailer = require('nodemailer');
 
 const sendInquiryEmail = async (inquiryData) => {
-  const { firstName, lastName, email, phone, description } = inquiryData;
+  const { firstName, lastName, email, phone, year, make, model, description } = inquiryData;
+  console.log( firstName, lastName, email, phone, year, make, model, description )
 
   // Configure the transporter
   const transporter = nodemailer.createTransport({
@@ -24,6 +25,9 @@ const sendInquiryEmail = async (inquiryData) => {
         <li><strong>Name:</strong> ${firstName} ${lastName}</li>
         <li><strong>Email:</strong> ${email}</li>
         <li><strong>Phone:</strong> ${phone}</li>
+        <li><strong>Make:</strong> ${make}</li>
+        <li><strong>Model:</strong> ${model}</li>
+        <li><strong>Year:</strong> ${year}</li>
         <li><strong>Description:</strong> ${description}</li>
       </ul>
     `,
@@ -42,6 +46,9 @@ const sendInquiryEmail = async (inquiryData) => {
         <li><strong>Name:</strong> ${firstName} ${lastName}</li>
         <li><strong>Email:</strong> ${email}</li>
         <li><strong>Phone:</strong> ${phone}</li>
+        <li><strong>Make:</strong> ${make}</li>
+        <li><strong>Model:</strong> ${model}</li>
+        <li><strong>Year:</strong> ${year}</li>
         <li><strong>Description:</strong> ${description}</li>
       </ul>
       <p>We will get back to you as soon as possible. Please do not reply to this email.</p>

@@ -20,6 +20,9 @@ const ContactUs = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
+  const [make, setMake] = useState("");
+  const [model, setModel] = useState("");
+  const [year, setYear] = useState("");
 
   // Handle screen resize
   useEffect(() => {
@@ -37,52 +40,59 @@ const ContactUs = () => {
     ? LocationIconBlack
     : LocationIcon;
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log("function: submit new inquiry")
-    
-      const inquiryData = {
-        firstName,
-        lastName,
-        email,
-        phone,
-        description,
-      };
-    
-      const api = "http://localhost:5001/api/inquiry/newInquiry";
-      console.log("API URL:", api)
-      
-      try {
-        const response = await fetch(api, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(inquiryData),
-        });
-    
-        if (response.ok) {
-          console.log("respose was ok")
-          const result = await response.json();
-          console.log("Inquiry submitted successfully:", result);
-          window.alert("Inquiry submitted successfully!");
-        } else {
-          console.error("Error submitting inquiry:", response.statusText);
-          window.alert("There was an error submitting your inquiry. Please try again.");
-        }
-      } catch (error) {
-        console.error("Error submitting inquiry:", error);
-        window.alert("Something went wrong. Please try again later.");
-      }
-    
-      // Clear all fields
-      setFirstName("");
-      setLastName("");
-      setPhone("");
-      setEmail("");
-      setDescription("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("function: submit new inquiry");
+
+    const inquiryData = {
+      firstName,
+      lastName,
+      email,
+      phone,
+      make,
+      model,
+      year,
+      description,
     };
-    
+
+    const api = "http://localhost:5001/api/inquiry/newInquiry";
+    console.log("API URL:", api);
+
+    try {
+      const response = await fetch(api, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inquiryData),
+      });
+
+      if (response.ok) {
+        console.log("respose was ok");
+        const result = await response.json();
+        console.log("Inquiry submitted successfully:", result);
+        window.alert("Inquiry submitted successfully!");
+      } else {
+        console.error("Error submitting inquiry:", response.statusText);
+        window.alert(
+          "There was an error submitting your inquiry. Please try again."
+        );
+      }
+    } catch (error) {
+      console.error("Error submitting inquiry:", error);
+      window.alert("Something went wrong. Please try again later.");
+    }
+
+    // Clear all fields
+    setFirstName("");
+    setLastName("");
+    setPhone("");
+    setEmail("");
+    setDescription("");
+    setMake("");
+    setModel("");
+    setYear("");
+  };
 
   return (
     <>
@@ -143,7 +153,10 @@ const ContactUs = () => {
 
             <div className="contactFormSection">
               <div className="flexContainer"></div>
+
               <form onSubmit={handleSubmit} className="contactForm">
+                <h3 style={{marginBottom: "20px", fontStyle:"italic"}}>Submit an appointment request</h3>
+                {/* flex row for first and last name*/}
                 <div>
                   <div>
                     <label>First Name</label>
@@ -169,6 +182,7 @@ const ContactUs = () => {
                     />
                   </div>
                 </div>
+
                 <div>
                   <div>
                     <label>Email</label>
@@ -181,6 +195,7 @@ const ContactUs = () => {
                       required
                     />
                   </div>
+
                   <div>
                     <label>Phone Number</label>
                     <input
@@ -192,6 +207,40 @@ const ContactUs = () => {
                       required
                     />
                   </div>
+                </div>
+
+                {/* flex row for email and phone number */}
+                <div>
+                      <div>
+                        <label>Car Make</label>
+                        <input
+                          id="carMake"
+                          value={make}
+                          onChange={(e) => setMake(e.target.value)}
+                          required
+                        ></input>
+                      </div>
+
+                      <div>
+                        <label>Car Model</label>
+                        <input
+                          id="carModel"
+                          value={model}
+                          onChange={(e) => setModel(e.target.value)}
+                          required
+                        ></input>
+                      </div>
+
+                      <div>
+                        <label>Car Year</label>
+                        <input
+                          id="carYear"
+                          value={year}
+                          onChange={(e) => setYear(e.target.value)}
+                          required
+                        ></input>
+                      </div>
+                  
                 </div>
 
                 <label>Provide a brief description of your case</label>
