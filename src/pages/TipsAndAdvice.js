@@ -177,6 +177,7 @@ const TipsAndAdvice = () => {
 
             {/* Display blog image */}
             {selectedBlog.blogImage ? (
+              <div className="blogImageContainer">
               <img
                 src={selectedBlog.blogImage}
                 alt={selectedBlog.title}
@@ -188,6 +189,7 @@ const TipsAndAdvice = () => {
                   borderRadius: "8px",
                 }}
               />
+              </div>
             ) : (
               <div
                 style={{

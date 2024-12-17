@@ -103,6 +103,18 @@
 margin-top: 100px;
 margin-bottom: 100px;
   }
+
+  .blogDetail .blogImageContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .blogDetail .blogDetailImage {
+    margin: auto;
+    align-self: center;
+    text-align: center;
+  }
   
   .backButton {
     background: #333;
@@ -169,7 +181,7 @@ margin-bottom: 100px;
 
   .blogDetailImage {
     display: block;
-    margin: 20px auto;
+    margin: auto;
     border-radius: 8px;
   }
   
