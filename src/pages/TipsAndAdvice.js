@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
+import topShape from "../assets/images/blogImages/topShape.jpg";
+import engine from "../assets/images/blogImages/engine.png";
+import suspension from "../assets/images/blogImages/suspensions.jpg";
+import carTrip from "../assets/images/blogImages/carTrip.jpg";
+import carManual from "../assets/images/blogImages/carmanual.jpg";
 import "../styles/style.css";
 import "../styles/blog.css";
 
@@ -7,6 +12,7 @@ const blogs = [
   {
     title: "5 Essential Tips to Keep Your Car in Top Shape",
     tip: "Keeping your car in good condition goes beyond avoiding unexpected expenses—it’s also a matter of safety and efficiency.",
+    blogImage: topShape,
     content: [
       "Keeping your car in good condition goes beyond avoiding unexpected expenses—it’s also a matter of safety and efficiency. With a few simple steps and a preventive maintenance routine, you can extend your vehicle's lifespan and drive with greater peace of mind. Check out five essential practices to keep your car in top shape.",
       "**1. Oil Change on Time**",
@@ -19,12 +25,13 @@ const blogs = [
       "Efficient brakes are crucial for your safety. If you notice noises, vibrations, or a 'soft' brake pedal, take your car to a mechanic immediately. Worn-out brake pads or discs can compromise stopping power, increasing the risk of accidents.",
       "**5. Regular Maintenance**",
       "Preventive maintenance acts like a full check-up for your car. During these inspections, mechanics evaluate critical components such as the engine, suspension, brakes, and electrical system. Following the manufacturer’s recommendations is the best way to prevent major issues and keep your car running like new.",
-      "Taking care of your car is an investment worth making: it prevents small issues from turning into significant expenses and ensures safety and performance on the road. Incorporating these practices into your routine will help keep your vehicle in top condition, save fuel, and avoid future headaches. After all, a well-maintained car means peace of mind and confidence behind the wheel!"
-    ]
+      "Taking care of your car is an investment worth making: it prevents small issues from turning into significant expenses and ensures safety and performance on the road. Incorporating these practices into your routine will help keep your vehicle in top condition, save fuel, and avoid future headaches. After all, a well-maintained car means peace of mind and confidence behind the wheel!",
+    ],
   },
   {
     title: "5 Crucial Tips to Extend Your Car's Engine Life",
     tip: "The engine is the heart of your car, and keeping this component in good condition is key to maintaining performance and avoiding costly repairs.",
+    blogImage: engine,
     content: [
       "**1. Use Quality Fuel**",
       "Low-quality fuel can cause dirt and deposits to build up in the engine, harming its efficiency and performance. Always choose trustworthy gas stations and high-quality fuel.",
@@ -36,12 +43,13 @@ const blogs = [
       "A leak in the exhaust system or a damaged catalytic converter can affect the engine's performance and even reduce fuel efficiency. Make periodic checks of the system to ensure everything is working properly.",
       "**5. Keep the Engine Lubricated**",
       "Engine oil is essential for lubricating moving parts. Not only should you change the oil regularly, but also check the oil level frequently to avoid damage from insufficient lubrication.",
-      "Taking good care of the engine is an intelligent way to ensure your car lasts longer without compromising performance. By following these tips, you can prevent serious issues and reduce repair costs."
-    ]
+      "Taking good care of the engine is an intelligent way to ensure your car lasts longer without compromising performance. By following these tips, you can prevent serious issues and reduce repair costs.",
+    ],
   },
   {
     title: "How to Choose the Ideal Suspension for Your Car",
     tip: "Choosing and maintaining the ideal suspension improves drivability and ensures greater safety and comfort.",
+    blogImage: suspension,
     content: [
       "The suspension is responsible for your car's stability and comfort, and it directly impacts safety and performance. Choosing the right suspension system can make a significant difference in your driving experience. Here’s how to make the right choice!",
       "**Understand the Suspension Type**",
@@ -54,12 +62,14 @@ const blogs = [
       "Shock absorbers are key to the suspension's performance. If you notice the car 'bouncing' excessively or instability in handling, it may be time to replace the shock absorbers. Always choose quality parts to ensure proper function.",
       "**Regular Maintenance**",
       "Even with a quality suspension, regular maintenance is essential. Have the suspension inspected periodically, and if you notice strange noises or changes in the vehicle's behavior, have it checked by a professional.",
-      "Investing in your car’s suspension is investing in a better driving experience!"
-    ]
+      "Investing in your car’s suspension is investing in a better driving experience!",
+    ],
   },
   {
     title: "How to Avoid Premature Wear on Your Clutch",
     tip: "Proper clutch use extends its life and prevents unnecessary repairs.",
+    blogImage: carManual,
+
     content: [
       "1. Avoid Resting Your Foot on the Clutch Pedal: Resting your foot on the clutch pedal while driving can cause premature wear. This keeps the clutch in partial contact, even when you're not engaging it, which speeds up wear.",
       "2. Avoid Abrupt Starts: Making abrupt starts can put excess strain on both the clutch and the engine. Always shift gears smoothly, especially when getting the car moving. This helps preserve both the clutch and transmission.",
@@ -71,12 +81,13 @@ const blogs = [
   {
     title: "How to Prepare Your Car for a Long Road Trip",
     tip: "Preparation minimizes surprises on the road and ensures a safer journey.",
+    blogImage: carTrip,
     content: [
       "**Check Oil and Fluid Levels:**",
       "Ensure that the engine oil, brake fluid, transmission fluid, and coolant are all at the correct levels. These fluids are essential for your car's performance during the trip.",
-      "**Inspect Your Tires:**" ,
+      "**Inspect Your Tires:**",
       "Check the tire pressure and visually inspect the tires for uneven wear, cuts, or bulges. Tires in good condition are vital for safety on the road. Don’t forget to check the spare tire and make sure you have all the tools for changing a flat.",
-      "**Test the Brakes:**", 
+      "**Test the Brakes:**",
       "Inspect the brakes, especially if you notice any strange noises or vibrations when braking. A full brake inspection is critical for ensuring your braking system is in top shape for the journey.",
       "**Check Your Lighting System:**",
       "Make sure all your headlights, brake lights, turn signals, and taillights are working properly. Driving at night with faulty lights is dangerous, and proper lighting is a legal requirement in many countries.",
@@ -88,7 +99,7 @@ const blogs = [
 
 const TipsAndAdvice = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedBlog, setSelectedBlog] = useState(null); // State to track selected blog
+  const [selectedBlog, setSelectedBlog] = useState(null);
 
   // Filter blogs based on search query
   const filteredBlogs = blogs.filter(
@@ -100,12 +111,10 @@ const TipsAndAdvice = () => {
       )
   );
 
-  // Handler to view a blog
   const viewBlog = (blog) => {
     setSelectedBlog(blog);
   };
 
-  // Handler to go back to the blog list
   const goBack = () => {
     setSelectedBlog(null);
   };
@@ -114,65 +123,119 @@ const TipsAndAdvice = () => {
     <>
       <Header className="blackHeader" />
       <div className="contentContainer blogScreen">
-        <div>
-          {selectedBlog ? (
-            <div className="blogDetail">
-              <button onClick={goBack} className="backButton">
-                &larr; Back to Blogs
-              </button>
-              <h1>{selectedBlog.title}</h1>
-              <p className="blogTip">{selectedBlog.tip}</p>
-              {selectedBlog.content.map((paragraph, index) => {
-                // Check for paragraphs that include "**" for bold text
-                const formattedParagraph = paragraph
-                  .split("**")
-                  .map((part, i) =>
-                    i % 2 === 1 ? <strong key={i}>{part}</strong> : part
-                  );
+        {selectedBlog ? (
+          <div className="blogDetail">
+            <button onClick={goBack} className="backButton">
+              &larr; Back to Blogs
+            </button>
+            <h1>{selectedBlog.title}</h1>
+            <p className="blogTip">{selectedBlog.tip}</p>
 
-                return <p key={index}>{formattedParagraph}</p>;
-              })}
-            </div>
-          ) : (
-            <div className="session" style={{ marginTop: "50px" }}>
-              <div className="blogHeader">
-                <h1>Recent Blogs</h1>
-                <input
-                  type="text"
-                  placeholder="Search blogs..."
-                  className="blogSearchBar"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
+            {/* Display blog image */}
+            {selectedBlog.blogImage ? (
+              <img
+                src={selectedBlog.blogImage}
+                alt={selectedBlog.title}
+                className="blogDetailImage"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  margin: "20px 0",
+                  borderRadius: "8px",
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  height: "200px",
+                  backgroundColor: "#ccc",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "8px",
+                  margin: "20px 0",
+                }}
+              >
+                <p>No Image Available</p>
               </div>
-              <div className="blogContainer">
-                {filteredBlogs.length > 0 ? (
-                  filteredBlogs.map((blog, index) => (
-                    <div
-                      key={index}
-                      className={`blogBlock ${
-                        index % 4 === 0 || index % 4 === 3
-                          ? "flexLarge"
-                          : "flexSmall"
-                      }`}
-                      onClick={() => viewBlog(blog)} // Navigate to blog detail
-                    >
-                      <div className="blogImage">
-                        <p>Image Placeholder</p>
-                      </div>
-                      <div className="blogContent">
-                        <h3>{blog.title}</h3>
-                        <p>{blog.tip}</p>
-                      </div>
+            )}
+
+            {/* Render blog content */}
+            {selectedBlog.content.map((paragraph, index) => {
+              const formattedParagraph = paragraph
+                .split("**")
+                .map((part, i) =>
+                  i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+                );
+              return <p key={index}>{formattedParagraph}</p>;
+            })}
+          </div>
+        ) : (
+          <div className="session" style={{ marginTop: "50px" }}>
+            <div className="blogHeader">
+              <h1>Recent Blogs</h1>
+              <input
+                type="text"
+                placeholder="Search blogs..."
+                className="blogSearchBar"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <div className="blogContainer">
+              {filteredBlogs.length > 0 ? (
+                filteredBlogs.map((blog, index) => (
+                  <div
+                    key={index}
+                    className={`blogBlock ${
+                      index % 4 === 0 || index % 4 === 3
+                        ? "flexLarge"
+                        : "flexSmall"
+                    }`}
+                    onClick={() => viewBlog(blog)}
+                  >
+                    <div className="blogImage">
+                      {blog.blogImage ? (
+                        <div
+                          style={{
+                            backgroundImage: `url(${blog.blogImage})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            width: "100%",
+                            height: "auto",
+                            borderRadius: "8px",
+                          }}
+                        ></div>
+                      ) : (
+                        <div
+                          style={{
+                            backgroundColor: "#eee",
+                            width: "100%",
+                            height: "150px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            borderRadius: "8px",
+                          }}
+                        >
+                          <p>No Image</p>
+                        </div>
+                      )}
                     </div>
-                  ))
-                ) : (
-                  <p>No blogs found.</p>
-                )}
-              </div>
+
+                    <div className="blogContent">
+                      <h3>{blog.title}</h3>
+                      <p>{blog.tip}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No blogs found.</p>
+              )}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );
