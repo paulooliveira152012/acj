@@ -5,6 +5,7 @@ import engine from "../assets/images/blogImages/engine.png";
 import suspension from "../assets/images/blogImages/suspensions.jpg";
 import carTrip from "../assets/images/blogImages/carTrip.jpg";
 import carManual from "../assets/images/blogImages/carmanual.jpg";
+import carDtcImage from "../assets/images/blogImages/dashlights.jpg"
 import "../styles/style.css";
 import "../styles/blog.css";
 
@@ -95,6 +96,49 @@ const blogs = [
       "In addition to being pleasant, keeping your car clean both inside and out helps prevent dirt from accumulating on moving parts like the engine and brakes. It also improves visibility in case you need to use the windshield wipers.",
     ],
   },
+  {
+    title: "Understanding Car Diagnostic Trouble Codes (DTC): What They Mean",
+    tip: "Learn what common car trouble codes mean when scanned and how to address them.",
+    blogImage: carDtcImage, // Replace with your image path
+    content: [
+      "Modern cars are equipped with **On-Board Diagnostics (OBD-II)** systems that detect issues within your vehicle. When a car is scanned, it produces diagnostic trouble codes (DTCs) that identify problems in key systems like the engine, transmission, and more.",
+      "**What Are DTC Codes?**",
+      "DTCs are five-character codes that help pinpoint issues. Their structure is as follows:",
+      "- **P**: Powertrain (engine, transmission)",
+      "- **B**: Body (airbags, seat belts)",
+      "- **C**: Chassis (suspension, steering)",
+      "- **U**: Undefined (network communication)",
+      "The first digit indicates the code type: **0** for generic OBD-II and **1** for manufacturer-specific codes.",
+      "**Common DTC Codes and Their Meanings:**",
+      "**1. P0300 – Random/Multiple Cylinder Misfire Detected**",
+      "Your engine is misfiring in one or more cylinders. Causes include faulty spark plugs, bad ignition coils, or fuel delivery issues. Fix: Check spark plugs, ignition coils, and fuel injectors.",
+      "**2. P0171 – System Too Lean (Bank 1)**",
+      "The air-fuel mixture is too lean. Causes include vacuum leaks or a dirty mass airflow sensor (MAF). Fix: Inspect for vacuum leaks or clean the MAF sensor.",
+      "**3. P0420 – Catalyst System Efficiency Below Threshold (Bank 1)**",
+      "Indicates a worn-out catalytic converter or faulty oxygen sensor. Fix: Replace the catalytic converter or O2 sensor.",
+      "**4. P0442 – EVAP System Leak Detected (Small Leak)**",
+      "A small leak in the evaporative emission control system. Causes: Loose gas cap or cracked EVAP hoses. Fix: Tighten or replace the gas cap.",
+      "**5. P0507 – Idle Control System RPM Higher Than Expected**",
+      "The engine idle speed is higher than normal. Causes: Dirty throttle body or faulty idle air control valve. Fix: Clean the throttle body or replace the valve.",
+      "**6. U0101 – Lost Communication with Transmission Control Module (TCM)**",
+      "There’s no communication with the TCM. Causes: Loose wiring connections or a faulty TCM. Fix: Inspect wiring and replace the TCM if necessary.",
+      "**7. P0113 – Intake Air Temperature Sensor Circuit High Input**",
+      "The intake air temperature sensor reads abnormally high. Causes: Damaged sensor or wiring. Fix: Replace the sensor or repair the wiring.",
+      "**8. B0028 – Right Side Airbag Deployment Circuit**",
+      "Fault detected in the airbag system. Causes: Faulty sensor or loose wiring. Fix: Inspect wiring and replace faulty sensors.",
+      "**9. C1234 – Wheel Speed Sensor Fault**",
+      "A wheel speed sensor is malfunctioning. Causes: Damaged sensor or corroded connections. Fix: Replace the faulty wheel speed sensor.",
+      "**10. P0700 – Transmission Control System Malfunction**",
+      "A general transmission control fault. Causes: Low transmission fluid or faulty TCM. Fix: Check fluid levels and replace the TCM.",
+      "**How to Read and Clear DTC Codes**",
+      "1. Use an OBD-II scanner to read the codes by connecting to the port (under the dashboard).",
+      "2. Address the problem causing the code.",
+      "3. Use the scanner to clear the codes after repairs.",
+      "Understanding these codes allows you to identify and fix car issues efficiently, saving time and money while keeping your vehicle in top condition. For persistent issues, consult a professional mechanic for accurate diagnosis."
+    ],
+  },
+
+  
 ];
 
 const TipsAndAdvice = () => {
