@@ -74,6 +74,20 @@
   .contactButton:hover {
     background-color: #5a1817;
   }
+
+  .contactMapSection {
+    max-width: 100%;
+    width: 100%;
+    aspect-ratio: 1.5;
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    /* background-color: red; */
+  }
+
+  .contactMapSection iframe {
+    height: 100%;
+  }
   
   /* Responsive Design */
   @media (max-width: 768px) {
