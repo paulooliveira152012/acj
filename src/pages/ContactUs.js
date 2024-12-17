@@ -121,13 +121,13 @@ const ContactUs = () => {
                     <span>
                       <PhoneIconComponent className="icon" />
                     </span>
-                    <span>+1 908-527-9734</span>
+                    <span><a href="tel: 9085279734">+1 908-527-9734</a></span>
                   </li>
                   <li>
                     <span>
                       <EnvelopIconComponent className="icon" />
                     </span>
-                    <span>acjautorepair@gmail.com</span>
+                    <span><a href="mailto: acjautorepair@gmail.com">acjautorepair@gmail.com</a></span>
                   </li>
                   <li>
                     <span>

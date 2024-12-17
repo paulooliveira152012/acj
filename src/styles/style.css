@@ -1842,6 +1842,10 @@ background-color: transparent;
         margin-bottom: 50px !important; 
     }
 
+    .contactList li a {
+        color: black;
+    }
+
     .contactList span {
         display: block;
         margin: auto;

@@ -2,6 +2,9 @@ import React from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import "../styles/style.css";
+import "../styles/services.css"; // New CSS file for improved styles
+
+// Import images
 import tpmSensorMachine from "../assets/images/equipment/tpm sensor machine.png";
 import batteryTestingMachine from "../assets/images/equipment/battery test.png";
 import videoInspectionScopeDevice from "../assets/images/equipment/video inspection scope.png";
@@ -15,57 +18,103 @@ import acChargeMachineR134 from "../assets/images/equipment/AC Charge machine R-
 import nitrogenleaktest from "../assets/images/equipment/nitrogenleaktest.png";
 import lyft from "../assets/images/machine.png";
 
-
 const OurServices = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const services = [
     {
       name: "Engine Repair",
       description:
-        "Comprehensive diagnostics and expert repairs to restore your engine's performance. Whether it's a minor issue or a major overhaul, we've got you covered.",
+        "Comprehensive diagnostics and expert repairs to restore your engine's performance.",
       equipment: ["Video Inspection Scope", "Fuel Pump Testing Kit", "Oil Pressure Gauge"],
+      image: videoInspectionScopeDevice, // Image of related equipment
     },
     {
       name: "Brake Services",
       description:
-        "Ensure your safety with precision brake repairs and maintenance, including brake pad replacement, rotor resurfacing, and more.",
+        "Precision brake repairs and maintenance, including pad replacement and rotor resurfacing.",
       equipment: ["Brake Service Machine", "Vacuum Pump Testing Kit"],
+      image: brakeServiceMachine,
     },
     {
-      name: "Wheel Alignment",
+      name: "Wheel Alignment & Suspension",
       description:
-        "Advanced alignment solutions to improve driving stability, extend tire life, and enhance fuel efficiency.",
-      equipment: ["Hunter Wheel Alignment and Balancing"],
+        "Advanced alignment and suspension solutions to ensure stability, smoother rides, and extended tire life.",
+      equipment: ["Hunter Wheel Alignment and Balancing", "Suspension Tools"],
+      image: lyft,
     },
     {
-      name: "Battery Testing",
+      name: "Battery Testing & Alternator Services",
       description:
-        "Diagnose and test your car's battery to ensure optimal performance. Prevent unexpected breakdowns with our advanced testing kits.",
-      equipment: ["Battery Testing Kit"],
+        "Diagnose and test batteries, alternators, and starters to ensure optimal performance and prevent breakdowns.",
+      equipment: ["Battery Testing Kit", "Alternator Testing Tools"],
+      image: batteryTestingMachine,
     },
     {
       name: "Air Conditioning",
       description:
-        "Stay cool and comfortable with our AC services, including recharging, leak detection, and maintenance.",
+        "AC services, including recharging, leak detection, and performance maintenance for R134 and R1234yf systems.",
       equipment: ["AC Charge Machine R134", "AC Charge Machine R1234yf", "AC Nitrogen Leak Test"],
+      image: acChargeMachineR1234yf,
+    },
+    {
+      name: "Oil Change & Fluids",
+      description:
+        "Quick and efficient oil changes, along with fluid checks and top-ups to ensure optimal vehicle health.",
+      equipment: ["Oil Pressure Gauge", "Fluid Pumps"],
+      image: oilPressureGauge,
+    },
+    {
+      name: "Heating and Cooling System",
+      description:
+        "Diagnose and repair heating and cooling systems, including radiator issues and thermostat replacements.",
+      equipment: ["Cooling System Pressure Test Kit", "Radiator Leak Testing Kit"],
+      image: coolingSystemKit,
+    },
+    {
+      name: "Computerized Diagnostics & Tune-Up",
+      description:
+        "State-of-the-art computerized diagnostics and tune-ups to improve vehicle efficiency and resolve hidden issues.",
+      equipment: ["OBD-II Scanner", "Tune-Up Tools"],
+      image: tpmSensorMachine,
+    },
+    {
+      name: "Exhaust System",
+      description:
+        "Inspection and repair of the exhaust system to reduce emissions, improve fuel efficiency, and eliminate leaks.",
+      equipment: ["Exhaust Pressure Testing Kit"],
+      image: nitrogenleaktest,
+    },
+    {
+      name: "Clutch Services",
+      description:
+        "Comprehensive clutch inspections, adjustments, and replacements to ensure smooth gear shifting and driving comfort.",
+      equipment: ["Clutch Alignment Tools", "Pressure Plate Testing Tools"],
+      image: oilPressureGauge,
+    },
+    {
+      name: "Traction Control & ABS",
+      description:
+        "Repair and maintenance of Anti-Lock Braking Systems (ABS) and traction control for enhanced safety and control.",
+      equipment: ["Brake Service Machine", "ABS Scanner"],
+      image: brakeServiceMachine,
+    },
+    {
+      name: "Lights & Electrical Systems",
+      description:
+        "Inspection, repair, and replacement of all vehicle lights and electrical components, including fuses and wiring.",
+      equipment: ["Electrical Testing Tools", "Lighting Fixtures"],
+      image: batteryTestingMachine,
+    },
+    {
+      name: "Preventive Maintenance",
+      description:
+        "General preventive maintenance to keep your car running smoothly, including belt, hose, and filter replacements.",
+      equipment: ["Preventive Maintenance Kit"],
+      image: fuelPumpTestingKit,
     },
   ];
-
-  const machines = [
-    { name: "TPM Sensor Machine", src: tpmSensorMachine },
-    { name: "Battery Testing Kit", src: batteryTestingMachine },
-    { name: "Video Inspection Scope", src: videoInspectionScopeDevice },
-    { name: "Radiator Leak Testing Kit", src: coolingSystemKit },
-    { name: "Fuel Pump Testing Kit", src: fuelPumpTestingKit },
-    { name: "Oil Pressure Gauge", src: oilPressureGauge },
-    { name: "Vacuum Pump Testing Kit", src: vaccumPumpTest },
-    { name: "Brake Service Machine", src: brakeServiceMachine },
-    { name: "AC Charge Machine R134", src: acChargeMachineR134 },
-    { name: "AC Charge Machine R1234yf", src: acChargeMachineR1234yf },
-    { name: "AC Nitrogen Leak Test", src: nitrogenleaktest },
-    { name: "Hunter Wheel Alignment and Balancing", src: lyft },
-  ];
+  
 
   return (
     <>
@@ -75,45 +124,41 @@ const OurServices = () => {
           <h2 className="pageTitle">/Our Services</h2>
           <h1>Our Services</h1>
           <p>
-            We specialize in delivering tailored solutions designed to meet your
-            unique needs. Our range of services combines expertise, innovation,
-            and a customer-focused approach to ensure the highest quality and
-            satisfaction.
+            Our range of services combines expertise, advanced tools, and a
+            customer-focused approach to ensure the highest quality and satisfaction.
           </p>
 
           {/* Services Section */}
-          <div className="services">
+          <div className="servicesGrid">
             {services.map((service, index) => (
               <div key={index} className="serviceCard">
+                <img
+                  src={service.image}
+                  alt={service.name}
+                  className="serviceImage"
+                />
                 <h2>{service.name}</h2>
                 <p>{service.description}</p>
-                <h3>Equipment Used:</h3>
-                <ul>
+                {/* <h3>Equipment Used:</h3> */}
+                {/* <ul>
                   {service.equipment.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Equipment Section */}
-          <h1>Our Equipment</h1>
-          <p>
-            We are equipped with advanced, state-of-the-art machinery that ensures precision, efficiency, and exceptional quality in every project.
-          </p>
-          <div className="machines">
-            {machines.map((machine, index) => (
-              <div key={index} className="machine">
-                <img src={machine.src} alt={machine.name} />
-                <h3>{machine.name}</h3>
+                </ul> */}
               </div>
             ))}
           </div>
         </article>
 
-        <button onClick={() => navigate('/contact-us')} style={{ marginBottom: "80px" }}>Contact Us</button>
-        
+        {/* Contact Button */}
+        <div className="contactButtonContainer">
+          <button
+            onClick={() => navigate("/contact-us")}
+            className="contactButton"
+          >
+            Contact Us
+          </button>
+        </div>
       </div>
     </>
   );
