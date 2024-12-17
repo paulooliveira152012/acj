@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import topShape from "../assets/images/blogImages/topShape.jpg";
 import engine from "../assets/images/blogImages/engine.png";
@@ -144,6 +144,16 @@ const blogs = [
 const TipsAndAdvice = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBlog, setSelectedBlog] = useState(null);
+
+    // Scroll to top whenever selectedBlog changes
+    useEffect(() => {
+      if (selectedBlog) {
+        window.scrollTo({
+          top: 100,
+          // behavior: "smooth",
+        });
+      }
+    }, [selectedBlog]);
 
   // Filter blogs based on search query
   const filteredBlogs = blogs.filter(
