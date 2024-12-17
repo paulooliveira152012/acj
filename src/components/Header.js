@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../navigation/nav";
 import BurgerMenu from "./BurgerMenu";
 import "../styles/style.css";
@@ -9,6 +9,7 @@ import blackLogo from '../assets/images/logo_black.svg';
 const Header = ({ className }) => {
     const [isOpen, setMenuOpen] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate()
 
     // Determine which logo to use based on the current pathname
     const getLogo = () => {
@@ -40,7 +41,7 @@ const Header = ({ className }) => {
     return (
         <>
             <div className={`header ${className || ""}`}>
-                <div className="branding">
+            <div className="branding" onClick={() => navigate("/")}>
                     <img src={getLogo()} alt="Logo" />
                 </div>
                 <div className="rightSection">

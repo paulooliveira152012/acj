@@ -181,6 +181,7 @@ ul {
 
 .header .branding img {
     width: 100%;
+    cursor: pointer;
 }
 
 /* Center logo horizontally when the black logo is used */
