@@ -1782,6 +1782,24 @@ background-color: transparent;
     justify-content: space-evenly;
   }
 
+  .socialMediaContainer ul a {
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
+  }
+
+  .socialMediaContainer ul a {
+    /* color: red; */
+  }
+
+  .socialIcon {
+    /* color: green; */
+    fill: white;
+  }
+
+  
+
   @media screen and (min-width: 1200px) {
     .contactUsContainer {
         /* width: 95%; */
@@ -1833,8 +1851,6 @@ background-color: transparent;
         /* margin-bottom: 30px; */
     }
 
-    
-
     .contactForm {
         /* backfground-color: red; */
         gap: 0;
@@ -1855,6 +1871,70 @@ background-color: transparent;
         margin-bottom: 15px;
     }
 
+    .socialIcon {
+        /* color: green; */
+        fill: black;
+      }
+
+      .instagramShape {
+        fill: white
+      }
+
+      .socialMediaContainer  {
+        /* background-color: red; */
+        width: 30%;
+      }
+
   }
  
-  
+  /* 
+    by default the background color where the icons are is 
+    #731F1E, the facebookIcon should be fill white:
+    import * as React from "react";
+    const FacebookIcon = (props) => (
+    <svg
+        width={22}
+        height={22}
+        viewBox="0 0 22 22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+    >
+        <path
+        d="M21.9996 ...
+        // fill="white"
+        />
+    </svg>
+    );
+    export default FacebookIcon;
+
+    and the instagram icon should be:
+    import * as React from "react";
+const InstagramIcon = (props) => (
+  <svg
+    width={22}
+    height={22}
+    viewBox="0 0 30 30"
+    fill="currentColor" // Makes the entire SVG inherit the color from CSS
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <circle cx={15} cy={15} r={15} 
+    fill="white" 
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12.408 7.045C13.2077 ...
+      fill="black"
+    />
+  </svg>
+);
+export default InstagramIcon;
+
+notice how this icon has two fill locations, the first one should be
+originally white and the second one black. but then when the window is
+simaller the first fill should be black (the circle), and the second should be white.
+
+
+  */

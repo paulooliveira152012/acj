@@ -142,13 +142,13 @@ const ContactUs = () => {
               <div className="socialMediaContainer">
                 <ul>
                   <li>
-                    <a>
-                      <InstagramIcon />
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                      <InstagramIcon className="socialIcon instagramIcon"/>
                     </a>
                   </li>
                   <li>
-                    <a>
-                      <FacebookIcon />
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                      <FacebookIcon className="socialIcon" />
                     </a>
                   </li>
                 </ul>
