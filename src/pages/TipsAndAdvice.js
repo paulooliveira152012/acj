@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import topShape from "../assets/images/blogImages/topShape.jpg";
 import engine from "../assets/images/blogImages/engine.png";
@@ -137,13 +138,12 @@ const blogs = [
       "Understanding these codes allows you to identify and fix car issues efficiently, saving time and money while keeping your vehicle in top condition. For persistent issues, consult a professional mechanic for accurate diagnosis."
     ],
   },
-
-  
 ];
 
 const TipsAndAdvice = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const navigate = useNavigate()
 
     // Scroll to top whenever selectedBlog changes
     useEffect(() => {
@@ -225,7 +225,11 @@ const TipsAndAdvice = () => {
                   i % 2 === 1 ? <strong key={i}>{part}</strong> : part
                 );
               return <p key={index}>{formattedParagraph}</p>;
+              
             })}
+            <div className="contactButtonContainer">
+            <button onClick={()=> navigate('/contact-us')}>Contact Our Shop</button>
+            </div>
           </div>
         ) : (
           <div className="session" style={{ marginTop: "50px" }}>

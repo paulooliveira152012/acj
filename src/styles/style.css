@@ -84,8 +84,9 @@ body {
     width: 100%;
     max-width: 1500px;
     /* background-color: red; */
-    font-family: "Montserrat", sans-serif;
+    font-family: "Poppins", sans-serif;
     /* padding-top: 100px; */
+
 }
 
 .appContainer {
@@ -533,6 +534,20 @@ nav a {
         border-radius: 20px;
         text-shadow: 1px 2px 17px black;
     }
+}
+
+.intro {
+    width: 80%;
+    margin: 80px auto;
+    font-family: "Poppins", sans-serif;
+}
+
+.intro h3 {
+    font-weight: 400;
+}
+
+.intro p {
+    font-size: 15px;
 }
 
 .businessInfoContainer {
@@ -1606,6 +1621,7 @@ background-color: transparent;
     /* position: absolute; */
     justify-content: center;
     margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .contactUsContainer {
@@ -1775,7 +1791,10 @@ background-color: transparent;
     margin: 0 auto;
     border-radius: 5px;
     overflow: hidden;
+    margin-top: 100px;
   }
+
+  
 
   .socialMediaContainer ul{
     /* background-color: red; */

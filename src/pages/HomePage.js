@@ -13,9 +13,15 @@ const Home = () => {
       <Header className={"absoluteHeader"} />
       <Hero />
       {/* BusinessInfo component */}
-      <p>At <strong>ACJ Auto Repair Shop</strong> we are equiped and prepared to service your vehicle's needs in the most comprehensive ways. Located at <strong>570 Maple Ave, Elizabeth, NJ 
-      </strong> we welcome you to 
-      </p> 
+      <div className="intro">
+        <h3>Welcome to ACJ Auto Repair!</h3>
+        <p>
+          We offer comprehensive maintenance and repair services to keep your
+          vehicle in top condition, with quality and reliability. Our team is
+          ready to serve you with efficiency and dedication. Visit us at <strong> 570
+          Maple Ave, Elizabeth, NJ 07202.</strong>
+        </p>
+      </div>
       <BusinessInfo />
       <WhyChooseUs />
       <CarTypesServices />
