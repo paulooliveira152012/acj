@@ -153,12 +153,29 @@
 
 .changeButtonContainer {
   display: none; /* Hidden by default */
+  position: relative;
 }
 
 .changeButtonContainer.visible {
   display: flex; /* Display when toggled */
 }
 
+.detailInfoModal {
+  /* height: 100%; */
+  position: absolute;
+  padding: 20px;
+  background-color: black;
+  border-radius: 20px;
+  max-width: 90%;
+  
+}
+
+.detailInfoModal p {
+  color: white;
+  right: 0;
+  position: relative;
+  width: 100%;
+}
 
 
 @media screen and (max-width: 650px) {
@@ -176,7 +193,7 @@
     /* flex-direction: column; */
     flex-direction: row;
     /* position: absolute; */
-    display: none;
+    display: none !important;
   }
 
   .changeButtonContainer .editButton {

@@ -13,24 +13,58 @@ const CalendarPage = () => {
     name: "",
     phone: "",
     email: "",
-    carDetails: { make: "", model: "", year: "", licensePlate: "", details: "" },
+    carDetails: {
+      make: "",
+      model: "",
+      year: "",
+      licensePlate: "",
+      details: "",
+    },
     time: "",
-
   });
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false); // To toggle form visibility
   const [isScheduleVisible, setIsScheduleVisible] = useState(false); // To toggle schedule visibility
   const [isEditFormVisible, setIsEditFormVisible] = useState(false); //To toggle appointment edit visibility
+  const [isInfoModalVisible, setIsInfoModalVisible] = useState(false); //to display info modal for car appointment detail
   const [dailyAppointments, setDailyAppointments] = useState([]); // Appointments for the selected day
   const [isChangingDateTime, setIsChangingDateTime] = useState(false);
   const [clickedAppointmentId, setClickedAppointmentId] = useState(null);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 650);
   const appointmentDetailsRef = useRef(null);
+  const detailModalRef = useRef(null);
   // displaying passwordModal
   const [enteredPassword, setEnteredPassword] = useState("");
   const [editAppointmentId, setEditAppointmentId] = useState(null);
-  const [isAppointmentSet, setIsAppointmentSet] = useState(false) //to know when to display ? icon with info
+  const [isAppointmentSet, setIsAppointmentSet] = useState(false); //to know when to display ? icon with info
 
   const adminPassword = "12345"; // Replace with your actual password logic
+
+   // Listen for screen size changes
+   useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 650);
+
+      // Ensure buttons are always displayed on larger screens
+      if (window.innerWidth >= 650) {
+        const allButtons = document.getElementsByClassName("changeButtonContainer");
+        Array.from(allButtons).forEach((button) => {
+          button.style.display = "block";
+        });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Detect if the device supports touch (for ipad/touch devices)
+  // Utility function to detect touch devices
+  const isTouchDevice = () => {
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  };
 
   const handleOpenPasswordModal = (id) => {
     setEditAppointmentId(id); // Save the ID of the appointment being edited
@@ -175,7 +209,13 @@ const CalendarPage = () => {
       name: "",
       phone: "",
       email: "",
-      carDetails: { make: "", model: "", year: "", licensePlate: "", details: "" },
+      carDetails: {
+        make: "",
+        model: "",
+        year: "",
+        licensePlate: "",
+        details: "",
+      },
       time: "",
     });
   };
@@ -226,7 +266,13 @@ const CalendarPage = () => {
         name: "",
         phone: "",
         email: "",
-        carDetails: { make: "", model: "", year: "", licensePlate: "", details: "" },
+        carDetails: {
+          make: "",
+          model: "",
+          year: "",
+          licensePlate: "",
+          details: "",
+        },
         time: "",
       });
       setIsFormVisible(false);
@@ -247,14 +293,14 @@ const CalendarPage = () => {
   const tileClassName = ({ date }) => {
     const now = new Date();
     const dateString = date.toISOString().split("T")[0];
-  
+
     // Check if the date is in the past
     const isPastDate = date < now.setHours(0, 0, 0, 0); // Compare with today's date at midnight
-  
+
     if (isPastDate) {
       return "past-date"; // Add a CSS class for past dates
     }
-  
+
     const appointmentsForDate = appointments.filter(
       (appointment) =>
         new Date(appointment.appointment.date).toISOString().split("T")[0] ===
@@ -265,13 +311,12 @@ const CalendarPage = () => {
     );
     const allTimes = generateTimeSlots(8, 17);
     const freeTimesCount = allTimes.length - takenTimes.length;
-  
+
     if (freeTimesCount === 0) {
       return "fully-booked-date"; // Apply red background for fully booked dates
     }
     return appointmentsForDate.length > 0 ? "highlighted-date" : null; // Highlight if there are appointments
   };
-  
 
   const tileContent = ({ date }) => {
     const dateString = date.toISOString().split("T")[0];
@@ -364,14 +409,34 @@ const CalendarPage = () => {
     }
   };
 
-  const displayButtons = () => {
-    console.log("displaying button");
-  };
-
+  
   const toggleAppointmentDetails = (id, ref) => {
-    setClickedAppointmentId((prevId) => (prevId === id ? null : id));
-    appointmentDetailsRef.current = ref;
+    // Check if screen size is less than 650px
+    if (window.innerWidth < 650) {
+      setClickedAppointmentId((prevId) => (prevId === id ? null : id));
+  
+      console.log("Displaying buttons on smaller screens");
+  
+      // Find the `.changeButtonContainer` inside the clicked `.appointment-details`
+      const buttons = ref.querySelector(".changeButtonContainer");
+  
+      if (buttons) {
+        // Toggle the display property of the buttons using setProperty for !important
+        const currentDisplay = window.getComputedStyle(buttons).display;
+  
+        if (currentDisplay === "block") {
+          buttons.style.setProperty("display", "none", "important"); // Hide buttons
+        } else {
+          buttons.style.setProperty("display", "block", "important"); // Show buttons
+        }
+      }
+    } else {
+      console.log("Screen size is larger than 650px; no toggling applied.");
+    }
   };
+  
+  
+  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -389,6 +454,40 @@ const CalendarPage = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  //  ? info icon
+  // Toggle modal visibility
+  const showModal = () => {
+    console.log("Show modal");
+    setIsInfoModalVisible(true); // Show the modal
+  };
+
+  const hideModal = () => {
+    console.log("Hide modal");
+    setIsInfoModalVisible(false); // Hide the modal
+  };
+
+  // Handle click outside the modal to close it (on touch devices)
+  const handleOutsideClick = (e) => {
+    if (detailModalRef.current && !detailModalRef.current.contains(e.target)) {
+      hideModal();
+    }
+  };
+
+  useEffect(() => {
+    if (isTouchDevice() && isInfoModalVisible) {
+      document.addEventListener("click", handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [isInfoModalVisible]);
+
+  const handleDisplayDetails = () => {
+    console.log("before toggling:", isInfoModalVisible);
+    setIsInfoModalVisible((prev) => !prev);
+    console.log("After togling:", !isInfoModalVisible);
+  };
 
   return (
     <div className="calendar-page">
@@ -500,13 +599,7 @@ const CalendarPage = () => {
                         </div>
 
                         {/* Buttons */}
-                        <div
-                          className={`changeButtonContainer ${
-                            clickedAppointmentId === appointment._id
-                              ? "visible"
-                              : ""
-                          }`}
-                        >
+                        <div className="changeButtonContainer">
                           <button
                             onClick={() =>
                               handleOpenPasswordModal(appointment._id)
@@ -521,10 +614,23 @@ const CalendarPage = () => {
                           >
                             Cancel
                           </button>
+
                           <button
+                            onMouseEnter={!isTouchDevice() ? showModal : null} // Show modal on hover (desktop)
+                            onMouseLeave={!isTouchDevice() ? hideModal : null} // Hide modal when no longer hovering (desktop)
+                            onClick={handleDisplayDetails} // Toggle modal on tap (touch devices)
                           >
                             ?
                           </button>
+
+                          {isInfoModalVisible && (
+                            <div className="detailInfoModal">
+                              {/* <p>{appointment.carDetails.details}</p> */}
+                              <div >
+                              <p>Troca de oleo Troca de oleo  Troca de oleo Troca de oleo Troca de oleo Troca de oleo Troca de oleo </p>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     )}
@@ -829,22 +935,21 @@ const CalendarPage = () => {
                   (appt) => appt.appointment.time === time
                 );
 
-                          // Parse time slot into a full Date object for comparison
-          const now = new Date();
-          const selectedDate = formData.appointment?.date || new Date();
-          const slotDateTime = new Date(selectedDate);
-          const [hours, minutes] = time.split(":").map(Number);
-          slotDateTime.setHours(hours, minutes, 0, 0);
+                // Parse time slot into a full Date object for comparison
+                const now = new Date();
+                const selectedDate = formData.appointment?.date || new Date();
+                const slotDateTime = new Date(selectedDate);
+                const [hours, minutes] = time.split(":").map(Number);
+                slotDateTime.setHours(hours, minutes, 0, 0);
 
-          // Determine if the slot is in the past
-          const isPastSlot = slotDateTime < now;
-
+                // Determine if the slot is in the past
+                const isPastSlot = slotDateTime < now;
 
                 return (
                   <button
                     key={time}
                     className={`time-slot ${
-                       isTaken ? "taken-slot" : isPastSlot ? "disabled-slot" : ""
+                      isTaken ? "taken-slot" : isPastSlot ? "disabled-slot" : ""
                     }`}
                     onClick={(e) => {
                       e.preventDefault();
