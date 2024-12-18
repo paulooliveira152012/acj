@@ -18,6 +18,7 @@ const costumerSchema = new mongoose.Schema({
         model: { type: String, required: true }, // e.g., "Corolla"
         year: { type: Number, required: true }, // e.g., 2018
         licensePlate: { type: String, required: true },
+        description: {type: String, required: true}
     },
     appointment: {
         date: { type: Date, required: true }, // Date and time of the appointment

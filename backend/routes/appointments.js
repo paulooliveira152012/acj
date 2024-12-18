@@ -6,10 +6,9 @@ const Client = require('../schemas/Costumer'); // Import User model (correct nam
 router.post('/newAppointment', async (req, res) => {
     console.group("route to add appointment reached")
     
-
     try {
-        const { name, phone, email, carDetails, appointment } = req.body;
-        console.log(name, phone, email, carDetails, appointment)
+        const { name, phone, email, carDetails, appointment, description } = req.body;
+        console.log(name, phone, email, carDetails, appointment, description)
 
         console.log("Received appointment:", appointment);
 
@@ -29,6 +28,7 @@ router.post('/newAppointment', async (req, res) => {
         const savedNewAppointment = await newAppointment.save();
         res.status(201).json(savedNewAppointment);
     } catch (err) {
+      console.log("ocorreu um erro", err)
         res.status(500).json({ error: err.message });
     }
 });

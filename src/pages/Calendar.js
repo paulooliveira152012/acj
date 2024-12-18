@@ -26,6 +26,7 @@ const CalendarPage = () => {
   const [isFormVisible, setIsFormVisible] = useState(false); // To toggle form visibility
   const [isScheduleVisible, setIsScheduleVisible] = useState(false); // To toggle schedule visibility
   const [isEditFormVisible, setIsEditFormVisible] = useState(false); //To toggle appointment edit visibility
+  
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false); //to display info modal for car appointment detail
   const [dailyAppointments, setDailyAppointments] = useState([]); // Appointments for the selected day
   const [isChangingDateTime, setIsChangingDateTime] = useState(false);
@@ -625,9 +626,9 @@ const CalendarPage = () => {
 
                           {isInfoModalVisible && (
                             <div className="detailInfoModal">
-                              {/* <p>{appointment.carDetails.details}</p> */}
                               <div >
-                              <p>Troca de oleo Troca de oleo  Troca de oleo Troca de oleo Troca de oleo Troca de oleo Troca de oleo </p>
+                              <p>{appointment.carDetails.description}</p>
+                              {/* <p>Troca de oleo Troca de oleo  Troca de oleo Troca de oleo Troca de oleo Troca de oleo Troca de oleo </p> */}
                               </div>
                             </div>
                           )}
@@ -754,6 +755,17 @@ const CalendarPage = () => {
                     required
                   />
                 </div>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="carDetails.description"
+                  value={formData.descrition}
+                  onChange={handleChange}
+                  placeholder="Enter a brief description"
+                  required
+                >
+                </input>
               </div>
               <button type="submit">save appointment</button>
             </form>
