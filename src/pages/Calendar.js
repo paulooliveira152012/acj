@@ -13,8 +13,9 @@ const CalendarPage = () => {
     name: "",
     phone: "",
     email: "",
-    carDetails: { make: "", model: "", year: "", licensePlate: "" },
+    carDetails: { make: "", model: "", year: "", licensePlate: "", details: "" },
     time: "",
+
   });
   const [isPasswordModalVisible, setIsPasswordModalVisible] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false); // To toggle form visibility
@@ -27,6 +28,7 @@ const CalendarPage = () => {
   // displaying passwordModal
   const [enteredPassword, setEnteredPassword] = useState("");
   const [editAppointmentId, setEditAppointmentId] = useState(null);
+  const [isAppointmentSet, setIsAppointmentSet] = useState(false) //to know when to display ? icon with info
 
   const adminPassword = "12345"; // Replace with your actual password logic
 
@@ -59,6 +61,7 @@ const CalendarPage = () => {
         email: appointmentToEdit.email,
         carDetails: appointmentToEdit.carDetails,
         time: appointmentToEdit.appointment.time,
+        details: appointmentToEdit.appointment.deetails,
         appointment: {
           date: new Date(appointmentToEdit.appointment.date),
         },
@@ -172,7 +175,7 @@ const CalendarPage = () => {
       name: "",
       phone: "",
       email: "",
-      carDetails: { make: "", model: "", year: "", licensePlate: "" },
+      carDetails: { make: "", model: "", year: "", licensePlate: "", details: "" },
       time: "",
     });
   };
@@ -223,7 +226,7 @@ const CalendarPage = () => {
         name: "",
         phone: "",
         email: "",
-        carDetails: { make: "", model: "", year: "", licensePlate: "" },
+        carDetails: { make: "", model: "", year: "", licensePlate: "", details: "" },
         time: "",
       });
       setIsFormVisible(false);
@@ -311,6 +314,7 @@ const CalendarPage = () => {
           model: appointmentToEdit.carDetails.model,
           year: appointmentToEdit.carDetails.year,
           licensePlate: appointmentToEdit.carDetails.licensePlate,
+          details: appointmentToEdit.carDetails.details,
         },
         time: appointmentToEdit.appointment.time,
         appointment: {
@@ -516,6 +520,10 @@ const CalendarPage = () => {
                             className="cancelButton"
                           >
                             Cancel
+                          </button>
+                          <button
+                          >
+                            ?
                           </button>
                         </div>
                       </div>
