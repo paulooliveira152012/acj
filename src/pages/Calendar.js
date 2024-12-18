@@ -26,12 +26,14 @@ const CalendarPage = () => {
   const [isFormVisible, setIsFormVisible] = useState(false); // To toggle form visibility
   const [isScheduleVisible, setIsScheduleVisible] = useState(false); // To toggle schedule visibility
   const [isEditFormVisible, setIsEditFormVisible] = useState(false); //To toggle appointment edit visibility
-  
+
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false); //to display info modal for car appointment detail
   const [dailyAppointments, setDailyAppointments] = useState([]); // Appointments for the selected day
   const [isChangingDateTime, setIsChangingDateTime] = useState(false);
   const [clickedAppointmentId, setClickedAppointmentId] = useState(null);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 650);
+  const [hoveredAppointmentId, setHoveredAppointmentId] = useState(null); //track whcih appointment is being hovered
+
   const appointmentDetailsRef = useRef(null);
   const detailModalRef = useRef(null);
   // displaying passwordModal
@@ -41,14 +43,16 @@ const CalendarPage = () => {
 
   const adminPassword = "12345"; // Replace with your actual password logic
 
-   // Listen for screen size changes
-   useEffect(() => {
+  // Listen for screen size changes
+  useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 650);
 
       // Ensure buttons are always displayed on larger screens
       if (window.innerWidth >= 650) {
-        const allButtons = document.getElementsByClassName("changeButtonContainer");
+        const allButtons = document.getElementsByClassName(
+          "changeButtonContainer"
+        );
         Array.from(allButtons).forEach((button) => {
           button.style.display = "block";
         });
@@ -410,21 +414,20 @@ const CalendarPage = () => {
     }
   };
 
-  
   const toggleAppointmentDetails = (id, ref) => {
     // Check if screen size is less than 650px
     if (window.innerWidth < 650) {
       setClickedAppointmentId((prevId) => (prevId === id ? null : id));
-  
+
       console.log("Displaying buttons on smaller screens");
-  
+
       // Find the `.changeButtonContainer` inside the clicked `.appointment-details`
       const buttons = ref.querySelector(".changeButtonContainer");
-  
+
       if (buttons) {
         // Toggle the display property of the buttons using setProperty for !important
         const currentDisplay = window.getComputedStyle(buttons).display;
-  
+
         if (currentDisplay === "block") {
           buttons.style.setProperty("display", "none", "important"); // Hide buttons
         } else {
@@ -435,9 +438,6 @@ const CalendarPage = () => {
       console.log("Screen size is larger than 650px; no toggling applied.");
     }
   };
-  
-  
-  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -483,6 +483,15 @@ const CalendarPage = () => {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, [isInfoModalVisible]);
+
+  // hover handlers based on id
+  const handleMouseEnter = (id) => {
+    setHoveredAppointmentId(id); // Set the hovered appointment's ID
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredAppointmentId(null); // Clear the hovered appointment's ID
+  };
 
   const handleDisplayDetails = () => {
     console.log("before toggling:", isInfoModalVisible);
@@ -617,18 +626,19 @@ const CalendarPage = () => {
                           </button>
 
                           <button
-                            onMouseEnter={!isTouchDevice() ? showModal : null} // Show modal on hover (desktop)
-                            onMouseLeave={!isTouchDevice() ? hideModal : null} // Hide modal when no longer hovering (desktop)
-                            onClick={handleDisplayDetails} // Toggle modal on tap (touch devices)
+                            onMouseEnter={() =>
+                              handleMouseEnter(appointment._id)
+                            } // Show details for the hovered appointment
+                            onMouseLeave={handleMouseLeave} // Hide details when leaving the hover
                           >
                             ?
                           </button>
 
-                          {isInfoModalVisible && (
+                          {/* Only show the modal for the hovered appointment */}
+                          {hoveredAppointmentId === appointment._id && (
                             <div className="detailInfoModal">
-                              <div >
-                              <p>{appointment.carDetails.description}</p>
-                              {/* <p>Troca de oleo Troca de oleo  Troca de oleo Troca de oleo Troca de oleo Troca de oleo Troca de oleo </p> */}
+                              <div>
+                                <p>{appointment.carDetails.description}</p>
                               </div>
                             </div>
                           )}
@@ -764,8 +774,7 @@ const CalendarPage = () => {
                   onChange={handleChange}
                   placeholder="Enter a brief description"
                   required
-                >
-                </input>
+                ></input>
               </div>
               <button type="submit">save appointment</button>
             </form>
