@@ -16,5 +16,7 @@ trocar a foto
 inserir informacoes reais
     //Our Services
 Atualizar texto
-atualizar fotos das maquinas (lista do giovani)
+atualizar fotos das maquinas (lista do giovani) ✅
 Contact Us btn --> negrito e color white quando hover ✅
+    //Calendario
+inserir campo para anotações do motivo do apontamento
