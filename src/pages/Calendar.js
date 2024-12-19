@@ -233,10 +233,10 @@ const CalendarPage = () => {
   };
 
   const handleSubmit = async (id, e) => {
-      // Prevent the form from reloading the page
-  if (e) {
-    e.preventDefault();
-  }
+      // Prevent the form from reloading the page temporarely for debugging
+  // if (e) {
+  //   e.preventDefault();
+  // }
     
     console.log("Submitting form with ID:", id);
 
