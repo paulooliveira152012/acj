@@ -1,17 +1,5 @@
-const cron = require("node-cron");
 const nodemailer = require("nodemailer");
-const mongoose = require("mongoose");
-const Appointment = require("../schemas/Costumer"); // Your Mongoose model
 require("dotenv").config();
-
-// Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("Connected to MongoDB emailSender"))
-  .catch((err) => {
-    console.error("Error connecting to MongoDB:", err);
-    process.exit(1); // Exit if connection fails
-  });
 
 // Business details
 const BUSINESS_DETAILS = {
@@ -24,87 +12,136 @@ const BUSINESS_DETAILS = {
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: "acjautoshop@gmail.com", // Your email
-    pass: "cysb pajc qpuh xroj", // Your app-specific password
+    user: process.env.COMPANY_EMAIL, // Your email
+    pass: process.env.COMPANY_EMAIL_PASSWORD, // Your app-specific password
   },
 });
 
-console.log("Setting up cron jobs...");
+/**
+ * Sends a confirmation email for a new appointment.
+ * @param {Object} appointmentDetails - Appointment details.
+ * @param {string} appointmentDetails.name - Client's name.
+ * @param {string} appointmentDetails.email - Client's email.
+ * @param {Date} appointmentDetails.date - Appointment date.
+ * @param {string} appointmentDetails.time - Appointment time.
+ */
+const sendAppointmentConfirmationEmail = async (appointmentDetails) => {
+  const { name, email, appointment } = appointmentDetails;
+  const { date, time } = appointment;
 
-// Cron job to run every day at 7:50 PM
-cron.schedule("08 20 * * *", async () => {
-  console.log("Running email reminder job at 7:50 PM...");
+  const mailOptions = {
+    from: `${BUSINESS_DETAILS.name} <${process.env.COMPANY_EMAIL}>`,
+    to: email,
+    subject: "Appointment Confirmation: Car Drop-Off",
+    html: `
+      <h1>Appointment Confirmation</h1>
+      <p>Dear ${name},</p>
+      <p>Thank you for scheduling your appointment with <strong>${BUSINESS_DETAILS.name}</strong>.</p>
+      <p><strong>Details:</strong></p>
+      <ul>
+        <li>Date: ${new Date(date).toLocaleDateString()}</li>
+        <li>Time: ${time}</li>
+        <li>Address: ${BUSINESS_DETAILS.address}</li>
+        <li>Phone: ${BUSINESS_DETAILS.phone}</li>
+      </ul>
+      <p>We look forward to serving you!</p>
+      <p>If you have any questions, feel free to contact us.</p>
+    `,
+  };
 
   try {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0); // Start of the day
-
-    const dayAfterTomorrow = new Date(tomorrow);
-    dayAfterTomorrow.setDate(tomorrow.getDate() + 1);
-
-
-    // Query customers collection for appointments scheduled for tomorrow
-    console.log(
-      `Searching for appointments between: ${tomorrow} and ${dayAfterTomorrow}`
-    );
-    const appointments = await Appointment.find({
-      "appointment.date": {
-        $gte: tomorrow, // Greater than or equal to the start of tomorrow
-        $lt: dayAfterTomorrow, // Less than the start of the day after tomorrow
-      },
-    });
-
-    console.log("Inspecting appointments:", appointments);
-    appointments.forEach((appt) => {
-      console.log(`Name: ${appt.name}, Email: ${appt.email}`);
-    });
-
-    console.log("Appointments found:", appointments);
-
-    if (appointments.length === 0) {
-      console.log("No appointments scheduled for tomorrow.");
-      return;
-    }
-
-    // Send reminder emails
-    for (const appt of appointments) {
-      try {
-        const mailOptions = {
-          from: `${BUSINESS_DETAILS.name} <acjautoshop@gmail.com>`,
-          to: appt.email, // Client's email
-          subject: "Appointment Reminder: Car Drop-Off",
-          html: `
-            <h1>Reminder: Car Drop-Off Appointment</h1>
-            <p>Dear ${appt.name},</p>
-            <p>This is a reminder of your appointment with us at <strong>${BUSINESS_DETAILS.name}</strong>.</p>
-            <p><strong>Details:</strong></p>
-            <ul>
-              <li>Date: ${new Date(appt.appointment.date).toLocaleDateString()}</li>
-              <li>Time: ${appt.appointment.time}</li>
-              <li>Address: ${BUSINESS_DETAILS.address}</li>
-              <li>Phone: ${BUSINESS_DETAILS.phone}</li>
-            </ul>
-            <p>Please don't hesitate to contact us if you have any questions.</p>
-            <p>We look forward to serving you!</p>
-          `,
-        };
-
-        // Send email
-        await transporter.sendMail(mailOptions);
-        console.log(`Reminder email sent to ${appt.email}`);
-      } catch (emailError) {
-        console.error(`Error sending email to ${appt.email}:`, emailError);
-      }
-    }
+    await transporter.sendMail(mailOptions);
+    console.log(`Confirmation email sent to ${email}`);
   } catch (error) {
-    console.error("Error during the email reminder job:", error);
+    console.error(`Error sending confirmation email to ${email}:`, error);
+    throw new Error("Failed to send confirmation email.");
   }
-});
+};
 
-// Ensure MongoDB connection closes properly on app termination
-process.on("SIGINT", async () => {
-  await mongoose.connection.close();
-  console.log("MongoDB connection closed due to app termination.");
-  process.exit(0);
-});
+/**
+ * Sends a reminder email for an existing appointment.
+ * @param {Object} appointmentDetails - Appointment details.
+ * @param {string} appointmentDetails.name - Client's name.
+ * @param {string} appointmentDetails.email - Client's email.
+ * @param {Date} appointmentDetails.date - Appointment date.
+ * @param {string} appointmentDetails.time - Appointment time.
+ */
+const sendAppointmentReminderEmail = async ({ name, email, date, time }) => {
+  const mailOptions = {
+    from: `${BUSINESS_DETAILS.name} <${process.env.EMAIL_USER}>`,
+    to: email,
+    subject: "Appointment Reminder: Car Drop-Off",
+    html: `
+      <h1>Reminder: Car Drop-Off Appointment</h1>
+      <p>Dear ${name},</p>
+      <p>This is a reminder of your appointment with us at <strong>${BUSINESS_DETAILS.name}</strong>.</p>
+      <p><strong>Details:</strong></p>
+      <ul>
+        <li>Date: ${new Date(date).toLocaleDateString()}</li>
+        <li>Time: ${time}</li>
+        <li>Address: ${BUSINESS_DETAILS.address}</li>
+        <li>Phone: ${BUSINESS_DETAILS.phone}</li>
+      </ul>
+      <p>Please don't hesitate to contact us if you have any questions.</p>
+      <p>We look forward to serving you!</p>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`Reminder email sent to ${email}`);
+  } catch (error) {
+    console.error(`Error sending reminder email to ${email}:`, error);
+    throw new Error("Failed to send reminder email.");
+  }
+};
+
+
+
+/**
+ * Sends a notification email with the appointment details to the company.
+ * @param {Object} appointmentDetails - Appointment details.
+ */
+const sendFormSubmissionToCompany = async (appointmentDetails) => {
+  const companyEmail = process.env.COMPANY_EMAIL || "acjautoshop@gmail.com";
+
+  const mailOptions = {
+    from: `${BUSINESS_DETAILS.name} <${process.env.COMPANY_EMAIL}>`,
+    to: companyEmail,
+    subject: "New Appointment Submission",
+    html: `
+      <h1>New Appointment Submission</h1>
+      <p><strong>Name:</strong> ${appointmentDetails.name}</p>
+      <p><strong>Phone:</strong> ${appointmentDetails.phone}</p>
+      <p><strong>Email:</strong> ${appointmentDetails.email}</p>
+      <p><strong>Car Details:</strong></p>
+      <ul>
+        <li>Make: ${appointmentDetails.carDetails.make}</li>
+        <li>Model: ${appointmentDetails.carDetails.model}</li>
+        <li>Year: ${appointmentDetails.carDetails.year}</li>
+        <li>License Plate: ${appointmentDetails.carDetails.licensePlate}</li>
+      </ul>
+      <p><strong>Appointment Details:</strong></p>
+      <ul>
+        <li>Date: ${new Date(appointmentDetails.appointment.date).toLocaleDateString()}</li>
+        <li>Time: ${appointmentDetails.appointment.time}</li>
+        <li>Service: ${appointmentDetails.appointment.service}</li>
+      </ul>
+      <p><strong>Description:</strong> ${appointmentDetails.carDetails.description || "N/A"}</p>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`Appointment submission sent to company email: ${companyEmail}`);
+  } catch (error) {
+    console.error(`Error sending form submission to company email:`, error);
+    throw new Error("Failed to send appointment details to the company.");
+  }
+};
+
+module.exports = {
+  sendAppointmentConfirmationEmail,
+  sendAppointmentReminderEmail,
+  sendFormSubmissionToCompany,
+};

@@ -232,7 +232,12 @@ const CalendarPage = () => {
     setIsPasswordModalVisible(false);
   };
 
-  const handleSubmit = async (id) => {
+  const handleSubmit = async (id, e) => {
+      // Prevent the form from reloading the page
+  if (e) {
+    e.preventDefault();
+  }
+    
     console.log("Submitting form with ID:", id);
 
     try {
@@ -244,6 +249,8 @@ const CalendarPage = () => {
           service: "Car Drop-Off",
         },
       };
+
+      console.log("data:", data)
 
       if (isEditFormVisible) {
         console.log("Editing appointment with ID:", id);
@@ -686,7 +693,7 @@ const CalendarPage = () => {
               X
             </span>
             <h2>Enter Your Information</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => handleSubmit(formData.id, e)}>
               <div>
                 <h3>Personal info</h3>
                 <input

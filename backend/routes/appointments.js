@@ -1,36 +1,46 @@
 const express = require('express');
 const router = express.Router();
 const Client = require('../schemas/Costumer'); // Import User model (correct name)
+const { sendAppointmentConfirmationEmail, sendFormSubmissionToCompany } = require("../emailSender/emailSender"); // Import the email logic
+
 
 // Add a new appointment
-router.post('/newAppointment', async (req, res) => {
-    console.group("route to add appointment reached")
-    
-    try {
-        const { name, phone, email, carDetails, appointment, description } = req.body;
-        console.log(name, phone, email, carDetails, appointment, description)
+// Add a new appointment
+router.post("/newAppointment", async (req, res) => {
+  console.group("Route to add appointment reached");
 
-        console.log("Received appointment:", appointment);
+  try {
+    const { name, phone, email, carDetails, appointment } = req.body;
+    console.log(name, phone, email, carDetails, appointment);
 
-        // Validate required fields
-        if (!name || !phone || !carDetails || !appointment) {
-            return res.status(400).json({ message: 'All required fields must be filled' });
-        }
+    console.log("Received appointment:", appointment);
 
-        const newAppointment = new Client({
-            name,
-            phone,
-            email,
-            carDetails,
-            appointment,
-        });
-
-        const savedNewAppointment = await newAppointment.save();
-        res.status(201).json(savedNewAppointment);
-    } catch (err) {
-      console.log("ocorreu um erro", err)
-        res.status(500).json({ error: err.message });
+    // Validate required fields
+    if (!name || !phone || !carDetails || !appointment) {
+      return res.status(400).json({ message: "All required fields must be filled" });
     }
+
+    const newAppointment = new Client({
+      name,
+      phone,
+      email,
+      carDetails,
+      appointment,
+    });
+
+    const savedNewAppointment = await newAppointment.save();
+
+ // Send confirmation email to the user
+ await sendAppointmentConfirmationEmail(savedNewAppointment);
+    
+ // Send form submission email to the company
+ await sendFormSubmissionToCompany(savedNewAppointment);
+
+    res.status(201).json(savedNewAppointment);
+  } catch (err) {
+    console.error("Error adding appointment:", err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Edit an existing appointment
