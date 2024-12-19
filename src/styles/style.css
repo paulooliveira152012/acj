@@ -1070,10 +1070,6 @@ a {
 
 /* login page */
 
-html {
-    
-}
-
 .admLoginPage {
     flex: 1;
     background-image: url('../assets//images/login.png');
@@ -1101,11 +1097,15 @@ html {
 }
 
 .admLoginPage .session .shaddow div {
-
 display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.admLoginPage .session .shaddow div img {
+    width: 30%;
+    margin: 20px auto;
 }
 
 .shaddow div p {

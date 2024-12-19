@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/style.css";
 import axios from "axios";
+import Logo from "../assets/images/logo_white.svg"
 
 const AdmLogin = () => {
   const [username, setUsername] = useState("");
@@ -52,7 +53,7 @@ const AdmLogin = () => {
             <div>
               <p>Page designated to staff members</p>
               <form className="loginForm" onSubmit={handleLogin}>
-                <p>siteLogo</p>
+                <img src={Logo}></img>
                 <input
                   id="username"
                   placeholder="Username"
