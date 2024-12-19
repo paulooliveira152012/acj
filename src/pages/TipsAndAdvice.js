@@ -243,6 +243,7 @@ const TipsAndAdvice = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
+            {/* here */}
             <div className="blogContainer">
               {filteredBlogs.length > 0 ? (
                 filteredBlogs.map((blog, index) => (
