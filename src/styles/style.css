@@ -931,6 +931,18 @@ a {
     justify-content: space-around;
 }
 
+.footer .socialMediaIconContainer {
+    /* background-color: red; */
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer .socialIconFooter {
+    fill: white;
+    cursor: pointer;
+}
+
 .footerContent div {
     width: auto;
     min-height: 150px;
@@ -1038,6 +1050,22 @@ a {
     .footerContent ul {
         align-items: center;
     }
+
+    .footer .socialMediaIconContainer {
+        /* background-color: purple; */
+        width: 30% !important; 
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;        
+    }
+
+    .footer .socialMediaIconContainer  {
+        /* background-color: green; */
+        scale: 1.5;
+        /* fill: black */
+    }
+
+    
 }
 
 /* login page */
@@ -1908,7 +1936,10 @@ background-color: transparent;
         /* background-color: red; */
         width: 30%;
       }
-
+      
+      .footer .instagramShape {
+        fill: black !important;
+    }
   }
  
   /* 

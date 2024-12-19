@@ -4,6 +4,8 @@ import PhoneIcon from "../assets/icons/footer/phone";
 import EnvelopIcon from "../assets/icons/footer/envelop";
 import LocationIcon from "../assets/icons/footer/location";
 import whiteLogo from "../assets/images/logo_white.svg";
+import FacebookIcon from "../assets/images/icons/facebook";
+import InstagramIcon from "../assets/images/icons/instagram";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,6 +16,23 @@ const Footer = () => {
       {/* section1 */}
       <div className="logoContainer">
         <img src={whiteLogo} alt="White Logo" />
+      </div>
+
+      <div className="socialMediaIconContainer">
+        <a
+          href="https://www.instagram.com/autorepairacj?igsh=NTBkNzlrYWxvcmto"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <InstagramIcon className="socialIconFooter instagramFooterIcon" />
+        </a>
+        <a
+          href="https://www.facebook.com/p/ACJ-Auto-Repair-61570440825296/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FacebookIcon className="socialIconFooter" />
+        </a>
       </div>
 
       {/* display flex para 4 divs */}
