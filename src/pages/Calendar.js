@@ -112,15 +112,24 @@ const CalendarPage = () => {
     }
   };
 
-  // Function to generate time slots between 8 AM and 5 PM
   const generateTimeSlots = (startHour, endHour) => {
     const times = [];
     for (let hour = startHour; hour <= endHour; hour++) {
-      const time = `${hour.toString().padStart(2, "0")}:00`;
-      times.push(time);
+      const period = hour < 12 ? "AM" : "PM";
+      const formattedHour = hour % 12 === 0 ? 12 : hour % 12; // Convert to 12-hour format
+      const baseTime = `${formattedHour}:00 ${period}`;
+      
+  
+      // Push aligned times (pad to a consistent length, e.g., 8 characters)
+      times.push(baseTime.padStart(8, " "));
     }
     return times;
   };
+  
+  // Example Usage
+  const timeSlots = generateTimeSlots(8, 17); // From 8:00 AM to 5:00 PM
+  console.log(timeSlots.join("\n")); // Print them aligned
+  
 
   // Fetch all appointments when the component mounts
   useEffect(() => {
