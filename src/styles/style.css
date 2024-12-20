@@ -1348,7 +1348,7 @@ cursor: pointer;
 
 
 .contentContainer .teamPicture {
-    background-image: url('../assets/images/teamPlaceholder.jpg');
+    background-image: url('../assets/images/aboutUsImage.png');
     height: 50vh;
     width: 100%;
     margin: auto;
@@ -1357,6 +1357,7 @@ cursor: pointer;
     background-position: calc(50% + 20px) 50%;
     position: relative;
     overflow: hidden;
+    background-repeat: no-repeat;
 }
 
 .contentContainer .teamPicture::before {
