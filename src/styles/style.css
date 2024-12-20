@@ -639,6 +639,9 @@ nav a {
     box-sizing: border-box; /* Include padding in width calculations */
     margin: 20px 0px;
     margin-bottom: 60px;
+    width: 100%;
+    /* background-color: red; */
+    text-align: center;
   }
 
   @media screen and (max-width:500px ) {
@@ -680,7 +683,7 @@ nav a {
 
   @media screen and (min-width: 1000px ) {
     .businessInfoContainer .allServicesList {
-        /* display: grid; */
+        display: grid;
         grid-template-columns: repeat(3, minmax(200px, 1fr)); /* Two columns with responsive widths */
         gap: 5px; /* Add space between rows and columns */
         justify-content: center; /* Center the grid within the container */
