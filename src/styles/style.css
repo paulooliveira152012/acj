@@ -553,24 +553,15 @@ nav a {
 .businessInfoContainer {
     height: auto;
     width: 100%;
-    /* padding: 50px; */
     box-sizing: border-box; /* Ensure padding is included in width/height */
-    /* background-color: blue; */
     overflow: hidden;
-}
-
-.businessInfoContainer .titleParentContainer {
-    /* background-color: blue; */
 }
 
 
 .businessInfoContainer .titleContainer {
     display: flex;
-    /* background-color: green; */
     height: 20%;
     align-items: center;
-    /* margin: 20px; */
-    /* margin-bottom: 20px; */
 }
 
 .businessInfoContainer .servicesContainer {
@@ -578,8 +569,6 @@ nav a {
     overflow-x: auto;   
     justify-content: space-around;
     gap: 50px;
-    /* margin: 20px 20px; */
-    /* background-color: green; */
     margin-top: 20px;
 }
 
@@ -613,10 +602,6 @@ nav a {
     margin-right: 10px;
 }
 
-.businessInfoContainer h2 {
-    /* color: white; */
-}
-
 .h2Underline {
     width: 100%;
     height: 1px;
@@ -626,7 +611,6 @@ nav a {
 }
 
 .businessInfoContainer .allServicesList {
-    /* background-color: green; */
     display: grid;
     grid-template-columns: repeat(2, minmax(200px, 1fr)); /* Two columns with responsive widths */
     gap: 5px; /* Add space between rows and columns */
@@ -635,12 +619,10 @@ nav a {
     width: 80%; /* Reduce width for better centering */
     margin: auto; /* Center the grid horizontally on the screen */
     text-align: justify; /* Justify text within each column */
-    /* padding-left: 10px; */
     box-sizing: border-box; /* Include padding in width calculations */
     margin: 20px 0px;
     margin-bottom: 60px;
     width: 100%;
-    /* background-color: red; */
     text-align: center;
   }
 
@@ -648,11 +630,9 @@ nav a {
     .businessInfoContainer .servicesContainer {
         display: flex;
         flex-direction: column;
-        /* overflow-x: auto;    */
         justify-content: space-around;
         gap: 50px;
         margin-top: 20px;
-        /* background-color: blue; */
         width: auto;
     };
 
@@ -661,18 +641,14 @@ nav a {
     }
 
     .businessInfoContainer .allServicesList {
-        /* background-color: green; */
         display: block;
       }
   }
 
   @media screen and (max-width:680px) {
     .businessInfoContainer .allServicesList {
-        /* background-color: blue; */
         grid-template-columns: repeat(2, minmax(200px, 1fr)); /* Two columns with responsive widths */
-        /* margin: 0; */
         padding: 0;
-        /* list-style: none; */
         width: 100%;
         padding: 60px;
         text-align: left;
@@ -698,15 +674,7 @@ nav a {
 
 
   }
-  
 
-
-/* .businessInfoContainer div {
-    width: calc(100% / 3);
-    height: 50vh;
-    background-color: #F3F3F3;
-    margin: 1px;
-} */
 
 @media screen and (max-width: 850px){
     .businessInfoContainer {
@@ -715,21 +683,10 @@ nav a {
     }
 
     .servicesContainer .container {
-        /* background-color: green; */
         height: 300px;
         aspect-ratio: 1;
     }
 
-    /* .businessInfoContainer div {
-        width: 100%;
-        height: 50vh;
-        background-color: #F3F3F3;
-        margin: 1px;
-    }  */
-
-    /* .businessInfoContainer h2 {
-        font-size:large;
-    } */
 
     .ifen {
         display: none;
@@ -737,21 +694,15 @@ nav a {
 }
 
 .WhyChooseUsContainer {
-    /* height: 50vh; */
     width: 100%;
-    /* background: radial-gradient(ellipse, rgba(52, 11, 13, 0.804) 40%, rgba(12, 12, 12, 0) 70%); */
-    /* color: white; */
-    /* padding: 20px 0; */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: red; */
 }
 
 .WhyChooseUsContainer {
     margin-top: 60px;
     padding-top: 0;
-    /* background-color: red; */
 }
 
 .WhyChooseUsContainer .whyListComponent .why {
@@ -766,7 +717,6 @@ nav a {
 .WhyChooseUsContainer .whyListComponent .why div {
     display: flex;
     align-items: center;
-    
 }
 
 .WhyChooseUsContainer .whyListComponent .why div p {
@@ -786,7 +736,6 @@ nav a {
     cursor: pointer;
     font-weight: bold;
 }
-
 
 
 .WhyChooseUsContainer button:hover {
@@ -833,8 +782,6 @@ nav a {
 
 }
 
-
-
 /* testemonials */
 /* Testimonials Container */
 .testemonialsContainer {
@@ -847,7 +794,6 @@ nav a {
     color: white;
     box-sizing: border-box;
     overflow: hidden; /* Prevent horizontal overflow from parent container */
-    /* background-color: pink; */
 }
 
 /* Testimonials Wrapper */
@@ -1047,12 +993,7 @@ a {
 
 .footer .section div {
     width: 100%;
-    /* background-color: red; */
-    /* height: 100%; */
-    /* display: flex; */
     margin: 10px;
-    /* margin-bottom: 0px; */
-    /* padding: 0; */
 }
 
 
