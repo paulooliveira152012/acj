@@ -17,8 +17,8 @@ const NavBar = ({ className, handleTabClick }) => {
       setCurrentScreen("about");
     } else if (location.pathname === "/our-services") {
       setCurrentScreen("our-services");
-    } else if (location.pathname === "/tips-and-advice") {
-      setCurrentScreen("tips-and-advice");
+    } else if (location.pathname === "/blogs") {
+      setCurrentScreen("blogs");
     } else if (location.pathname === "/contact-us") {
       setCurrentScreen("contact");
     }
@@ -52,19 +52,20 @@ const NavBar = ({ className, handleTabClick }) => {
           Our Services
         </Link>
         <Link 
-            to="/tips-and-advice" 
-            onClick={handleTabClick}
-            className={currentScreen === "tips-and-advice" ? "currentScreenBlack" : ""}
-        >
-          Tips & Advice
-        </Link>
-        <Link 
             to="/contact-us" 
             onClick={handleTabClick}
             className={currentScreen === "contact" ? "currentScreenBlack" : ""}
             >
           Contact
         </Link>
+        <Link 
+            to="/blogs" 
+            onClick={handleTabClick}
+            className={currentScreen === "blogs" ? "currentScreenBlack" : ""}
+        >
+          Blogs
+        </Link>
+      
         {/* <Link to="/accessibility-statement" onClick={handleTabClick}>Accessibility Statement</Link>  */}
         {/* <Link to="/privacy-policy" onClick={handleTabClick}>Privacy Policy</Link> */}
       </nav>

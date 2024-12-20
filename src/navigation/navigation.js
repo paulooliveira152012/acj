@@ -35,7 +35,7 @@ const ContentWithFooter = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/our-services" element={<OurServices />} />
-                    <Route path="/tips-and-advice" element={<TipsAndAdvice />} />
+                    <Route path="/blogs" element={<TipsAndAdvice />} />
                     <Route path="/contact-us" element={<ContactUs />} />
                     <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
