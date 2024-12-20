@@ -22,29 +22,19 @@ const BusinessInfo = () => {
   ];
 
   const allServices = [
-    "Alignment",
-    "Steering & Suspension",
-    "Computerized Diagnostic",
-    "Tune Up",
-    "Filters",
-    "Belts And Hoses",
-    "ABS",
-    "Alternator & Starter",
-    "Radiator",
-    "Engine & Transmission",
-    "Air Conditioner",
-    "Heating And Cooling",
-    "Brake",
-    "Tire Pressure Light",
-    "Battery Test",
-    "Exhaust System",
-    "Traction Control-Air Bag",
-    "4x4",
-    "Oil Change & Fluids",
-    "Lights",
-    "Clutch",
+    "Diagnostics & Computerized Testing",
+    "Oil Changes & Fluid Maintenance",
+    "Brakes & ABS Systems",
+    "Engine & Transmission Repair",
+    "Heating & Air Conditioning",
+    "Alignment & Suspension",
+    "Battery, Starter & Alternator",
+    "Tires & Tire Pressure Services",
+    "Exhaust & Emissions Systems",
     "General Preventive Maintenance",
   ];
+  
+  
 
   return (
     <div className="businessInfoContainer session">

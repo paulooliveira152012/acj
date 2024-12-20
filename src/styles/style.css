@@ -547,7 +547,7 @@ nav a {
 }
 
 .intro p {
-    font-size: 15px;
+    font-size: 17px;
 }
 
 .businessInfoContainer {
@@ -639,6 +639,28 @@ nav a {
     box-sizing: border-box; /* Include padding in width calculations */
     margin: 20px 0px;
     margin-bottom: 60px;
+  }
+
+  @media screen and (max-width:500px ) {
+    .businessInfoContainer .servicesContainer {
+        display: flex;
+        flex-direction: column;
+        /* overflow-x: auto;    */
+        justify-content: space-around;
+        gap: 50px;
+        margin-top: 20px;
+        /* background-color: blue; */
+        width: auto;
+    };
+
+    .businessInfoContainer .servicesContainer p{
+        background-color: green;
+    }
+
+    .businessInfoContainer .allServicesList {
+        /* background-color: green; */
+        display: block;
+      }
   }
 
   @media screen and (max-width:680px) {
@@ -790,6 +812,24 @@ nav a {
     }
 }
 
+@media screen and (max-width: 400px) {
+    .WhyChooseUsContainer .whyListComponent .why div p {
+        font-size: 15px;
+    }
+
+    .servicesContainer {
+        width: 100%!important;
+    }
+
+    .servicesContainer .container {
+        width: 50% !important;
+        background-color: red;
+        min-width: 90% !important;
+        margin: auto;
+    }
+
+}
+
 
 
 /* testemonials */
@@ -872,7 +912,7 @@ nav a {
 }
 
 .container p:last-child {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     /* background-color: red; */
 }
 
@@ -1344,7 +1384,6 @@ cursor: pointer;
 .contentContainer li {
     padding-left: 20px;
 }
-
 
 
 .contentContainer .teamPicture {
