@@ -140,6 +140,10 @@ const sendFormSubmissionToCompany = async (appointmentDetails) => {
   }
 };
 
+// Funcao para mandar email de feedback apos apontamnto
+// apos 1 dia de cada apontamento 
+
+
 module.exports = {
   sendAppointmentConfirmationEmail,
   sendAppointmentReminderEmail,

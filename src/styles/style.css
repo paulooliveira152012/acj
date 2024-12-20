@@ -803,7 +803,7 @@ nav a {
     background-repeat: no-repeat;
     color: white;
     box-sizing: border-box;
-    overflow-x: hidden; /* Prevent horizontal overflow from parent container */
+    overflow: hidden; /* Prevent horizontal overflow from parent container */
     /* background-color: pink; */
 }
 
@@ -816,6 +816,14 @@ nav a {
     scrollbar-width: thin; /* For modern browsers (e.g., Firefox) */
     scrollbar-color: rgba(0, 0, 0, 0.6) transparent;
     scroll-behavior: smooth;
+}
+
+/* star container */
+.starsContainer {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 
@@ -838,15 +846,17 @@ nav a {
     flex: 0 0 250px; /* Fixed width for horizontal scroll */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    text-align: center;
+    text-align: left;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
     border-radius: 10px; /* Rounded corners */
     color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
 }
+
+
 
 /* Heading */
 .testemonialsContainer h2 {
@@ -862,7 +872,8 @@ nav a {
 }
 
 .container p:last-child {
-    font-size: 1rem;
+    font-size: 0.7rem;
+    /* background-color: red; */
 }
 
 /* Media Queries */
