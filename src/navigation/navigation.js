@@ -11,6 +11,7 @@ import AdmLogin from "../pages/AdmLogin.js";
 import Calendar from "../pages/Calendar.js";
 import Footer from "../components/Footer.js";
 import "../styles/style.css";
+import ProtectedRoute from "../helper/ProtectedRoute.js";
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -40,7 +41,12 @@ const ContentWithFooter = () => {
                     <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/admLogin" element={<AdmLogin />} />
-                    <Route path="/calendar" element={<Calendar />} />
+                    <Route 
+                        path="/calendar" 
+                        element={
+                            <ProtectedRoute>
+                                <Calendar />
+                            </ProtectedRoute>} />
                     <Route path="*" element={<Home />} /> {/* Fallback Route */}
                 </Routes>
             </div>

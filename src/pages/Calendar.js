@@ -515,8 +515,15 @@ const CalendarPage = () => {
     console.log("After togling:", !isInfoModalVisible);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("admToken"); // Clear token on logout
+    window.location.href = "/"; // Redirect to the homepage
+  };
+  
+
   return (
     <div className="calendar-page">
+      <button className="logoutBtn" onClick={handleLogout}>Log Out</button>
       <h1>Schedule Your Car Drop-Off</h1>
       <div className="calendarContainer">
         <Calendar

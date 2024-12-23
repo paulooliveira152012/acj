@@ -20,7 +20,12 @@
   flex-direction: column;
   justify-content: center;
   font-family: "Montserrat", sans-serif;
-  height: 100vh;
+  height: 100vh; 
+}
+
+.calendar-page h1 {
+  /* background-color: red; */
+  padding-top: 20px;
 }
 
 .titleSessionCalendar {
@@ -697,4 +702,18 @@ form button {
   margin: auto;
   padding: 20px;
   /* border-radius: 10px; */
+}
+
+.logoutBtn { 
+  /* background-color: red; */
+  font-family: montserrat;
+  width: 20%;
+  right: 0;
+  top: 0;
+  position: absolute;
+  color: red;
+  border: none;
+  border-radius: 20px;
+  padding: 5px;
+  margin: 10px;
 }

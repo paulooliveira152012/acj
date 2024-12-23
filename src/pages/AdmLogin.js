@@ -30,12 +30,31 @@ const AdmLogin = () => {
           password,
         }
       );
-
+      
       const { token } = response.data;
       console.log("Login successful, token:", token);
-      setSuccess(true);
+
       localStorage.setItem("admToken", token);
-      navigate("/calendar");
+
+      // Verify the token with the backend before navigating
+    const verifyUrl =
+    process.env.NODE_ENV === "production"
+      ? `${process.env.REACT_APP_API_URL}/api/admin/verify-token`
+      : "http://localhost:5001/api/admin/verify-token";
+
+      const verifyResponse = await axios.get(verifyUrl, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      if (verifyResponse.status === 200) {
+        console.log("Token verified successfully. Redirecting to calendar...");
+        setSuccess(true);
+        navigate("/calendar"); // Navigate to the calendar page
+      } else {
+        navigate("/")
+        throw new Error("Token verification failed.");
+      }
+
     } catch (err) {
       console.error(
         "Login failed:",
