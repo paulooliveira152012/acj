@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Staff = require('../schemas/Staff'); // Import Staff model
-const bcrypt = require('bcrypt'); // For password hashing and verification
+// const bcrypt = require('bcryptjs'); // Temporarily commenting out bcrypt
 const jwt = require('jsonwebtoken'); // For generating authentication tokens
 
-// Secret for JWT (store securely, e.g., in .env file)
-const JWT_SECRET = process.env.JWT_SECRET || 'fchdbvdbaldkvbkaehdkv';
+// Secret for JWT (store securely in .env file)
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Route to create a new administrator
 router.post('/create-admin', async (req, res) => {
@@ -18,8 +18,13 @@ router.post('/create-admin', async (req, res) => {
             return res.status(400).json({ message: 'Username already exists' });
         }
 
-        // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
+        // Validate password length
+        if (password.length < 8) {
+            return res.status(400).json({ message: 'Password must be at least 8 characters long' });
+        }
+
+        // Temporarily mock password (remove bcrypt logic for now)
+        const hashedPassword = password;  // Just use the plain password temporarily
 
         // Create the new admin
         const newAdmin = new Staff({
@@ -36,28 +41,21 @@ router.post('/create-admin', async (req, res) => {
     }
 });
 
-
 // Admin login route
 router.post('/login', async (req, res) => {
-    console.log("Route reached");
     const { username, password } = req.body;
 
     try {
-        console.log("Trying to find user in the 'staff' collection...");
         const staff = await Staff.findOne({ username });
-        console.log("MongoDB query result:", staff);
 
         if (!staff) {
-            console.log("User not found");
             return res.status(401).json({ message: 'Invalid username or password' });
         }
 
-        console.log("Checking password...");
-        const isPasswordValid = await bcrypt.compare(password, staff.password);
-        console.log("Password valid:", isPasswordValid);
+        // Temporarily compare plain password (without bcrypt)
+        const isPasswordValid = password === staff.password;  // Just compare directly
 
         if (!isPasswordValid) {
-            console.log("Invalid password");
             return res.status(401).json({ message: 'Invalid username or password' });
         }
 
@@ -72,24 +70,25 @@ router.post('/login', async (req, res) => {
     }
 });
 
-
+// Test password route
 router.post('/test-password', async (req, res) => {
     const { password } = req.body;
 
-    // Hashed password from the database
-    const hashedPassword = "$2b$10$XhpcgqT.L3/hDl5/8s7InuOr9OV/XtHCc2v5y/IJJ33I.BjrHhyEC";
+    const hashedPassword = "$2a$10$XhpcgqT.L3/hDl5/8s7InuOr9OV/XtHCc2v5y/IJJ33I.BjrHhyEC";
 
     try {
-        const isMatch = await bcrypt.compare(password, hashedPassword);
+        // Temporarily compare password directly without bcrypt
+        const isMatch = password === hashedPassword;  // Compare the plain password
         res.json({ isMatch });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
-
-
 module.exports = router;
+
+
+
 
 
 

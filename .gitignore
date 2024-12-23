@@ -6,11 +6,13 @@
 /.pnp
 .pnp.js
 
+/backend/.env
+
 # testing
 /coverage
 
 # production
-/build
+# /build
 
 # misc
 .DS_Store
@@ -25,3 +27,4 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+.vercel

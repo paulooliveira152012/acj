@@ -16,9 +16,15 @@ const AdmLogin = () => {
     event.preventDefault();
     setError(""); // Clear previous errors
 
+    // Set the API URL based on the environment
+    const apiUrl = 
+      process.env.NODE_ENV === 'production'
+    ? `${process.env.REACT_APP_API_URL}/admin/login`
+    : "http://localhost:5001/api/admin/login"; // Use local API in development
+
     try {
       const response = await axios.post(
-        "http://localhost:5001/api/admin/login",
+        apiUrl,
         {
           username,
           password,

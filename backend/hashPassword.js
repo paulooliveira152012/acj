@@ -1,18 +1,23 @@
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcryptjs'); // Temporarily commenting out bcrypt
 
 const hashPassword = async (password) => {
     try {
-        // Generate a salt and hash the password
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-        console.log('Hashed Password:', hashedPassword);
+      // Temporarily mock the hashed password (skip bcrypt for now)
+      const hashedPassword = password;  // Just return the plain password temporarily
+      console.log("Hashed Password:", hashedPassword);
+      return hashedPassword; // Return the "hash" (which is just the plain password for now)
     } catch (err) {
-        console.error('Error hashing password:', err);
+      console.error("Error hashing password:", err);
+      throw err; // Rethrow the error for further handling if needed
     }
-};
+  };
+  
+  // Example usage
+  hashPassword("acj2024@");
+  
 
-// Replace 'securepassword123' with the password you want to hash
-hashPassword('acj2024@');
+
+
 
 
 // $2b$10$0lo0W8SWRcY/rfho4k1/TO9H85eBTVXFMnGRc6i/jCPHx8RLBBEim
