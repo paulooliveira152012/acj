@@ -33,16 +33,16 @@ mongoose
 app.use("/api/appointments", appointmentRouter);
 app.use("/api/admin", adminRouter); // Routes for admin login
 app.use("/api/inquiry", newInquiry);
-app.get("/", (req, res) => res.send("Welcome to the Mechanic Shop API"));
 
 // Serve static files in production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "build"))); // Corrected path to 'build' directory
+  app.use(express.static(path.join(__dirname, "../build"))); // Corrected path to 'build' directory
 
-  // Handle all other requests by serving the React frontend
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "build", "index.html"));
+   // Handle all other requests by serving the React frontend (for client-side routing)
+   app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../build", "index.html"));
   });
+
 } else {
   app.get("/", (req, res) => res.send("Wasn't able to find serving files"));
 }
