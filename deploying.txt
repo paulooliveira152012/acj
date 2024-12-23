@@ -1,0 +1,52 @@
+1 - login to heroku from backend folder
+heroku login
+
+2 - create new heroku app
+[heroku create {app name}]
+
+3 - set enviroments varables to herokuapp
+- the "\" at the end indicates there are multiple variables
+- after everything include "-a" (see what that means)
+- and lastly the name of the app
+
+heroku config:set \
+COMPANY_EMAIL="acjautoshop@gmail.com" \
+COMPANY_EMAIL_PASSWORD="cysb pajc qpuh xroj" \
+COMPANY_RECEIVER_EMAIL="acjautoshop@gmail.com" \
+EMAIL_USER="acjautoshop@gmail.com" \
+REACT_APP_API_URL="https://secure-lake-52268.herokuapp.com/api" \JWT_SECRET="dbvblfkblvjbdzjvbkdfbkdb" -a acj     
+
+4 - set Procfile at the root.
+- it has to be named Procfile, heroku needs it to know where server indicates
+- specify content, the route to server.js
+
+web: node backend/server.js
+
+
+5 - in server.js indicate build location:
+(expected to be moved to the backend folder after creation)
+// Serve static files in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "build"))); // Corrected path to 'build' directory
+
+   // Handle all other requests by serving the React frontend (for client-side routing)
+   app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+  });
+
+} else {
+  app.get("/", (req, res) => res.send("Wasn't able to find serving files"));
+}
+
+6 - build the app from the root directory
+npm run build
+
+7 - move build folder to backend folder, because when deploying the backend
+(from the backend folder), it needs the build folder.
+
+8 - from backend folder commit and push backend:
+(add everything)
+git add . 
+(commit everything)
+git commit -m "heroku app created, Procfile at root, app built, build folder moved to backend folder"
+git push heroku main
