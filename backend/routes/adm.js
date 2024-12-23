@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Staff = require('../schemas/Staff'); // Import Staff model
-// const bcrypt = require('bcryptjs'); // Temporarily commenting out bcrypt
+const bcrypt = require('bcryptjs'); // Temporarily commenting out bcrypt
 const jwt = require('jsonwebtoken'); // For generating authentication tokens
 
 // Secret for JWT (store securely in .env file)
@@ -23,8 +23,8 @@ router.post('/create-admin', async (req, res) => {
             return res.status(400).json({ message: 'Password must be at least 8 characters long' });
         }
 
-        // Temporarily mock password (remove bcrypt logic for now)
-        const hashedPassword = password;  // Just use the plain password temporarily
+         // Hash the password using bcrypt
+         const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
 
         // Create the new admin
         const newAdmin = new Staff({
@@ -52,8 +52,8 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
 
-        // Temporarily compare plain password (without bcrypt)
-        const isPasswordValid = password === staff.password;  // Just compare directly
+        // Use bcrypt to compare the password
+        const isPasswordValid = await bcrypt.compare(password, staff.password);
 
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid username or password' });
@@ -78,7 +78,7 @@ router.post('/test-password', async (req, res) => {
 
     try {
         // Temporarily compare password directly without bcrypt
-        const isMatch = password === hashedPassword;  // Compare the plain password
+        const isMatch = await bcrypt.compare(password, hashedPassword);
         res.json({ isMatch });
     } catch (err) {
         res.status(500).json({ error: err.message });
