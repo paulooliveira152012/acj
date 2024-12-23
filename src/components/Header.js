@@ -24,6 +24,20 @@ const Header = ({ className }) => {
         setMenuOpen(false);
     };
 
+     // Add or remove overflow:hidden to body when menu is open
+     useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = "hidden"; // Disable scrolling
+        } else {
+            document.body.style.overflow = ""; // Restore scrolling
+        }
+
+        // Cleanup on unmount
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isOpen]);
+
     // Close the menu on screen resize above 850px
     useEffect(() => {
         const handleResize = () => {
