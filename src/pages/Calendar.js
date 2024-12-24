@@ -118,26 +118,27 @@ const CalendarPage = () => {
       const period = hour < 12 ? "AM" : "PM";
       const formattedHour = hour % 12 === 0 ? 12 : hour % 12; // Convert to 12-hour format
       const baseTime = `${formattedHour}:00 ${period}`;
-      
-  
+
       // Push aligned times (pad to a consistent length, e.g., 8 characters)
       times.push(baseTime.padStart(8, " "));
     }
     return times;
   };
-  
+
   // Example Usage
   const timeSlots = generateTimeSlots(8, 17); // From 8:00 AM to 5:00 PM
-  console.log(timeSlots.join("\n")); // Print them aligned
-  
+  // console.log(timeSlots.join("\n")); // Print them aligned
 
   // Fetch all appointments when the component mounts
   useEffect(() => {
     const fetchAllAppointments = async () => {
+      const api =
+        process.env.NODE_ENV === "production"
+          ? `${process.env.REACT_APP_API_URL}/api/appointments/all`
+          : "http://localhost:5001/api/appointments/all";
+
       try {
-        const response = await axios.get(
-          "http://localhost:5001/api/appointments/all"
-        );
+        const response = await axios.get(api);
         console.log("Fetched appointments from backend:", response.data);
         setAppointments(response.data); // Store all appointments
       } catch (err) {
@@ -153,11 +154,14 @@ const CalendarPage = () => {
     if (!selectedDate) return; // Avoid fetching until a date is selected
 
     const fetchDailyAppointments = async () => {
+      const api =
+        process.env.NODE_ENV === "production"
+          ? `${process.env.REACT_APP_API_URL}/api/appointments/all`
+          : "http://localhost:5001/api/appointments/all";
+
       try {
         const date = selectedDate.toISOString().split("T")[0]; // Format as YYYY-MM-DD
-        const response = await axios.get(
-          `http://localhost:5001/api/appointments/all`
-        );
+        const response = await axios.get(api);
         console.log("Fetched appointments from backend:", response.data);
 
         // Filter appointments for the selected date
@@ -242,11 +246,11 @@ const CalendarPage = () => {
   };
 
   const handleSubmit = async (id, e) => {
-      // Prevent the form from reloading the page temporarely for debugging
-  // if (e) {
-  //   e.preventDefault();
-  // }
-    
+    // Prevent the form from reloading the page temporarely for debugging
+    // if (e) {
+    //   e.preventDefault();
+    // }
+
     console.log("Submitting form with ID:", id);
 
     try {
@@ -259,7 +263,7 @@ const CalendarPage = () => {
         },
       };
 
-      console.log("data:", data)
+      console.log("data:", data);
 
       if (isEditFormVisible) {
         console.log("Editing appointment with ID:", id);
@@ -519,11 +523,12 @@ const CalendarPage = () => {
     localStorage.removeItem("admToken"); // Clear token on logout
     window.location.href = "/"; // Redirect to the homepage
   };
-  
 
   return (
     <div className="calendar-page">
-      <button className="logoutBtn" onClick={handleLogout}>Log Out</button>
+      <button className="logoutBtn" onClick={handleLogout}>
+        Log Out
+      </button>
       <h1>Schedule Your Car Drop-Off</h1>
       <div className="calendarContainer">
         <Calendar
@@ -562,12 +567,22 @@ const CalendarPage = () => {
 
                 // Create a Date object for the current slot
                 const now = new Date(); // Current date and time
-                const slotDateTime = new Date(selectedDate); // Base the slot date on the selected date
-                const [hours, minutes] = time.split(":").map(Number);
-                slotDateTime.setHours(hours, minutes, 0, 0); // Set the time of the slot
+                now.setSeconds(0, 0); // Reset seconds and milliseconds for precision
 
-                // Check if the slot is in the past
-                const isPastSlot = slotDateTime < now;
+                const slotDateTime = new Date(selectedDate); // Base the slot date on the selected date
+                const [hours, minutes, period] = time
+                  .match(/(\d+):(\d+)\s(AM|PM)/)
+                  .slice(1);
+                let parsedHours = parseInt(hours, 10);
+                if (period === "PM" && parsedHours !== 12) parsedHours += 12; // Convert PM to 24-hour format
+                if (period === "AM" && parsedHours === 12) parsedHours = 0; // Handle midnight edge case
+
+                slotDateTime.setHours(parsedHours, parseInt(minutes, 10), 0, 0); // Set time accurately
+                console.log("now:", now);
+                console.log("slotDateTime:", slotDateTime);
+
+                const isPastSlot = slotDateTime < now; // Compare the two dates
+                console.log("isPastSlot:", isPastSlot);
 
                 return (
                   <div
@@ -953,6 +968,14 @@ const CalendarPage = () => {
 
             <Calendar
               onChange={(date) => {
+                const now = new Date();
+                now.setHours(0, 0, 0, 0); // Reset time to the start of the day for comparison
+
+                if (date < now) {
+                  alert("Cannot select a past date!");
+                  return; // Prevent setting a past date
+                }
+
                 setFormData((prev) => ({
                   ...prev,
                   appointment: { ...prev.appointment, date },
@@ -970,6 +993,11 @@ const CalendarPage = () => {
               value={formData.appointment?.date || new Date()}
               tileClassName={tileClassName} // Apply custom styling to tiles
               tileContent={tileContent} // Add available slots
+              tileDisabled={({ date }) => {
+                const now = new Date();
+                now.setHours(0, 0, 0, 0); // Reset to start of the day
+                return date < now; // Disable past dates
+              }}
             />
 
             <h3>Select a New Time</h3>
