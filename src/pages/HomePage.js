@@ -1,9 +1,9 @@
 import Header from "../components/Header";
 import Hero from "../components/Hero";
-import BusinessInfo from "../components/BusinessInfo";
 import WhyChooseUs from "../components/WhyChooseUs";
 import CarTypesServices from "../components/CarTypeServices";
 import TestimonialsCarousel from "../components/Carrossel";
+import BusinessCards from "../components/BusinessInfoCarrossel";
 import "../styles/style.css";
 
 const Home = () => {
@@ -22,7 +22,7 @@ const Home = () => {
           Maple Ave, Elizabeth, NJ 07202.</strong>
         </p>
       </div>
-      <BusinessInfo />
+      <BusinessCards />
       <WhyChooseUs />
       <CarTypesServices />
       <TestimonialsCarousel />
