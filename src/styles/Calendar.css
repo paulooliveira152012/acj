@@ -679,9 +679,9 @@ form input {
   position: absolute;
   right: 5%;
   top: 1%;
-  /* background-color: red; */
+  background-color: white;
   float: right;
-  color: white;
+  color: black;
   font-size: 25px;
   cursor: pointer;
 }
@@ -715,4 +715,45 @@ form button {
   border-radius: 20px;
   padding: 5px;
   margin: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  .infoChildContainer {
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+    height: 100%;
+  }
+
+  .closeButton {
+    background-color: transparent;
+    aspect-ratio: 1;
+  }
+
+  .calendar-page {
+    height: 100%;
+  }
+}
+
+
+@media screen and (max-width: 1000px) {
+  .calendar-page {
+    height: auto;
+  }
+
+  .calendarContainer {
+    height: 100%;
+  }
+
+  .infoParentContainer {
+    height: 100%;
+    /* background-color: pink; */
+    overflow-y: auto;
+  }
+
+  .infoChildContainer {
+    height: 90%;
+    /* background-color: red; */
+    overflow-y: auto;
+  }
 }
