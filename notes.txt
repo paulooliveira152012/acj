@@ -6,7 +6,7 @@ set up scheduling system ✅
 deixar em negrito a pagina atual (demarcar menu lateral) ✅
 ajustar tamanho do icone de menu lateral (diminuir) ✅
 almentar a logo no cabeçalho ✅
-arrumar carrossel de comentarios loop infinito ❗️❗️❗️
+arrumar carrossel de comentarios loop infinito ✅
     //aboutUs
 botao hover tem que deixar em negrito e branco quando hover ✅
 ajustar tamanho entre contactus btn e hours of operations ✅

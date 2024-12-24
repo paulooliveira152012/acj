@@ -865,6 +865,39 @@ nav a {
     /* background-color: red; */
 }
 
+/* testemonialCarrossel component */
+.testimonialsCarouselContainer {
+    text-align: center;
+    margin: 20px auto;
+    background-image: url('../assets//images/engine.png');
+    background-size: cover;
+    color: white;
+  }
+  
+  .testimonialSlide {
+    padding: 10px 20px;
+  }
+  
+  .testimonialName {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .starsContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .testimonialMessage {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.651);
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+  }
+  
+
 /* Media Queries */
 @media screen and (max-width: 768px) {
 
