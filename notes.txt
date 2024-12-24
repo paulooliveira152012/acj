@@ -21,7 +21,9 @@ Contact Us btn --> negrito e color white quando hover ✅
     //Calendario
 inserir campo para anotações do motivo do apontamento ✅
 disable new appointments oon empty slots to past dates ✅
-fix mobile appointment creation ❗️❗️❗️
+fix mobile appointment creation ✅
+fix mobile calendar appearance ❗️❗️❗️
 atualizar foto do about us com placa borrada ✅
-arrumar rolagem de tela quando sideMenu esta aberto ❗️❗️❗️
+arrumar rolagem de tela quando sideMenu esta aberto ✅
 Colocar favicon na versao simples 
+appointment request, atualizar link dinamico 
