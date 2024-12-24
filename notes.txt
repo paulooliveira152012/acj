@@ -20,8 +20,8 @@ atualizar fotos das maquinas (lista do giovani) ✅
 Contact Us btn --> negrito e color white quando hover ✅
     //Calendario
 inserir campo para anotações do motivo do apontamento ✅
-disable new appointments oon empty slots to past dates ❗️❗️❗️
+disable new appointments oon empty slots to past dates ✅
 fix mobile appointment creation ❗️❗️❗️
-atualizar foto do about us com placa borrada ❗️❗️❗️
+atualizar foto do about us com placa borrada ✅
 arrumar rolagem de tela quando sideMenu esta aberto ❗️❗️❗️
 Colocar favicon na versao simples 
