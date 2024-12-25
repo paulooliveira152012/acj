@@ -663,16 +663,15 @@ const CalendarPage = () => {
                           >
                             ?
                           </button>
-
+                        </div>
                           {/* Only show the modal for the hovered appointment */}
                           {hoveredAppointmentId === appointment._id && (
-                            <div className="detailInfoModal">
+                            <div className="detailInfoModal2">
                               <div>
                                 <p>{appointment.carDetails.description}</p>
                               </div>
                             </div>
                           )}
-                        </div>
                       </div>
                     )}
                   </div>
