@@ -4,7 +4,7 @@ import Header from "../components/Header";
 
 const PrivacyPolicy = () => {
     return (
-        <div className="contentContainer">
+        <div className="contentContainer" style={{ paddingTop: "0" }}> 
             <Header className={"blackHeader"}/>
             <div className="session">
             <h1>Privacy Policy</h1>

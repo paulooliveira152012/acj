@@ -4,7 +4,7 @@ import Header from "../components/Header";
 
 const AccessibilityStatement = () => {
   return (
-    <div className="contentContainer">
+    <div className="contentContainer" style={{ paddingTop: "0" }}> 
         <Header className={'blackHeader'}/>
         <div className="session">
       <h1>Accessibility Statement</h1>
