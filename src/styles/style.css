@@ -556,7 +556,21 @@ nav a {
     box-sizing: border-box; /* Ensure padding is included in width/height */
     overflow: hidden;
 }
+    .BusinessCardsWideScreen {
+        display: none;
+    }
 
+    .fBusinessCardsWideScreen div {
+        display: none;
+    }
+
+    .wideContainer {
+        display: flex;
+    }
+
+    .wideContainer .cardContainer {
+        width: 70%;
+    }
 
 .businessInfoContainer .titleContainer {
     display: flex;
@@ -610,7 +624,7 @@ nav a {
     padding: 0;
 }
 
-.BusinessCardContainer div{
+.BusinessCardContainer div {
     height: 200px;
     width: 70%;
     margin: auto;
@@ -619,7 +633,11 @@ nav a {
     padding: 20px;
     border-radius: 10px;
     max-width: 500px;
+    margin: 70px auto;
 }
+
+
+
 
 
  .allServicesList {
@@ -684,8 +702,13 @@ nav a {
         box-sizing: border-box; /* Include padding in width calculations */
       }
 
-      .BusinessCardContainer div {
-        max-width: 50%;
+      .BusinessCardsWideScreen {
+        display: flex;
+        margin: 50px 0px;
+      }
+
+      .hide {
+        display: none;
       }
   }
 

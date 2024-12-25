@@ -27,3 +27,4 @@ atualizar foto do about us com placa borrada ✅
 arrumar rolagem de tela quando sideMenu esta aberto ✅
 Colocar favicon na versao simples 
 appointment request, atualizar link dinamico 
+refactor login page routing logic ❗️❗️❗️

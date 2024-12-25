@@ -46,7 +46,7 @@ class BusinessCards extends Component {
         <div className="h2Underline"></div>
         <Carousel>
           {businessInfoList.map((item, index) => (
-            <div key={index} className="BusinessCardContainer">
+            <div key={index} className="BusinessCardContainer hide">
               <div>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
@@ -54,6 +54,17 @@ class BusinessCards extends Component {
             </div>
           ))}
         </Carousel>
+
+        <div className="BusinessCardsWideScreen">
+        {businessInfoList.map((item, index) => (
+            <div key={index} className="BusinessCardContainer wideContainer">
+              <div className="cardContainer">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className="servicesContainer2 ">
           {/* services list */}
