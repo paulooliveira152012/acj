@@ -341,7 +341,19 @@ const CalendarPage = () => {
     if (freeTimesCount === 0) {
       return "fully-booked-date"; // Apply red background for fully booked dates
     }
-    return appointmentsForDate.length > 0 ? "highlighted-date" : null; // Highlight if there are appointments
+
+    if (appointmentsForDate.length > 0) {
+      return "highlighted-date"; // Highlight if there are appointments
+    }
+  
+    // Check if the date is a Saturday or Sunday
+  const day = date.getDay();
+  if (day === 0 || day === 6) {
+    return "weekend-date"; // Add a CSS class for weekends
+  }
+
+  return null; // Default return
+
   };
 
   const tileContent = ({ date }) => {
@@ -515,6 +527,9 @@ const CalendarPage = () => {
     localStorage.removeItem("admToken"); // Clear token on logout
     window.location.href = "/"; // Redirect to the homepage
   };
+
+
+  
 
   return (
     <div className="calendar-page">
