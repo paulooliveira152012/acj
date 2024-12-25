@@ -532,7 +532,13 @@ const CalendarPage = () => {
   
 
   return (
-    <div className="calendar-page">
+    <div
+    className={`calendar-page ${
+      isFormVisible || isScheduleVisible || isEditFormVisible
+        ? "modal-open"
+        : ""
+    }`}
+  >
       <button className="logoutBtn" onClick={handleLogout}>
         Log Out
       </button>

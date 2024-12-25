@@ -27,6 +27,11 @@
   height: 100vh; 
 }
 
+.calendar-page.modal-open {
+  height: 100vh; /* Temporarily set full screen height */
+  overflow: hidden; /* Prevent scrolling */
+}
+
 .calendar-page h1 {
   /* background-color: red; */
   padding-top: 20px;
@@ -234,6 +239,22 @@
     width: 40% !important;
     height: 100%;
   }
+
+  
+  .detailInfoModal2 {
+    height: auto;
+    margin-right: 20px;
+    width: 40% !important;
+    position: absolute;
+    right: 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    max-width: 100%;
+    z-index: 1000;
+    /* top: 10%; */
+    min-width: 100px;
+  }
 }
 
 /* For screens larger than 600px, buttons are always displayed */
@@ -293,6 +314,7 @@
   /* color: #ff0000; */
   cursor: pointer;
   align-self: flex-end;
+  z-index: 1000;
 }
 
 /* Style for past dates */
