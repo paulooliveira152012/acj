@@ -60,7 +60,7 @@ const Footer = () => {
         </div>
 
         <div className="calendarLinkDiv">
-          <Link to='/calendar-page'>
+          <Link to='/admLogin'>
           <h3 className="h3Calendar">Calendar</h3>
           </Link>
         </div>
