@@ -992,15 +992,6 @@ a {
     font-size: 13px;
 }
 
-.footerContent {
-    /* background-color: green; */
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: space-around;
-}
-
 .footer .socialMediaIconContainer {
     /* background-color: red; */
     width: 15%;
@@ -1013,11 +1004,31 @@ a {
     cursor: pointer;
 }
 
+.footerContent {
+    /* background-color: green; */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
+}
+
 .footerContent div {
     width: auto;
     min-height: 150px;
     /* background-color: blue; */
     margin: 20px;
+    flex: 1;
+    text-align: center;
+}
+
+.footer a {
+    cursor: pointer;
+}
+
+.footer .h3Calendar {
+    cursor: pointer;
+    margin: auto;
 }
 
 .footerContent div ul {
@@ -1027,10 +1038,25 @@ a {
     /* justify-content: space-evenly; */
 }
 
+.footerContent .calendarLinkDiv {
+    /* background-color: green; */
+    text-align: center;
+}
+
+.footerContent .calendarLinkDiv Link {
+    margin: auto;
+    text-align: center;
+}
+
+
+
 .footerContent div ul li {
     margin-top: 18px;
     display: flex;
-    align-items: center;
+    align-items: center !important;
+    text-align: center !important;
+    /* background-color: red !important; */
+    justify-content: center;
 }
 
 .footerContent a {
@@ -1038,7 +1064,7 @@ a {
     padding: 0;
     /* background-color: red; */
     display: flex;
-    align-items: center;
+    text-align: center;
 }
 
 .icon {
@@ -1063,7 +1089,12 @@ a {
 
 .footer .section div {
     width: 100%;
+    /* background-color: red; */
+    /* height: 100%; */
+    /* display: flex; */
     margin: 10px;
+    /* margin-bottom: 0px; */
+    /* padding: 0; */
 }
 
 
@@ -1099,6 +1130,32 @@ a {
     margin: 20px;
 }
 
+.bottomFooter {
+    /* background-color: red; */
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.bottomFooter .developedByNova a {
+    background-color: none;
+    display: flex;
+    align-items: center;
+}
+
+.bottomFooter .developedByNova img { 
+    width: 15%;
+}
+
+.bottomFooter span {
+    margin-left: 10px;
+    font-style: italic;
+    font-weight: lighter;
+}
+
+
+
 @media screen and (max-width: 500px) {
     .footer {
         height: 100%;
@@ -1116,21 +1173,31 @@ a {
         align-items: center;
     }
 
-    .footer .socialMediaIconContainer {
-        /* background-color: purple; */
-        width: 30% !important; 
-        display: flex;
-        justify-content: space-around;
-        margin: 20px 0;        
+    .bottomFooter {
+        /* background-color: red; */
+        flex-direction: column;
+        align-items: center;
     }
 
-    .footer .socialMediaIconContainer  {
-        /* background-color: green; */
-        scale: 1.5;
-        /* fill: black */
+    .socialMediaIconContainer {
+        order: 1;
+        margin: 15px !important;        
     }
 
-    
+    .developedByNova  {
+        order: 2;
+        margin: 15px;
+    }
+
+    .copyRight {
+        order: 3;
+        margin: 15px;
+    }
+
+    .footerContent div {
+        min-height: fit-content;
+        
+    }
 }
 
 /* login page */

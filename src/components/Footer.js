@@ -6,6 +6,7 @@ import LocationIcon from "../assets/icons/footer/location";
 import whiteLogo from "../assets/images/logo_white.svg";
 import FacebookIcon from "../assets/images/icons/facebook";
 import InstagramIcon from "../assets/images/icons/instagram";
+import Vendor from "../assets/vendor.svg"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -17,23 +18,7 @@ const Footer = () => {
       <div className="logoContainer">
         <img src={whiteLogo} alt="White Logo" />
       </div>
-
-      <div className="socialMediaIconContainer">
-        <a
-          href="https://www.instagram.com/autorepairacj?igsh=NTBkNzlrYWxvcmto"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <InstagramIcon className="socialIconFooter instagramFooterIcon" />
-        </a>
-        <a
-          href="https://www.facebook.com/p/ACJ-Auto-Repair-61570440825296/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FacebookIcon className="socialIconFooter" />
-        </a>
-      </div>
+    
 
       {/* display flex para 4 divs */}
       <div className="footerContent">
@@ -71,37 +56,45 @@ const Footer = () => {
             <li>
               <Link to="/contact-us">Contact</Link>
             </li>
-            <li>
-              <Link to="/tips-and-advice">Blogs</Link>
-            </li>
           </ul>
         </div>
 
-        {/* div 3 */}
-        <div>
-          <h3>Legal</h3>
-          <ul>
-            <li>
-              <Link to="/privacy-policy">Privacy Policy</Link>
-            </li>
-            <li>
-              <Link to="/accessibility-statement">Accessibility Statement</Link>
-            </li>
-          </ul>
+        <div className="calendarLinkDiv">
+          <Link to='/calendar-page'>
+          <h3 className="h3Calendar">Calendar</h3>
+          </Link>
         </div>
 
-        {/* div 4 */}
-        <div>
-          <h3>Adm</h3>
-
-          <li style={{ listStyle: "none", marginTop: "12px" }}>
-            <Link to="/admLogin">login (Adm)</Link>
-          </li>
-        </div>
       </div>
-      <div></div>
       <div className="divLine"></div>
-      <p>&copy; {currentYear} ACJ Auto Repair. All rights reserved.</p>
+      <div className="bottomFooter">
+        {/* 1 */}
+        <div className="developedByNova">
+          <a href="https://www.novasolutionsweb.com/" target="__blank">
+          <img src={Vendor}></img>
+          <span>Empowered by Nova </span>
+          </a>
+        </div>
+        {/* 2 */}
+        <p className="copyRight">&copy; {currentYear} ACJ Auto Repair. All rights reserved.</p>
+        {/* 3 */}
+        <div className="socialMediaIconContainer">
+        <a
+          href="https://www.instagram.com/autorepairacj?igsh=NTBkNzlrYWxvcmto"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <InstagramIcon className="socialIconFooter" />
+        </a>
+        <a
+          href="https://www.facebook.com/p/ACJ-Auto-Repair-61570440825296/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FacebookIcon className="socialIconFooter" />
+        </a>
+      </div>
+      </div>
     </div>
   );
 };
