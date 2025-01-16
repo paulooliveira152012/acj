@@ -521,9 +521,7 @@ nav a {
 
 
 @media screen and (max-width: 500px) {
-    .hero {
-        min-height: 80vh;
-    }
+    
 
     .heroContent {
         /* background-color: rgba(0, 0, 0, 0.825); */
