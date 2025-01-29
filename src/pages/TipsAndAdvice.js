@@ -10,6 +10,7 @@ import carDtcImage from "../assets/images/blogImages/dashlights.jpg"
 import "../styles/style.css";
 import "../styles/blog.css";
 
+// conteudos
 const blogs = [
   {
     title: "5 Essential Tips to Keep Your Car in Top Shape",
@@ -175,9 +176,13 @@ const TipsAndAdvice = () => {
 
   return (
     <>
+    {/* cabecalho */}
       <Header className="blackHeader" />
+      {/* pagina inteira */}
       <div className="contentContainer blogScreen">
+        {/* tem um blog selecionado? */}
         {selectedBlog ? (
+          // se sim: mostra a pagian do blog
           <div className="blogDetail">
             <button onClick={goBack} className="backButton">
               &larr; Back to Blogs
@@ -231,8 +236,11 @@ const TipsAndAdvice = () => {
             <button onClick={()=> navigate('/contact-us')}>Contact Our Shop</button>
             </div>
           </div>
+          // se nao (nao tem um blog selecionado)
         ) : (
+          // mostrar todos os blogs
           <div className="session" style={{ marginTop: "50px" }}>
+            {/* cabecalho da pagina () */}
             <div className="blogHeader">
               <h1>Recent Blogs</h1>
               <input
@@ -243,10 +251,13 @@ const TipsAndAdvice = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            {/* here */}
+            {/* Container que envelopa todos os blogs */}
             <div className="blogContainer">
+              {/* perguntando se tem algum blog pesquisado */}
               {filteredBlogs.length > 0 ? (
+                // se sim, mostrar so os blogs filtrados
                 filteredBlogs.map((blog, index) => (
+                  // div do blog
                   <div
                     key={index}
                     className={`blogBlock ${
